@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(APPLICATION_LIBRARY AngrySpartyLib)
 
 # Define a variable to hold a list of source files
-set(SOURCE_FILES main.cpp AngrySpartyApp.cpp AngrySpartyApp.h pch.h)
+set(SOURCE_FILES main.cpp AngrySpartyApp.cpp AngrySpartyApp.h)
 
 # Grab the wxWidget library and include the use file
 # Additionally, turn off wxWidget's built-in precompiled headers
@@ -15,9 +15,12 @@ set(wxBUILD_PRECOMP_OFF)
 find_package(wxWidgets COMPONENTS core base xrc html xml REQUIRED)
 include(${wxWidgets_USE_FILE})
 
-# add the application library to this project
+# Add the application library to this project
 add_subdirectory(${APPLICATION_LIBRARY})
 include_directories(${APPLICATION_LIBRARY})
+
+# Add the testing library to this project
+add_subdirectory(Tests)
 
 add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SOURCE_FILES})
 
@@ -25,4 +28,4 @@ add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${APPLICATION_LIBRARY})
 
 # Add precompiled headers to the project
-target_precompile_headers(${PROJECT_NAME} PRIVATE pch.h)
+target_precompile_headers(${PROJECT_NAME} PRIVATE ./${APPLICATION_LIBRARY}/pch.h)
