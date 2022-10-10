@@ -1,9 +1,8 @@
-#include <iostream>
+/**
+ * @file main.cpp
+ */
 
-int main()
-{
-    std::cout << "Hello, World!" << std::endl;
-    std::cout << "Test1" << std::endl;
-    ///test will m
-    return 0;
-}
+#include "pch.h"
+#include "AngrySpartyApp.h"
+
+wxIMPLEMENT_APP(AngrySpartyApp);
