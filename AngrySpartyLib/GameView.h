@@ -1,12 +1,14 @@
 /**
  * @file GameView.h
- * @author Will Morant
+ * @author Will Morant, Joey Vesche
  * GameView class
  */
 
 #ifndef PROJECT1_GAMEVIEW_H
 #define PROJECT1_GAMEVIEW_H
+
 #include "Game.h"
+
 /**
  * View class for the AngrySparty Game
  */
@@ -15,9 +17,9 @@ private:
     void OnPaint(wxPaintEvent& event);
     /// Game class object
 
-    Game  mGame; //- Uncomment when Game class is initialized
+    Game mGame;
 
-    /// Any Item we are currently dragging
+    /// Any item we are currently dragging
     ///std::shared_ptr<int> mGrabbedObject; - Uncomment when Object class is created
 
     /**

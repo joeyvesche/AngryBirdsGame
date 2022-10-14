@@ -1,12 +1,13 @@
 /**
  * @file GameView.cpp
- * @author Will Morant
+ * @author Will Morant, Joey Vesche
  */
 #include "pch.h"
 #include "GameView.h"
 #include <wx/dcbuffer.h>
-#include "ids.h"
 #include <wx/graphics.h>
+#include "ids.h"
+
 /**
  * Add menus specific to the view
  * @param mainFrame The main frame that owns the menu bar
@@ -89,12 +90,10 @@ void GameView::OnPaint(wxPaintEvent& event)
     auto size = GetClientSize();
 
     auto graphics =
-            std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc ));
+            std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc));
     graphics->SetInterpolationQuality(wxINTERPOLATION_BEST);
 
     mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
-
-    ///mGame.OnDraw(&dc); - Uncomment when Game class is initialized
 }
 
 

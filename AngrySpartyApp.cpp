@@ -27,12 +27,17 @@ bool AngrySpartyApp::OnInit()
     #endif
 
     // exit if the up-called initialization was unsuccessful
-    if (!wxApp::OnInit()) return false;
+    if (!wxApp::OnInit()) {
+        return false;
+    }
+
+    // Add image type handlers
+    wxInitAllImageHandlers();
 
     // Initialize and display the main frame of the application
     auto frame = new MainFrame();
     frame->Initialize();
-    frame->Show();
+    frame->Show(true);
 
     return true;
 }

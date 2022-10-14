@@ -1,15 +1,18 @@
 /**
  * @file Game.h
- * @author Yuqi Pan
+ * @author Yuqi Pan, Joey Vesche
  *
  *
  */
 
 #ifndef PROJECT1_GAME_H
 #define PROJECT1_GAME_H
+
+#include "pch.h"
 #include <wx/xml/xml.h>
 #include <memory>
 #include <string>
+
 class Item;
 /**
  * Class of game
@@ -29,7 +32,8 @@ private:
     double mYOffset = 1;
 
     std::unique_ptr<wxBitmap> mBackground;  ///< Background image to use
-    /// All of the items to populate our aquarium
+    std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use+86+
+    /// All of the items to populate our game
     std::vector<std::shared_ptr<Item>> mItems;
 public:
     Game();
@@ -65,6 +69,7 @@ public:
      * @param meters n
      */
     void SetHeight(int meters) { mHeight = meters; }
+
 };
 
 #endif //PROJECT1_GAME_H

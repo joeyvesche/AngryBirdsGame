@@ -1,6 +1,6 @@
 /**
  * @file Game.cpp
- * @author Yuqi Pan
+ * @author Yuqi Pan, Joey Vesche
  */
 #include "pch.h"
 #include "Game.h"
@@ -11,7 +11,8 @@
  */
 Game::Game()
 {
-
+    mBackground = std::make_unique<wxBitmap>(L"images/background1.png", wxBITMAP_TYPE_ANY);
+    mSlingshot = std::make_unique<wxBitmap>(L"images/slingshot.png", wxBITMAP_TYPE_ANY);
 }
 
 
@@ -23,14 +24,14 @@ Game::Game()
  */
 void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
-    wxBrush background(*wxBLACK);
+    wxBrush background(*wxWHITE);
     graphics->SetBrush(background);
     graphics->DrawRectangle(0, 0, width, height);
 
     graphics->PushState();
 
     // Get the playing area size in centimeters
-    auto playingAreaSize = wxSize(mWidth, mHeight);
+    auto playingAreaSize = wxSize(GetWidth(), GetHeight());
     playingAreaSize *= Consts::MtoCM;
 
     //
@@ -58,14 +59,29 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     // and Y up being increase values
     //
     // INSERT YOUR DRAWING CODE HERE
-    graphics->SetPen(*wxWHITE_PEN);
-    graphics->DrawRectangle(-10,-10, 20, 20);
+    auto wid = mWidth * Consts::MtoCM;
+    auto hit = mHeight * Consts::MtoCM;
+
+    graphics->PushState();
+    graphics->Scale(1, -1);
+    graphics->DrawBitmap(*mBackground,
+            -wid/2,
+            -hit,
+            wid, hit);
+    graphics->PopState();
+
+    graphics->PushState();
+    graphics->Scale(0.1, -0.1);
+    graphics->DrawBitmap(*mSlingshot,
+                -3300,
+                -600,
+                wid/2, hit);
     graphics->PopState();
 }
 
 /**
- * Add an Item to the Game
- * @param item New Item to add
+ * Add an item to the Game
+ * @param item New item to add
  */
 void Game::Add(std::shared_ptr<Item> item)
 {
@@ -74,10 +90,10 @@ void Game::Add(std::shared_ptr<Item> item)
 
 /**
  * Test an x,y click location to see if it clicked
- * on some Item in the Game.
+ * on some item in the Game.
  * @param x X location in pixels
  * @param y Y location in pixels
- * @returns Pointer to Item we clicked on or nullptr if none.
+ * @returns Pointer to item we clicked on or nullptr if none.
 */
 std::shared_ptr<Item> Game::HitTest(int x, int y)
 {
@@ -142,7 +158,7 @@ void Game::Load(const wxString &filename)
     for( ; child; child=child->GetNext())
     {
         auto name = child->GetName();
-        if(name == L"Item")
+        if(name == L"item")
         {
             XmlItem(child);
         }
@@ -160,7 +176,7 @@ void Game::Clear()
 }
 
 /**
- * Handle a node of type Item.
+ * Handle a node of type item.
  * @param node XML node
  */
 void Game::XmlItem(wxXmlNode *node)
