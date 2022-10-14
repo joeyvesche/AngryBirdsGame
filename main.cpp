@@ -1,5 +1,6 @@
 /**
  * @file main.cpp
+ * @author Will Skaggs
  */
 
 #include <pch.h>
