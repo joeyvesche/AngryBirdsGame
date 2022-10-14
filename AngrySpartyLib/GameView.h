@@ -17,7 +17,7 @@ private:
 
     ///Game  mGame; - Uncomment when Game class is initialized
 
-    /// Any item we are currently dragging
+    /// Any Item we are currently dragging
     ///std::shared_ptr<int> mGrabbedObject; - Uncomment when Object class is created
 
     /**

@@ -4,7 +4,7 @@ project(Tests)
 set(CMAKE_CXX_STANDARD 17)
 
 # Define a variable to hold a list of source files for this project
-set(TEST_FILES gtest_main.cpp EmptyTest.cpp)
+set(TEST_FILES gtest_main.cpp EmptyTest.cpp ItemTest.cpp)
 
 # Get Google Tests
 include(FetchContent)

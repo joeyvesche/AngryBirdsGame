@@ -27,5 +27,9 @@ add_executable(${PROJECT_NAME} WIN32 MACOSX_BUNDLE ${SOURCE_FILES})
 # Link required libraries to the executable
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${APPLICATION_LIBRARY})
 
+#Load in image files
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/images/
+        DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/images/)
+
 # Add precompiled headers to the project
 target_precompile_headers(${PROJECT_NAME} PRIVATE ./${APPLICATION_LIBRARY}/pch.h)

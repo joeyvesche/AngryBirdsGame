@@ -63,8 +63,8 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 }
 
 /**
- * Add an item to the Game
- * @param item New item to add
+ * Add an Item to the Game
+ * @param item New Item to add
  */
 void Game::Add(std::shared_ptr<Item> item)
 {
@@ -73,10 +73,10 @@ void Game::Add(std::shared_ptr<Item> item)
 
 /**
  * Test an x,y click location to see if it clicked
- * on some item in the Game.
+ * on some Item in the Game.
  * @param x X location in pixels
  * @param y Y location in pixels
- * @returns Pointer to item we clicked on or nullptr if none.
+ * @returns Pointer to Item we clicked on or nullptr if none.
 */
 std::shared_ptr<Item> Game::HitTest(int x, int y)
 {
@@ -141,7 +141,7 @@ void Game::Load(const wxString &filename)
     for( ; child; child=child->GetNext())
     {
         auto name = child->GetName();
-        if(name == L"item")
+        if(name == L"Item")
         {
             XmlItem(child);
         }
@@ -159,7 +159,7 @@ void Game::Clear()
 }
 
 /**
- * Handle a node of type item.
+ * Handle a node of type Item.
  * @param node XML node
  */
 void Game::XmlItem(wxXmlNode *node)
