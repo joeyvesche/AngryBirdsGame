@@ -6,7 +6,7 @@
 
 #ifndef PROJECT1_GAMEVIEW_H
 #define PROJECT1_GAMEVIEW_H
-
+#include "Game.h"
 /**
  * View class for the AngrySparty Game
  */
@@ -15,7 +15,7 @@ private:
     void OnPaint(wxPaintEvent& event);
     /// Game class object
 
-    ///Game  mGame; - Uncomment when Game class is initialized
+    Game  mGame; //- Uncomment when Game class is initialized
 
     /// Any Item we are currently dragging
     ///std::shared_ptr<int> mGrabbedObject; - Uncomment when Object class is created

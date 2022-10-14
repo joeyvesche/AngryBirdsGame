@@ -17,12 +17,12 @@ class Item;
 class Game {
 private:
     /// width of game
-    int mWidth = 800;
+    int mWidth = 8;
     /// height of game
-    int mHeight = 600;
+    int mHeight = 6;
 
     /// scale
-    double mScale = 1;
+    double mScale = 10;
     /// X offset
     double mXOffset = 1;
     /// Y offset
@@ -54,6 +54,17 @@ public:
     std::shared_ptr<Item> HitTest(int x, int y);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
+
+    /**
+     * Set width of game to n meters
+     * @param meters n
+     */
+    void SetWidth(int meters) { mWidth = meters; }
+    /**
+     * Set Height of game to n meters
+     * @param meters n
+     */
+    void SetHeight(int meters) { mHeight = meters; }
 };
 
 #endif //PROJECT1_GAME_H

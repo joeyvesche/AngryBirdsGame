@@ -6,7 +6,7 @@
 #include "GameView.h"
 #include <wx/dcbuffer.h>
 #include "ids.h"
-
+#include <wx/graphics.h>
 /**
  * Add menus specific to the view
  * @param mainFrame The main frame that owns the menu bar
@@ -26,7 +26,9 @@ void GameView::AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar, wxMenu* viewMenu
  */
 void GameView::Initialize(wxFrame* parent)
 {
-    Create(parent, wxID_ANY);
+    Create(parent, wxID_ANY,
+            wxDefaultPosition, wxDefaultSize,
+            wxFULL_REPAINT_ON_RESIZE);
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     Bind(wxEVT_PAINT, &GameView::OnPaint, this);
 
@@ -83,6 +85,14 @@ void GameView::OnPaint(wxPaintEvent& event)
     wxBrush background(*wxWHITE);
     dc.SetBackground(background);
     dc.Clear();
+
+    auto size = GetClientSize();
+
+    auto graphics =
+            std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc ));
+    graphics->SetInterpolationQuality(wxINTERPOLATION_BEST);
+
+    mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
 
     ///mGame.OnDraw(&dc); - Uncomment when Game class is initialized
 }

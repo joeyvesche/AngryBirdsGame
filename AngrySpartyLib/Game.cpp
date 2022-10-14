@@ -30,7 +30,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     graphics->PushState();
 
     // Get the playing area size in centimeters
-    auto playingAreaSize = wxSize(width, height);
+    auto playingAreaSize = wxSize(mWidth, mHeight);
     playingAreaSize *= Consts::MtoCM;
 
     //
@@ -58,7 +58,8 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     // and Y up being increase values
     //
     // INSERT YOUR DRAWING CODE HERE
-
+    graphics->SetPen(*wxWHITE_PEN);
+    graphics->DrawRectangle(-10,-10, 20, 20);
     graphics->PopState();
 }
 
