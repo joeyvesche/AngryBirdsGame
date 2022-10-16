@@ -78,6 +78,12 @@ void Item::Draw(wxDC *dc)
             int(GetY() - hit / 2));
 }
 
+void Item::XmlLoad(wxXmlNode* node)
+{
+    node->GetAttribute(L"x", L"0").ToDouble(&mX);
+    node->GetAttribute(L"y", L"0").ToDouble(&mY);
+}
+
 
 /**
  * Save this item to an XML node

@@ -6,6 +6,7 @@
 #include "Game.h"
 #include <wx/graphics.h>
 #include "Consts.h"
+#include "Item.h"
 /**
  * Game Constructor
  */
@@ -181,7 +182,23 @@ void Game::Clear()
  */
 void Game::XmlItem(wxXmlNode *node)
 {
+    // A pointer for the item we are loading
+    std::shared_ptr<Item> item;
 
+    // We have an item. What type?
+    auto type = node->GetAttribute(L"type");
+    /*
+    if (type == L"block")
+    {
+        item = make_shared<Block>(this);
+    }
+     */
+
+    if (item != nullptr)
+    {
+        Add(item);
+        item->XmlLoad(node);
+    }
 }
 
 /**

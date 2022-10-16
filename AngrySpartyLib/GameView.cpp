@@ -41,6 +41,7 @@ void GameView::Initialize(wxFrame* parent)
             IDM_LOADLEVELTWO);
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &GameView::OnLoadLevelThree, this,
             IDM_LOADLEVELTHREE);
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &GameView::LoadItems, this, wxID_OPEN);
 
     Bind(wxEVT_LEFT_DOWN, &GameView::OnLeftDown, this);
     Bind(wxEVT_LEFT_UP, &GameView::OnLeftUp, this);
@@ -176,4 +177,19 @@ void GameView::OnLoadLevelTwo(wxCommandEvent& event)
 void GameView::OnLoadLevelThree(wxCommandEvent& event)
 {
 
+}
+
+void GameView::LoadItems(wxCommandEvent& event)
+{
+    wxFileDialog loadFileDialog(this, _("Load Aquarium file"), "", "",
+            "Aquarium Files (*.aqua)|*.aqua", wxFD_OPEN);
+    if (loadFileDialog.ShowModal() == wxID_CANCEL)
+    {
+        return;
+    }
+
+    auto filename = loadFileDialog.GetPath();
+
+    mGame.Load(filename);
+    Refresh();
 }

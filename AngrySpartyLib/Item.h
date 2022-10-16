@@ -1,3 +1,5 @@
+#include <wx/xml/xml.h>
+
 /**
  * @file Item.h
  * @author Joseph Pauls
@@ -111,6 +113,8 @@ public:
      * @return int representing the height
      */
     int GetHeight() const {return mItemBitmap->GetHeight(); }
+
+    void XmlLoad(wxXmlNode *node);
 
 };
 

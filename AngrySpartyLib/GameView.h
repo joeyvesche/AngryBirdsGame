@@ -58,11 +58,17 @@ private:
     void OnDebugView(wxCommandEvent& event);
     void OnUpdateDebugView(wxUpdateUIEvent& event);
 
+    //
+    //  Load item
+    //
+    void LoadItems(wxCommandEvent& event);
+
 
 public:
     void Initialize(wxFrame* parent);
 
     void AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar, wxMenu* viewMenu);
+
 
 };
 

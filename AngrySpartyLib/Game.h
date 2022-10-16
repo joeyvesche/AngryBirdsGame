@@ -8,7 +8,6 @@
 #ifndef PROJECT1_GAME_H
 #define PROJECT1_GAME_H
 
-#include "pch.h"
 #include <wx/xml/xml.h>
 #include <memory>
 #include <string>

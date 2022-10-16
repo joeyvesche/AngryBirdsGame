@@ -54,6 +54,7 @@ void MainFrame::Initialize()
     helpMenu->Append(wxID_ABOUT, "&About\tF1", "Show about dialog");
 
     //File Menu options
+    fileMenu->Append(wxID_OPEN, "O&pen\tAlt-O", "Open the xml file to load items");
     fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit this program");
 
     //View Menu options
