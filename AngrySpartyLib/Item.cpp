@@ -79,18 +79,11 @@ void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics)
             wid, hit);
 }
 
-void Item::XmlLoad(wxXmlNode* node)
-{
-    node->GetAttribute(L"x", L"0").ToDouble(&mX);
-    node->GetAttribute(L"y", L"0").ToDouble(&mY);
-}
-
-
 /**
  * Save this item to an XML node
  * @param node The parent node we are going to be a child of
  * @return wxXmlNode that we saved the item into
-
+ */
 wxXmlNode *Item::XmlSave(wxXmlNode *node)
 {
     auto itemNode = new wxXmlNode(wxXML_ELEMENT_NODE, L"item");
@@ -101,7 +94,7 @@ wxXmlNode *Item::XmlSave(wxXmlNode *node)
 
     return itemNode;
 }
-*/
+
 
 
 /**
@@ -112,10 +105,9 @@ wxXmlNode *Item::XmlSave(wxXmlNode *node)
  * for specific items.
  *
  * @param node The Xml node we are loading the item from
-
+ */
 void Item::XmlLoad(wxXmlNode *node)
 {
     node->GetAttribute(L"x", L"0").ToDouble(&mX);
     node->GetAttribute(L"y", L"0").ToDouble(&mY);
 }
- */
