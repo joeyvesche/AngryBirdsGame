@@ -7,7 +7,9 @@
 #include <wx/dcbuffer.h>
 #include <wx/graphics.h>
 #include "ids.h"
-
+#include "Block.h"
+#include "Game.h"
+#include <memory>
 /**
  * Add menus specific to the view
  * @param mainFrame The main frame that owns the menu bar
@@ -58,7 +60,7 @@ void GameView::Initialize(wxFrame* parent)
     mStopWatch.Start();
      * --
      */
-
+    TestAdd();
 }
 
 /**
@@ -192,4 +194,14 @@ void GameView::LoadItems(wxCommandEvent& event)
 
     mGame.Load(filename);
     Refresh();
+}
+
+void GameView::TestAdd()
+{
+    const std::wstring filename = L"elementStone047.png";
+    auto item = std::make_shared<Block>(&mGame, filename);
+    mGame.Add(item);
+    item->SetLocation(0,100);
+    Refresh();
+
 }

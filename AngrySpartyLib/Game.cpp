@@ -55,11 +55,8 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 
     graphics->Translate(mXOffset, mYOffset);
 
-    //
-    // From here we are dealing with centimeter pixels
-    // and Y up being increase values
-    //
-    // INSERT YOUR DRAWING CODE HERE
+
+
     auto wid = mWidth * Consts::MtoCM;
     auto hit = mHeight * Consts::MtoCM;
 
@@ -78,6 +75,18 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
                 -600,
                 wid/2, hit);
     graphics->PopState();
+
+    //
+    // From here we are dealing with centimeter pixels
+    // and Y up being increase values
+    //
+    // INSERT YOUR DRAWING CODE HERE
+    for(auto &item: mItems)
+    {
+        item->Draw(graphics);
+    }
+
+    graphics->PopState();
 }
 
 /**
@@ -86,7 +95,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
  */
 void Game::Add(std::shared_ptr<Item> item)
 {
-
+    mItems.push_back(item);
 }
 
 /**

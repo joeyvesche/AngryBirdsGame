@@ -1,5 +1,5 @@
 #include <wx/xml/xml.h>
-
+#include <wx/graphics.h>
 /**
  * @file Item.h
  * @author Joseph Pauls
@@ -74,7 +74,7 @@ public:
      * Draw this item
      * @param dc Device context to draw on
      */
-    void Draw(wxDC *dc);
+    virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
     *

@@ -7,13 +7,13 @@
 #include "Item.h"
 
 using namespace std;
-
+const std::wstring ResDir = L"./images/";
 /**
 *  Constructor
 */
 Item::Item(Game* game, const wstring& filename) :mGame(game)
 {
-    mItemImage = make_unique<wxImage>(filename, wxBITMAP_TYPE_ANY);
+    mItemImage = make_unique<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
     mItemBitmap = make_unique<wxBitmap>(*mItemImage);
 }
 
@@ -69,13 +69,14 @@ bool Item::HitTest(int x, int y)
 /**
  * Draw this item
  */
-void Item::Draw(wxDC *dc)
+void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     double wid = mItemBitmap->GetWidth();
     double hit = mItemBitmap->GetHeight();
-    dc->DrawBitmap(*mItemBitmap,
+    graphics->DrawBitmap(*mItemBitmap,
             int(GetX() - wid / 2),
-            int(GetY() - hit / 2));
+            int(GetY() + hit / 2),
+            wid, hit);
 }
 
 void Item::XmlLoad(wxXmlNode* node)
