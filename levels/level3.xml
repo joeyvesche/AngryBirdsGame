@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level width="14.22" height="8"><items><background width="14.22" height="8" image="background1.png"/><slingshot x="-5.5" y="0.25"/><block x="0" y="0.125" width="14.22" height="0.25" repeat-x="35" type="static" image="sand.png"/><block x="3.02015" y="0.765915" angle="89.5402" friction="0.3" restitution="0.8" width="1" height="0.25" image="elementWood015.png"/><foe x="2.99279" y="1.55826" angle="-337.974" radius="0.3" down="1" image="foeM.png"/></items><angry x="-6.5" y="0.3" spacing="0.6"><gruff-sparty/><gruff-sparty/></angry></level>
