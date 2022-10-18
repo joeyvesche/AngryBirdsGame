@@ -1,6 +1,8 @@
 /**
  * @file GameView.cpp
- * @author Will Morant, Joey Vesche
+ * @author Will Morant
+ * @author Joey Vesche
+ * @author Joseph Pauls
  */
 #include "pch.h"
 #include "GameView.h"
@@ -12,6 +14,7 @@
 #include "SlingShot.h"
 #include "Consts.h"
 #include <memory>
+
 /**
  * Add menus specific to the view
  * @param mainFrame The main frame that owns the menu bar
@@ -154,7 +157,8 @@ void GameView::OnUpdateDebugView(wxUpdateUIEvent& event)
  */
 void GameView::OnLoadLevelZero(wxCommandEvent& event)
 {
-
+    mGame.Load(L"levels/level0.xml");
+    Refresh();
 }
 
 /**
@@ -163,7 +167,8 @@ void GameView::OnLoadLevelZero(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelOne(wxCommandEvent& event)
 {
-
+    mGame.Load(L"levels/level1.xml");
+    Refresh();
 }
 
 /**
@@ -172,7 +177,8 @@ void GameView::OnLoadLevelOne(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelTwo(wxCommandEvent& event)
 {
-
+    mGame.Load(L"levels/level2.xml");
+    Refresh();
 }
 
 /**
@@ -181,7 +187,8 @@ void GameView::OnLoadLevelTwo(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelThree(wxCommandEvent& event)
 {
-
+    mGame.Load(L"levels/level3.xml");
+    Refresh();
 }
 
 void GameView::LoadItems(wxCommandEvent& event)

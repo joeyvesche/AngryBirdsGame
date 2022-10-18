@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level width="14.22" height="8">
+    <items>
+        <background width="14.22" height="8" image="background1.png"/>
+        <slingshot x="-5.5" y="0.25"/>
+        <block x="0" y="0.125" width="14.22" height="0.25" repeat-x="35" type="static" image="sand.png"/>
+        <block x="3.0063" y="0.765003" angle="90.0103" friction="0.3" restitution="0.8" width="1" height="0.25"
+               image="elementWood015.png"/>
+        <block x="4.01397" y="0.765071" angle="90.0328" width="1" height="0.25" image="elementWood015.png"/>
+        <block x="3.52247" y="1.40523" angle="0.0250774" width="1.5" height="0.25" image="elementWood031.png"/>
+        <block x="3.05503" y="1.92015" angle="-269.881" width="0.75" height="0.2" image="elementStone047.png"/>
+        <block x="4.0351" y="1.92204" angle="270.197" width="0.75" height="0.2" image="elementStone047.png"/>
+        <block x="3.37571" y="1.64578" angle="-270.015" width="0.2" height="0.175" image="debrisStone_1.png"/>
+        <block x="3.74612" y="1.64569" angle="-90.011" width="0.2" height="0.175" image="debrisGlass_1.png"/>
+        <block x="3.48723" y="2.41188" angle="180.21" width="3" height="0.2" image="elementMetal013.png"/>
+        <block x="3.19765" y="2.95264" angle="270.6" width="0.85" height="0.2" image="elementMetal029.png"/>
+        <block x="2.15612" y="2.94857" angle="91.1401" width="0.85" height="0.2" image="elementMetal029.png"/>
+        <block x="3.87788" y="3.49745" angle="180.317" width="2" height="0.2" image="elementMetal013.png"/>
+        <block x="2.65189" y="3.652" angle="194.624" width="2" height="0.2" image="elementMetal013.png"/>
+        <block x="2.95882" y="4.1141" angle="14.564" width="0.5" height="0.5" image="flagGreen.png"/>
+        <poly x="4.54695" y="2.95783" angle="0.406454" image="elementMetal002.png">
+            <v x="-0.425" y="-0.425"/>
+            <v x="0.425" y="-0.425"/>
+            <v x="-0.425" y="0.425"/>
+        </poly>
+        <foe x="4.14378" y="3.89139" angle="-337.194" radius="0.3" down="1" image="foeM.png"/>
+        <foe x="2.65774" y="2.80145" angle="22.9369" radius="0.3" down="1" image="foeO.png"/>
+    </items>
+    <angry x="-6.5" y="0.3" spacing="0.6">
+        <gruff-sparty/>
+        <helmet-sparty/>
+        <gruff-sparty/>
+    </angry>
+</level>

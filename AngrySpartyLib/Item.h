@@ -83,12 +83,12 @@ public:
     */
     double DistanceTo(std::shared_ptr<Item> item);
 
-    /* XML is not yet implemented
+
     virtual wxXmlNode* XmlSave(wxXmlNode* node);
 
     virtual void XmlLoad(wxXmlNode* node);
 
-     */
+
 
     /**
     * Handle updates for animation
@@ -114,7 +114,7 @@ public:
      */
     int GetHeight() const {return mItemBitmap->GetHeight(); }
 
-    void XmlLoad(wxXmlNode *node);
+
 
 };
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level width="20" height="8">
+    <items>
+        <background width="20" height="8" image="background1.png"/>
+        <goalposts x="-5.5" y="0.25"/>
+        <block x="0" y="0.125" width="20" height="0.25" repeat-x="45" type="static" image="sand.png"/>
+        <block x="4.09142" y="2.04342" angle="268.599" friction="0.3" restitution="0.8" width="1" height="0.25"
+               image="elementWood015.png"/>
+        <block x="3.35625" y="2.06137" angle="-271.398" width="1" height="0.25" image="elementWood015.png"/>
+        <block x="5.35271" y="2.65242" angle="-1.42057" width="1.5" height="0.25" image="elementWood031.png"/>
+        <block x="5.15529" y="3.64555" angle="-177.924" width="0.75" height="0.2" image="elementStone047.png"/>
+        <block x="3.69974" y="0.364022" angle="0.0632041" width="0.75" height="0.2" image="elementStone047.png"/>
+        <block x="6.055" y="3.67833" angle="-87.926" width="0.2" height="0.175" image="debrisStone_1.png"/>
+        <block x="3.95657" y="3.45098" angle="-102.159" width="0.2" height="0.175" image="debrisGlass_1.png"/>
+        <block x="4.76891" y="1.41164" angle="178.593" width="3" height="0.2" image="elementMetal013.png"/>
+        <block x="4.5197" y="0.36511" angle="-180.006" width="0.85" height="0.2" image="elementMetal029.png"/>
+        <block x="3.44736" y="0.903492" angle="-90.6401" width="0.85" height="0.2" image="elementMetal029.png"/>
+        <block x="4.5444" y="3.1012" angle="167.595" width="2" height="0.2" image="elementMetal013.png"/>
+        <block x="5.19023" y="3.43189" angle="182.073" width="2" height="0.2" image="elementMetal013.png"/>
+        <block x="9.05663" y="2.53256" angle="0.454629" width="0.5" height="0.5" image="flagGreen.png"/>
+        <poly x="3.68597" y="2.56838" angle="-136.395" image="elementMetal002.png">
+            <v x="-0.425" y="-0.425"/>
+            <v x="0.425" y="-0.425"/>
+            <v x="-0.425" y="0.425"/>
+        </poly>
+        <block x="5.57156" y="2.00695" angle="358.586" width="1" height="1" image="elementExplosive039.png"/>
+        <block x="5.57604" y="0.766388" angle="359.828" width="1" height="1" image="elementExplosive039.png"/>
+        <block x="9.00001" y="1.265" angle="-6.57524e-06" density="100" width="0.5" height="2"
+               image="elementExplosive041.png"/>
+        <foe x="5.85255" y="3.05716" angle="21.1097" radius="0.3" down="1.5" image="foeM.png"/>
+        <foe x="4.35066" y="3.79633" angle="-64.9866" radius="0.3" down="1.5" image="foeO.png"/>
+        <foe x="5.12217" y="4.03672" angle="-20.4206" radius="0.3" down="1.5" image="foeM2.png"/>
+        <foe x="4.53487" y="0.759972" angle="-337.889" radius="0.3" down="0.6" image="foeN.png"/>
+    </items>
+    <angry x="-6.5" y="0.3" spacing="0.6">
+        <helmet-sparty/>
+        <helmet-sparty/>
+        <helmet-sparty/>
+        <helmet-sparty/>
+        <helmet-sparty/>
+        <helmet-sparty/>
+    </angry>
+</level>
