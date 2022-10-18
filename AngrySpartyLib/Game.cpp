@@ -25,7 +25,7 @@ Game::Game()
  */
 void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
-    wxBrush background(*wxWHITE);
+    wxBrush background(*wxBLACK);
     graphics->SetBrush(background);
     graphics->DrawRectangle(0, 0, width, height);
 
@@ -68,13 +68,23 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
             wid, hit);
     graphics->PopState();
 
+
     graphics->PushState();
-    graphics->Scale(0.1, -0.1);
+    graphics->Scale(0.17, -0.17);
     graphics->DrawBitmap(*mSlingshot,
-                -3300,
-                -600,
-                wid/2, hit);
+                -3500,
+                -920,
+                350, 900);
     graphics->PopState();
+
+    wxFont bigFont(wxSize(40, 70),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
+    graphics->SetFont(bigFont, wxColour(255, 0, 0));
+    graphics->GetTextExtent(L"000", &wid, &hit);
+    graphics->DrawText(L"000", 5.5 * Consts::MtoCM, 7 * Consts::MtoCM);
+    graphics->DrawText(L"000", -6.75 * Consts::MtoCM, 7 * Consts::MtoCM);
 
     //
     // From here we are dealing with centimeter pixels
@@ -87,6 +97,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     }
 
     graphics->PopState();
+
 }
 
 /**

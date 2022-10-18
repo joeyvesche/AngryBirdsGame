@@ -12,7 +12,7 @@ void MainFrame::Initialize()
 {
 
     Create(nullptr, wxID_ANY, L"Angry Sparty",
-            wxDefaultPosition, wxSize(1600, 900));
+            wxDefaultPosition, wxSize(1100, 700));
 
     auto sizer = new wxBoxSizer( wxVERTICAL );
 

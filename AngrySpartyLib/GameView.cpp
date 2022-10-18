@@ -9,6 +9,8 @@
 #include "ids.h"
 #include "Block.h"
 #include "Game.h"
+#include "SlingShot.h"
+#include "Consts.h"
 #include <memory>
 /**
  * Add menus specific to the view
@@ -61,6 +63,7 @@ void GameView::Initialize(wxFrame* parent)
      * --
      */
     TestAdd();
+
 }
 
 /**
@@ -205,3 +208,5 @@ void GameView::TestAdd()
     Refresh();
 
 }
+
+

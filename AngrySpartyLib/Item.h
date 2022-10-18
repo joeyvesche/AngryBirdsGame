@@ -55,7 +55,7 @@ public:
      *  The X location of the item
      *  @return X location in pixels
      */
-     double GetX() const{ return mX;}
+    double GetX() const{ return mX;}
 
     /**
     * The Y location of the item
@@ -100,7 +100,7 @@ public:
      * Get the pointer to the Game object
      * @return Pointer to Game object
      */
-     Game *GetGame() {return mGame; }
+    Game *GetGame() {return mGame; }
 
     /**
     * Get the width of the object
