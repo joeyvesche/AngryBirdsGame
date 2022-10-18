@@ -13,6 +13,7 @@
 #include <string>
 
 class Item;
+class ItemVisitor;
 /**
  * Class of game
  */
@@ -113,6 +114,8 @@ public:
     {
         mLevels.push_back(level);
     };
+
+    void Accept(ItemVisitor * visitor);
 };
 
 #endif //PROJECT1_GAME_H

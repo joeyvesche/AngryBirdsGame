@@ -8,6 +8,7 @@
  */
 
 class Game;
+class ItemVisitor;
 #ifndef PROJECT1_ITEM_H
 #define PROJECT1_ITEM_H
 /**
@@ -115,6 +116,7 @@ public:
     int GetHeight() const {return mItemBitmap->GetHeight(); }
 
 
+    virtual void Accept(ItemVisitor * visitor) = 0;
 
 };
 

@@ -25,6 +25,7 @@ public:
     Block(Game* game, const std::wstring& filename);
 
     void XmlLoad(wxXmlNode* node) override;
+    void Accept(ItemVisitor * visitor) override;
 
 };
 
