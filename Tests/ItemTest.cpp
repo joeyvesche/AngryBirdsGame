@@ -9,7 +9,7 @@
 #include <Game.h>
 
 /// Demo item filename, in this case a helmet sparty
-const std::wstring HelmetSpartyImageName = L"images/helmet-sparty.png";
+const std::wstring HelmetSpartyImageName = L"helmet-sparty.png";
 
 /** Mock class for testing the class Item */
 class ItemMock : public Item {
