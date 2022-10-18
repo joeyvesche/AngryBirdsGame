@@ -1,6 +1,6 @@
 /**
  * @file Game.h
- * @author Yuqi Pan, Joey Vesche
+ * @authors Yuqi Pan, Joey Vesche, Joseph Pauls
  *
  *
  */
@@ -13,15 +13,16 @@
 #include <string>
 
 class Item;
+class ItemVisitor;
 /**
  * Class of game
  */
 class Game {
 private:
     /// width of game
-    int mWidth = 8;
+    double mWidth = 14.22;
     /// height of game
-    int mHeight = 6;
+    int mHeight = 8;
 
     /// scale
     double mScale = 10;
@@ -31,11 +32,15 @@ private:
     double mYOffset = 1;
 
     std::unique_ptr<wxBitmap> mBackground;  ///< Background image to use
-    std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use+86+
+    std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use
     /// All of the items to populate our game
     std::vector<std::shared_ptr<Item>> mItems;
+
+    /// A list holding lists of items, which are the levels
+    std::vector<std::vector<std::shared_ptr<Item>>> mLevels;
 public:
     Game();
+
     /**
      * Get the width of the aquarium
      * @return Aquarium width in pixels
@@ -49,11 +54,17 @@ public:
     int GetHeight() const { return mHeight; }
 
     void Save(const wxString& filename);
-    void Load(const wxString &filename);
+
+    void Load(const wxString& filename);
+
     void Clear();
-    void XmlItem(wxXmlNode *node);
+
+    void XmlItems(wxXmlNode* node);
+
     void Update(double elapsed);
+
     void Add(std::shared_ptr<Item> item);
+
     std::shared_ptr<Item> HitTest(int x, int y);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
@@ -63,12 +74,48 @@ public:
      * @param meters n
      */
     void SetWidth(int meters) { mWidth = meters; }
+
     /**
      * Set Height of game to n meters
      * @param meters n
      */
     void SetHeight(int meters) { mHeight = meters; }
 
+    /**
+     * A getter for items to be used when loading a level.
+     * @return the list of items
+     */
+    std::vector<std::shared_ptr<Item>> GetItems()
+    {
+        return mItems;
+    };
+
+    /**
+     * A getter for Levels to be used when loading a level.
+     * @return the list of items
+     */
+    std::vector<std::vector<std::shared_ptr<Item>>> GetLevels()
+    {
+        return mLevels;
+    }
+
+    /**
+     * A setter to set our items list to be used when loading a level
+     */
+    void SetItems(std::vector<std::shared_ptr<Item>> loadList)
+    {
+        mItems = loadList;
+    };
+
+    /**
+     * A setter to create the level list held in Game
+     */
+    void SetLevels(std::vector<std::shared_ptr<Item>> level)
+    {
+        mLevels.push_back(level);
+    };
+
+    void Accept(ItemVisitor * visitor);
 };
 
 #endif //PROJECT1_GAME_H

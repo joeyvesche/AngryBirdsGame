@@ -64,6 +64,7 @@ private:
     void LoadItems(wxCommandEvent& event);
 
     void TestAdd();
+
 public:
     void Initialize(wxFrame* parent);
 

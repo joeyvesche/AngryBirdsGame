@@ -8,6 +8,7 @@
  */
 
 class Game;
+class ItemVisitor;
 #ifndef PROJECT1_ITEM_H
 #define PROJECT1_ITEM_H
 /**
@@ -21,7 +22,7 @@ private:
     /// Item location in the game
     double mX = 0;
     double mY = 0;
-
+    double mAngle = 0;
     /// The underlying Item image
     std::unique_ptr<wxImage> mItemImage;
 
@@ -55,7 +56,7 @@ public:
      *  The X location of the item
      *  @return X location in pixels
      */
-     double GetX() const{ return mX;}
+    double GetX() const{ return mX;}
 
     /**
     * The Y location of the item
@@ -100,7 +101,7 @@ public:
      * Get the pointer to the Game object
      * @return Pointer to Game object
      */
-     Game *GetGame() {return mGame; }
+    Game *GetGame() {return mGame; }
 
     /**
     * Get the width of the object
@@ -115,6 +116,9 @@ public:
     int GetHeight() const {return mItemBitmap->GetHeight(); }
 
 
+    virtual void Accept(ItemVisitor * visitor) = 0;
+
+    double GetAngle(){return mAngle;}
 
 };
 

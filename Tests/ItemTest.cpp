@@ -10,14 +10,14 @@
 
 /// Demo item filename, in this case a helmet sparty
 const std::wstring HelmetSpartyImageName = L"helmet-sparty.png";
-
+class ItemVisitor;
 /** Mock class for testing the class Item */
 class ItemMock : public Item {
 public:
     ItemMock(Game *game) : Item(game, HelmetSpartyImageName) {}
 
     void Draw(wxDC *dc) {}
-
+    void Accept(ItemVisitor *) {}
 };
 
 
@@ -26,6 +26,7 @@ TEST(ItemTest, Construct)
 {
     Game game;
     ItemMock item(&game);
+
 }
 
 // Test our item getters and setters
