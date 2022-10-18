@@ -4,7 +4,7 @@ project(AngrySpartyLib)
 set(CMAKE_CXX_STANDARD 17)
 
 # Define a variable to hold a list of source files
-set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h GameView.cpp GameView.h ids.h Game.cpp Game.h Consts.h Item.cpp Item.h Block.cpp Block.h SlingShot.cpp SlingShot.h Scoreboard.cpp Scoreboard.h ItemVisitor.cpp ItemVisitor.h)
+set(SOURCE_FILES MainFrame.cpp MainFrame.h pch.h GameView.cpp GameView.h ids.h Game.cpp Game.h Consts.h Item.cpp Item.h Block.cpp Block.h SlingShot.cpp SlingShot.h Scoreboard.cpp Scoreboard.h ItemVisitor.cpp ItemVisitor.h Foe.cpp Foe.h AngrySparty.cpp AngrySparty.h GruffSparty.cpp GruffSparty.h HelmetSparty.cpp HelmetSparty.h)
 
 # Grab the wxWidget library and include the use file
 # Additionally, turn off wxWidget's built-in precompiled headers
