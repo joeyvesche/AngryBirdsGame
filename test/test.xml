@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+    <item x="100" y="100" type="block" image="elementMetal013.png"/>
+    <item x="200" y="200" type="block" image="elementMetal029.png"/>
+    <item x="300" y="300" type="block" image="elementStone047.png"/>
+    <item x="400" y="400" type="block" image="elementStone047.png"/>
+    <item x="700" y="700" type="block" image="elementWood015.png"/>
+</level>

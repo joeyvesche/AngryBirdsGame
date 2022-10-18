@@ -11,3 +11,8 @@ Block::Block(Game* game, const std::wstring& filename)
 {
 
 }
+
+void Block::XmlLoad(wxXmlNode* node)
+{
+    Item::XmlLoad(node);
+}

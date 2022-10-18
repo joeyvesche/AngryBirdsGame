@@ -7,6 +7,8 @@
 #include <wx/graphics.h>
 #include "Consts.h"
 #include "Item.h"
+#include "Block.h"
+
 /**
  * Game Constructor
  */
@@ -207,12 +209,12 @@ void Game::XmlItem(wxXmlNode *node)
 
     // We have an item. What type?
     auto type = node->GetAttribute(L"type");
-    /*
+
     if (type == L"block")
     {
-        item = make_shared<Block>(this);
+        auto image =node->GetAttribute(L"image").ToStdWstring();
+        item = std::make_shared<Block>(this, image);
     }
-     */
 
     if (item != nullptr)
     {

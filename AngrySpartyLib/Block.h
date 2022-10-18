@@ -23,6 +23,9 @@ public:
     Block(const Block &) = delete;
 
     Block(Game* game, const std::wstring& filename);
+
+    void XmlLoad(wxXmlNode* node) override;
+
 };
 
 #endif //PROJECT1_BLOCK_H

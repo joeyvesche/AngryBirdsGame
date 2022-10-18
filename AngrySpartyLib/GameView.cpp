@@ -210,8 +210,8 @@ void GameView::OnLoadLevelThree(wxCommandEvent& event)
 
 void GameView::LoadItems(wxCommandEvent& event)
 {
-    wxFileDialog loadFileDialog(this, _("Load Aquarium file"), "", "",
-            "Aquarium Files (*.aqua)|*.aqua", wxFD_OPEN);
+    wxFileDialog loadFileDialog(this, _("Load Game file"), "", "",
+            "Aquarium Files (*.xml)|*.xml", wxFD_OPEN);
     if (loadFileDialog.ShowModal() == wxID_CANCEL)
     {
         return;
