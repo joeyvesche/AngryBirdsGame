@@ -25,6 +25,8 @@ public:
 
     HelmetSparty(Game *game);
 
+    void Accept(ItemVisitor * visitor) override {};
+
 };
 
 #endif //PROJECT1_HELMETSPARTY_H

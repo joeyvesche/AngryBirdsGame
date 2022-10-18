@@ -25,6 +25,8 @@ public:
     void operator=(const GruffSparty &) = delete;
 
     GruffSparty(Game *game);
+
+    void Accept(ItemVisitor * visitor) override {};
 };
 
 #endif //PROJECT1_GRUFFSPARTY_H
