@@ -19,9 +19,9 @@ class Item;
 class Game {
 private:
     /// width of game
-    int mWidth = 8;
+    double mWidth = 14.22;
     /// height of game
-    int mHeight = 6;
+    int mHeight = 8;
 
     /// scale
     double mScale = 10;
@@ -31,7 +31,7 @@ private:
     double mYOffset = 1;
 
     std::unique_ptr<wxBitmap> mBackground;  ///< Background image to use
-    std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use+86+
+    std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use
     /// All of the items to populate our game
     std::vector<std::shared_ptr<Item>> mItems;
 
