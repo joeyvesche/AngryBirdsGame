@@ -59,7 +59,7 @@ public:
 
     void Clear();
 
-    void XmlItem(wxXmlNode* node);
+    void XmlItems(wxXmlNode* node);
 
     void Update(double elapsed);
 

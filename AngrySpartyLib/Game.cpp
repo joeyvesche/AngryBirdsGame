@@ -170,8 +170,8 @@ void Game::Load(const wxString& filename)
     auto child = root->GetChildren();
     for (; child; child = child->GetNext()) {
         auto name = child->GetName();
-        if (name==L"item") {
-            XmlItem(child);
+        if (name==L"items") {
+            XmlItems(child);
         }
     }
 }
@@ -190,22 +190,25 @@ void Game::Clear()
  * Handle a node of type item.
  * @param node XML node
  */
-void Game::XmlItem(wxXmlNode* node)
+void Game::XmlItems(wxXmlNode* node)
 {
-    // A pointer for the item we are loading
-    std::shared_ptr<Item> item;
+    auto child = node->GetChildren();
+    for (; child; child = child->GetNext()) {
+        auto name = child->GetName();
+        std::shared_ptr<Item> item;
 
-    // We have an item. What type?
-    auto type = node->GetAttribute(L"type");
-
-    if (type==L"block") {
-        auto image = node->GetAttribute(L"image").ToStdWstring();
-        item = std::make_shared<Block>(this, image);
-    }
-
-    if (item!=nullptr) {
-        Add(item);
-        item->XmlLoad(node);
+        if (name==L"block") {
+            auto image = child->GetAttribute(L"image").ToStdWstring();
+            item = std::make_shared<Block>(this, image);
+        }
+        else if (name==L"poly") {
+            // auto image = child->GetAttribute(L"image").ToStdWstring();
+            // item = std::make_shared<Poly>(this, image);
+        }
+        if (item!=nullptr) {
+            Add(item);
+            item->XmlLoad(child);
+        }
     }
 }
 

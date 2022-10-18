@@ -40,16 +40,21 @@ TEST(GameTest, XmlLoadTest){
 
     ASSERT_EQ(visitor.mItems[0]->GetX(), 100);
     ASSERT_EQ(visitor.mItems[0]->GetY(), 100);
+    ASSERT_EQ(visitor.mItems[0]->GetAngle(), 1);
 
     ASSERT_EQ(visitor.mItems[1]->GetX(), 200);
     ASSERT_EQ(visitor.mItems[1]->GetY(), 200);
+    ASSERT_EQ(visitor.mItems[1]->GetAngle(), 2);
 
     ASSERT_EQ(visitor.mItems[2]->GetX(), 300);
     ASSERT_EQ(visitor.mItems[2]->GetY(), 300);
+    ASSERT_EQ(visitor.mItems[2]->GetAngle(), 3);
 
     ASSERT_EQ(visitor.mItems[3]->GetX(), 400);
     ASSERT_EQ(visitor.mItems[3]->GetY(), 400);
+    ASSERT_EQ(visitor.mItems[3]->GetAngle(), 4);
 
     ASSERT_EQ(visitor.mItems[4]->GetX(), 700);
     ASSERT_EQ(visitor.mItems[4]->GetY(), 700);
+    ASSERT_EQ(visitor.mItems[4]->GetAngle(), 5);
 }

@@ -22,7 +22,7 @@ private:
     /// Item location in the game
     double mX = 0;
     double mY = 0;
-
+    double mAngle = 0;
     /// The underlying Item image
     std::unique_ptr<wxImage> mItemImage;
 
@@ -117,6 +117,8 @@ public:
 
 
     virtual void Accept(ItemVisitor * visitor) = 0;
+
+    double GetAngle(){return mAngle;}
 
 };
 
