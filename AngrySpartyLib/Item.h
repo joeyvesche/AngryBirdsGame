@@ -7,10 +7,15 @@
  * The underlying base class for all items in the game
  */
 
-class Game;
-class ItemVisitor;
+
 #ifndef PROJECT1_ITEM_H
 #define PROJECT1_ITEM_H
+
+#include <memory>
+
+class Game;
+class ItemVisitor;
+
 /**
  * Base Class for items used in the game
  */
