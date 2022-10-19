@@ -9,6 +9,8 @@
 #ifndef PROJECT1_XMLVIEW_H
 #define PROJECT1_XMLVIEW_H
 
+#include <wx/xml/xml.h>
+
 /**
  * This class will view the children of an XML node
  * and allow for easier parsing of data
