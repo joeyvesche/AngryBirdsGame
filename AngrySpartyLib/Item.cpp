@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Item.h"
+#include "Consts.h"
 
 using namespace std;
 const std::wstring ResDir = L"./images/";
@@ -75,7 +76,7 @@ void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     double hit = mItemBitmap->GetHeight();
     graphics->DrawBitmap(*mItemBitmap,
             int(GetX() - wid / 2),
-            int(GetY() + hit / 2),
+            int(GetY() - hit / 2),
             wid, hit);
 }
 
@@ -111,4 +112,6 @@ void Item::XmlLoad(wxXmlNode *node)
     node->GetAttribute(L"x", L"0").ToDouble(&mX);
     node->GetAttribute(L"y", L"0").ToDouble(&mY);
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
+
+    SetLocation(GetX() * Consts::MtoCM, GetY() * Consts::MtoCM);
 }
