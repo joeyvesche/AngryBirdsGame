@@ -10,28 +10,26 @@
 #define PROJECT1_LEVEL_H
 
 #include <string>
-#include "XmlView.h"
 #include <utility>
+#include <list>
+#include <memory>
+#include "Item.h"
+#include "AngrySparty.h"
 
 /**
- * This class stores the contents of an XML level
- * file and supports parsing of the stored data
+ * This class loads and stores the contents of a
+ * level XML file
  */
 class Level {
 private:
-    wxXmlDocument mDoc; ///< The XML document from a level file
+    std::pair<double, double> mSize; ///< {width, height} of the level in meters
+    std::list<std::shared_ptr<Item>> mItems; ///< All items in this level
+
+    void LoadItemsXml(wxXmlNode * items);
+    void LoadSpartysXml(wxXmlNode * angry);
 
 public:
     Level(std::wstring const & filepath);
-
-    std::pair<double, double> GetSize() const;
-
-    /**
-     * View the XML contents of a level
-     *
-     * @return an XML view of the xml root
-     */
-    XmlView Contents() const { return XmlView(mDoc.GetRoot()); }
 };
 
 
