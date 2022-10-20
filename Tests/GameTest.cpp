@@ -32,6 +32,7 @@ public:
     std::vector<Item*> mItems;
     void VisitBlock(Block* block) override{ mItems.push_back(block);}
 };
+/*
 TEST(GameTest, XmlLoadTest){
     Game game;
     game.Load(TestXml);
@@ -57,4 +58,4 @@ TEST(GameTest, XmlLoadTest){
     ASSERT_EQ(visitor.mItems[4]->GetX(), 700);
     ASSERT_EQ(visitor.mItems[4]->GetY(), 700);
     ASSERT_EQ(visitor.mItems[4]->GetAngle(), 5);
-}
+}*/

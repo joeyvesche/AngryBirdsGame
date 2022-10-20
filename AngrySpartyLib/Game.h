@@ -11,6 +11,7 @@
 #include <wx/xml/xml.h>
 #include <memory>
 #include <string>
+#include "Level.h"
 
 class Item;
 class ItemVisitor;
@@ -33,11 +34,10 @@ private:
 
     std::unique_ptr<wxBitmap> mBackground;  ///< Background image to use
     std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use
-    /// All of the items to populate our game
-    std::vector<std::shared_ptr<Item>> mItems;
 
-    /// A list holding lists of items, which are the levels
-    std::vector<std::vector<std::shared_ptr<Item>>> mLevels;
+    std::vector<Level> mLevels; ///< A list of all levels
+    Level mLevel; ///< The currently loaded level
+
 public:
     Game();
 
@@ -59,8 +59,6 @@ public:
 
     void Clear();
 
-    void XmlItems(wxXmlNode* node);
-
     void Update(double elapsed);
 
     void Add(std::shared_ptr<Item> item);
@@ -80,40 +78,6 @@ public:
      * @param meters n
      */
     void SetHeight(int meters) { mHeight = meters; }
-
-    /**
-     * A getter for items to be used when loading a level.
-     * @return the list of items
-     */
-    std::vector<std::shared_ptr<Item>> GetItems()
-    {
-        return mItems;
-    };
-
-    /**
-     * A getter for Levels to be used when loading a level.
-     * @return the list of items
-     */
-    std::vector<std::vector<std::shared_ptr<Item>>> GetLevels()
-    {
-        return mLevels;
-    }
-
-    /**
-     * A setter to set our items list to be used when loading a level
-     */
-    void SetItems(std::vector<std::shared_ptr<Item>> loadList)
-    {
-        mItems = loadList;
-    };
-
-    /**
-     * A setter to create the level list held in Game
-     */
-    void SetLevels(std::vector<std::shared_ptr<Item>> level)
-    {
-        mLevels.push_back(level);
-    };
 
     void Accept(ItemVisitor * visitor);
 };

@@ -56,22 +56,6 @@ void GameView::Initialize(wxFrame* parent)
     Bind(wxEVT_MOTION, &GameView::OnMouseMove, this);
 
     /// Load all of the levels when the game is launched and store them for later use.
-    mGame.Load(L"levels/level0.xml");
-    auto Level0 = mGame.GetItems();
-    mGame.SetLevels(Level0);
-
-    mGame.Load(L"levels/level1.xml");
-    auto Level1 = mGame.GetItems();
-    mGame.SetLevels(Level1);
-
-    mGame.Load(L"levels/level2.xml");
-    auto Level2 = mGame.GetItems();
-    mGame.SetLevels(Level2);
-
-    mGame.Load(L"levels/level3.xml");
-    auto Level3 = mGame.GetItems();
-    mGame.SetLevels(Level3);
-
 
     /**
      * Might need these later for moving objects
@@ -174,7 +158,6 @@ void GameView::OnUpdateDebugView(wxUpdateUIEvent& event)
  */
 void GameView::OnLoadLevelZero(wxCommandEvent& event)
 {
-    mGame.SetItems(mGame.GetLevels()[0]);
     Refresh();
 }
 
@@ -184,7 +167,6 @@ void GameView::OnLoadLevelZero(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelOne(wxCommandEvent& event)
 {
-    mGame.SetItems(mGame.GetLevels()[1]);
     Refresh();
 }
 
@@ -194,7 +176,6 @@ void GameView::OnLoadLevelOne(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelTwo(wxCommandEvent& event)
 {
-    mGame.SetItems(mGame.GetLevels()[2]);
     Refresh();
 }
 
@@ -204,7 +185,6 @@ void GameView::OnLoadLevelTwo(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelThree(wxCommandEvent& event)
 {
-    mGame.SetItems(mGame.GetLevels()[3]);
     Refresh();
 }
 

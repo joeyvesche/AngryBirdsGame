@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level width="14.22" height="8">
+    <items>
+        <background width="14.22" height="8" image="background1.png"/>
+        <slingshot x="-5.5" y="0.25"/>
+    </items>
+</level>

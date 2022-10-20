@@ -8,6 +8,14 @@
 #include "Consts.h"
 #include "Item.h"
 #include "Block.h"
+#include <vector>
+
+// The directory that contains all level xml files
+std::wstring const LevelDirectory = L"levels/";
+
+// an ordered list of level xml file names
+std::vector<std::wstring> const LevelFiles =
+        {L"level0.xml", L"level1.xml", L"level2.xml", L"level3.xml"};
 
 /**
  * Game Constructor
@@ -16,6 +24,11 @@ Game::Game()
 {
     mBackground = std::make_unique<wxBitmap>(L"images/background1.png", wxBITMAP_TYPE_ANY);
     mSlingshot = std::make_unique<wxBitmap>(L"images/slingshot.png", wxBITMAP_TYPE_ANY);
+
+    // load all levels from files
+    for (auto const & filename : LevelFiles) {
+        mLevels.emplace_back(LevelDirectory + filename);
+    }
 }
 
 /**
@@ -89,9 +102,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     // and Y up being increase values
     //
     // INSERT YOUR DRAWING CODE HERE
-    for (auto& item: mItems) {
-        item->Draw(graphics);
-    }
+    mLevel.OnDraw(graphics);
 
     graphics->PopState();
 
@@ -103,7 +114,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
  */
 void Game::Add(std::shared_ptr<Item> item)
 {
-    mItems.push_back(item);
+    //mItems.push_back(item);
 }
 
 /**
@@ -133,9 +144,6 @@ void Game::Save(const wxString& filename)
     xmlDoc.SetRoot(root);
 
     // Iterate over all items and save them
-    for (auto item: mItems) {
-
-    }
 
     if (!xmlDoc.Save(filename, wxXML_NO_INDENTATION)) {
         wxMessageBox(L"Write to XML failed");
@@ -152,28 +160,7 @@ void Game::Save(const wxString& filename)
  */
 void Game::Load(const wxString& filename)
 {
-    wxXmlDocument xmlDoc;
-    if (!xmlDoc.Load(filename)) {
-        wxMessageBox(L"Unable to load Game file");
-        return;
-    }
 
-    Clear();
-
-    // Get the XML document root node
-    auto root = xmlDoc.GetRoot();
-
-    //
-    // Traverse the children of the root
-    // node of the XML document in memory!!!!
-    //
-    auto child = root->GetChildren();
-    for (; child; child = child->GetNext()) {
-        auto name = child->GetName();
-        if (name==L"items") {
-            XmlItems(child);
-        }
-    }
 }
 
 /**
@@ -183,34 +170,9 @@ void Game::Load(const wxString& filename)
  */
 void Game::Clear()
 {
-    mItems.clear();
 }
 
-/**
- * Handle a node of type item.
- * @param node XML node
- */
-void Game::XmlItems(wxXmlNode* node)
-{
-    auto child = node->GetChildren();
-    for (; child; child = child->GetNext()) {
-        auto name = child->GetName();
-        std::shared_ptr<Item> item;
 
-        if (name==L"block") {
-            auto image = child->GetAttribute(L"image").ToStdWstring();
-            item = std::make_shared<Block>(this, image);
-        }
-        else if (name==L"poly") {
-            // auto image = child->GetAttribute(L"image").ToStdWstring();
-            // item = std::make_shared<Poly>(this, image);
-        }
-        if (item!=nullptr) {
-            Add(item);
-            item->XmlLoad(child);
-        }
-    }
-}
 
 /**
  * Handle updates for animation
@@ -223,7 +185,7 @@ void Game::Update(double elapsed)
 
 void Game::Accept(ItemVisitor* visitor)
 {
-    for (auto item: mItems) {
-        item->Accept(visitor);
+    for (auto & item: mLevel) {
+        item.Accept(visitor);
     }
 }

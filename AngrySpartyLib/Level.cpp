@@ -71,9 +71,7 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
 }
 
 /**
- * Construct a new level object
- *
- * Load and store data from and XML file located
+ * Create a level object from an XML file located
  * at the given filepath
  *
  * @param filepath the path to the level XML file
@@ -85,9 +83,13 @@ Level::Level(std::wstring const & filepath)
     // exit if loading the xml file was unsuccessful
     if (!doc.Load(filepath)) return;
 
-    // Process all items in the xml file
+    // process root tag attributes
     auto root = doc.GetRoot();
 
+    root->GetAttribute("width").ToDouble(&mSize.first);
+    root->GetAttribute("height").ToDouble(&mSize.second);
+
+    // process everything else
     for (auto child = root->GetChildren(); child != nullptr; child = child->GetNext())
     {
         if (child->GetName() == L"items")
@@ -97,5 +99,18 @@ Level::Level(std::wstring const & filepath)
         {
             LoadSpartysXml(child);
         }
+    }
+}
+
+/**
+ * Draw the items
+ *
+ * @param graphics the graphics context to draw on
+ */
+void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
+{
+    for (auto & item : mItems)
+    {
+        item.Draw(graphics);
     }
 }
