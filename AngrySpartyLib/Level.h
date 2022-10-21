@@ -30,7 +30,7 @@ private:
     void LoadItemsXml(wxXmlNode * items);
     void LoadSpartysXml(wxXmlNode * angry);
 
-    Physics *mPhysics; ///The physics system for this level
+    std::shared_ptr<Physics> mPhysics; ///The physics system for this level
 
 public:
     /**
@@ -63,7 +63,7 @@ public:
      */
     auto end() { return mItems.end(); }
 
-    Physics* GetPhysics() {return mPhysics;}
+    std::shared_ptr<Physics> GetPhysics() {return mPhysics;}
 
     double GetWidth() {return mWidth;}
     double GetHeight() {return mHeight;}

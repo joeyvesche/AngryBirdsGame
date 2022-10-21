@@ -104,9 +104,7 @@ Level::Level(std::wstring const & filepath)
     root->GetAttribute("height").ToDouble(&mHeight);
     b2Vec2 size;
     size.Set(float(mWidth), float(mHeight));
-    Physics phys(size);
-    mPhysics = &phys;
-
+    mPhysics = std::make_shared<Physics>(size);
 
     // process everything else
     for (auto child = root->GetChildren(); child != nullptr; child = child->GetNext())

@@ -28,7 +28,7 @@ void Block::XmlLoad(wxXmlNode* node)
 
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this, node);
     Level *level = Item::GetLevel();
-    Physics *physics = level->GetPhysics();
+    std::shared_ptr<Physics> physics = level->GetPhysics();
     body->MakeBody(physics);
     mBody = body->GetBody();
 }
