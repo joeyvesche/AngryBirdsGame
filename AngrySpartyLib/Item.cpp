@@ -102,5 +102,5 @@ void Item::XmlLoad(wxXmlNode *node)
     node->GetAttribute(L"y", L"0").ToDouble(&mY);
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
 
-    SetLocation(GetX() * Consts::MtoCM, GetY() * Consts::MtoCM);
+    //SetLocation(GetX() * Consts::MtoCM, GetY() * Consts::MtoCM);
 }

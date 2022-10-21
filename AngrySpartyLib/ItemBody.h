@@ -8,9 +8,10 @@
 #ifndef PROJECT1_ITEMBODY_H
 #define PROJECT1_ITEMBODY_H
 #include "Item.h"
-#include "Block.h"
+//#include "Block.h"
 #include "Physics.h"
 
+class Block;
 class ItemBody {
 private:
 
@@ -22,7 +23,7 @@ private:
 
     double mFriction = 0; ///Friction of item
 
-    double mDensity = 0; /// Density of item
+    double mDensity = 1; /// Density of item
 
     double mRestitution = 0; /// Restitution of item
 
@@ -40,10 +41,13 @@ private:
 
 public:
 
-    ItemBody(Block *block, wxXmlNode *node);
+    ItemBody(Block* block, wxXmlNode* node);
 
-    ///void MakeBody(Physics *physics);
+    void MakeBody(Physics *physics);
 
+    b2Body* GetBody() {return mBody;}
+
+    b2Vec2 GetPosition() {return mPosition;}
 };
 
 #endif //PROJECT1_ITEMBODY_H

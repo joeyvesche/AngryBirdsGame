@@ -11,6 +11,9 @@
 #include <string>
 #include "Physics.h"
 #include "Consts.h"
+#include "ItemBody.h"
+#include "Level.h"
+
 /**
  * Base Class for a block
  */
@@ -23,10 +26,10 @@ private:
     b2Vec2 mSize; /// size vector of block
 
 
-    std::unique_ptr<wxImage> mBlockImage; ///Image for block
-    std::unique_ptr<wxBitmap> mBlockBitmap; ///Bitmap for block
+    std::shared_ptr<wxImage> mBlockImage; ///Image for block
+    std::shared_ptr<wxBitmap> mBlockBitmap; ///Bitmap for block
 
-    int mRepeatX = 0;
+    int mRepeatX = 1; /// Amount of times to repeat block
 
 
 
@@ -49,6 +52,8 @@ public:
 
     ///getter for box2D Body object
     b2Body *GetBody() {return mBody;}
+
+    b2Vec2 GetPosition() {return mBody->GetPosition();}
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 

@@ -23,13 +23,17 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if (name == L"background")
         {
-            auto background = std::make_shared<Background>(this, L"background1.png");
+            std::shared_ptr<Background> background;
+            background = std::make_shared<Background>(this, L"background1.png");
             background->XmlLoad(child);
             item = background;
 
         } else if (name == L"block")
         {
-           item = std::make_shared<Block>(this, child->GetAttribute(L"image").ToStdWstring());
+           auto block = std::make_shared<Block>(this, child->GetAttribute(L"image").ToStdWstring());
+           block->XmlLoad(child);
+           item = block;
+
         } else if (name == L"poly")
         {
 

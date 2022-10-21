@@ -10,6 +10,8 @@
 Block::Block(Level* level, const std::wstring& filename)
         :Item(level, filename)
 {
+    mBlockImage = std::make_shared<wxImage>(L"images/" + filename, wxBITMAP_TYPE_ANY);
+    mBlockBitmap = std::make_shared<wxBitmap>(*mBlockImage);
 
 }
 
@@ -23,6 +25,12 @@ void Block::XmlLoad(wxXmlNode* node)
     node->GetAttribute(L"height", L"0").ToDouble(&height);
     mSize.x = width;
     mSize.y = height;
+
+    std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this, node);
+    Level *level = Item::GetLevel();
+    Physics *physics = level->GetPhysics();
+    body->MakeBody(physics);
+    mBody = body->GetBody();
 }
 
 void Block::Accept(ItemVisitor* visitor)
@@ -32,9 +40,9 @@ void Block::Accept(ItemVisitor* visitor)
 
 void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    /**graphics->PushState();
+    graphics->PushState();
 
-    b2Body* body = GetBody();
+    b2Body* body = mBody;
     auto position = body->GetPosition();
     auto angle = body->GetAngle();
 
@@ -64,5 +72,5 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         x += xw;
     }
 
-    graphics->PopState();*/
+    graphics->PopState();
 }

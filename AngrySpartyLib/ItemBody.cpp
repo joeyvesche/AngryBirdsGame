@@ -11,7 +11,6 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
     node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
     node->GetAttribute(L"restitution", L"0").ToDouble(&mRestitution);
-    node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
 
     if (node->GetAttribute(L"type", L"0") == "static")
     {
@@ -20,17 +19,18 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
 
     node->GetAttribute(L"x", "0").ToDouble(&mX);
     node->GetAttribute(L"y", "0").ToDouble(&mY);
-    mPosition.Set(mX, mY);
+    mPosition.Set(float(mX), float(mY));
 
     node->GetAttribute(L"width", "0").ToDouble(&mWidth);
     node->GetAttribute(L"height", "0").ToDouble(&mHeight);
-    mSize.Set(mWidth, mHeight);
+    mSize.Set(float(mWidth), float(mHeight));
 
 }
 
-/**void ItemBody::MakeBody(Physics *physics)
+void ItemBody::MakeBody(Physics *physics)
 {
-    //b2World* world = redacted
+
+    b2World* world = physics->GetWorld();
 
     // Create the box
     b2PolygonShape box;
@@ -56,5 +56,7 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
         fixtureDef.restitution = (float)mRestitution;
 
         body->CreateFixture(&fixtureDef);
+
     }
-}*/
+    mBody = body;
+}

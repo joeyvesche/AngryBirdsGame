@@ -12,6 +12,7 @@
 #include <b2_body.h>
 #include <b2_polygon_shape.h>
 #include <b2_mouse_joint.h>
+#include <b2_fixture.h>
 
 /**
  * Physics system for a level.
@@ -27,7 +28,7 @@ private:
 public:
     Physics(const b2Vec2& size);
 
-    b2World GetWorld() {return mWorld;}
+    b2World *GetWorld() {return &mWorld;}
 };
 
 #endif //PROJECT1_PHYSICS_H
