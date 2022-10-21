@@ -79,6 +79,8 @@ public:
     void SetHeight(int meters) { mHeight = meters; }
 
     void Accept(ItemVisitor * visitor);
+
+    void SetLevel(int index);
 };
 
 #endif //PROJECT1_GAME_H
