@@ -19,7 +19,7 @@ void Block::XmlLoad(wxXmlNode* node)
 {
     Item::XmlLoad(node);
 
-    node->GetAttribute(L"repeat-x", L"0").ToInt(&mRepeatX);
+    node->GetAttribute(L"repeat-x", L"1").ToInt(&mRepeatX);
     double width, height;
     node->GetAttribute(L"width", L"0").ToDouble(&width);
     node->GetAttribute(L"height", L"0").ToDouble(&height);

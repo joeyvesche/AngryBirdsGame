@@ -12,7 +12,7 @@ SlingShot::SlingShot(Level* level, const std::wstring& filename)
     mSlingshot = std::make_unique<wxBitmap>(L"images/slingshot.png", wxBITMAP_TYPE_ANY);
 }
 
-void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height)
+void SlingShot::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
 //    graphics->PushState();
 //    graphics->Scale(1, -1);
