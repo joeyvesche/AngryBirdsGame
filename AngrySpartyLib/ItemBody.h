@@ -10,6 +10,7 @@
 #include "Item.h"
 //#include "Block.h"
 #include "Physics.h"
+#include <memory>
 
 class Block;
 class ItemBody {
@@ -43,7 +44,7 @@ public:
 
     ItemBody(Block* block, wxXmlNode* node);
 
-    void MakeBody(Physics *physics);
+    void MakeBody(std::shared_ptr<Physics> physics);
 
     b2Body* GetBody() {return mBody;}
 

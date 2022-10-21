@@ -27,7 +27,7 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
 
 }
 
-void ItemBody::MakeBody(Physics *physics)
+void ItemBody::MakeBody(std::shared_ptr<Physics> physics)
 {
 
     b2World* world = physics->GetWorld();
