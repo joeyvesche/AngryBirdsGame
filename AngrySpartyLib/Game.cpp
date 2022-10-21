@@ -163,3 +163,8 @@ void Game::Accept(ItemVisitor* visitor)
         item->Accept(visitor);
     }
 }
+
+void Game::SetLevel(int index)
+{
+    mLevel = mLevels[index];
+}

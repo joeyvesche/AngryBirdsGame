@@ -156,6 +156,7 @@ void GameView::OnUpdateDebugView(wxUpdateUIEvent& event)
  */
 void GameView::OnLoadLevelZero(wxCommandEvent& event)
 {
+    mGame.SetLevel(0);
     Refresh();
 }
 
@@ -165,6 +166,7 @@ void GameView::OnLoadLevelZero(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelOne(wxCommandEvent& event)
 {
+    mGame.SetLevel(1);
     Refresh();
 }
 
@@ -174,6 +176,7 @@ void GameView::OnLoadLevelOne(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelTwo(wxCommandEvent& event)
 {
+    mGame.SetLevel(2);
     Refresh();
 }
 
@@ -183,6 +186,7 @@ void GameView::OnLoadLevelTwo(wxCommandEvent& event)
  */
 void GameView::OnLoadLevelThree(wxCommandEvent& event)
 {
+    mGame.SetLevel(3);
     Refresh();
 }
 
