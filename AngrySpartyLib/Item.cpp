@@ -12,7 +12,7 @@ const std::wstring ResDir = L"./images/";
 /**
 *  Constructor
 */
-Item::Item(Game* game, const wstring& filename) :mGame(game)
+Item::Item(Level* level, const wstring& filename) :mLevel(level)
 {
     mItemImage = make_unique<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
     mItemBitmap = make_unique<wxBitmap>(*mItemImage);

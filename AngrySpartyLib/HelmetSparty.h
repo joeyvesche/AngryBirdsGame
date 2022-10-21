@@ -23,7 +23,7 @@ public:
     /// Assignment operator
     void operator=(const HelmetSparty &) = delete;
 
-    HelmetSparty(Game *game);
+    HelmetSparty(Level *level);
 
     void Accept(ItemVisitor * visitor) override {};
 

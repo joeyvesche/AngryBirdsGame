@@ -17,7 +17,7 @@ class AngrySparty: public Item {
 private:
 
 protected:
-    AngrySparty(Game *game, const std::wstring &filename);
+    AngrySparty(Level *level, const std::wstring &filename);
 
 public:
     /// Default constructor (disabled)

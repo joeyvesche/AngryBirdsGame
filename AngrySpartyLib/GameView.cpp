@@ -203,14 +203,5 @@ void GameView::LoadItems(wxCommandEvent& event)
     Refresh();
 }
 
-void GameView::TestAdd()
-{
-    const std::wstring filename = L"elementStone047.png";
-    auto item = std::make_shared<Block>(&mGame, filename);
-    mGame.Add(item);
-    item->SetLocation(0,100);
-    Refresh();
-
-}
 
 

@@ -37,7 +37,7 @@ public:
     /// Copy constructor (disabled)
     Block(const Block &) = delete;
 
-    Block(Game* game, const std::wstring& filename);
+    Block(Level* level, const std::wstring& filename);
 
     void XmlLoad(wxXmlNode* node) override;
     void Accept(ItemVisitor * visitor) override;

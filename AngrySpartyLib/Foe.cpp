@@ -8,7 +8,7 @@
 #include "Game.h"
 #include "Item.h"
 
-Foe::Foe(Game *game, const std::wstring &filename) : Item(game, mFoeFileName)
+Foe::Foe(Level *level, const std::wstring &filename) : Item(level, mFoeFileName)
 {
 
 }

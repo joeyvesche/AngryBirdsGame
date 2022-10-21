@@ -12,7 +12,7 @@
 /// HelmetSparty filename
 const std::wstring HelmetSpartyImageName = L"helmet-sparty.png";
 
-HelmetSparty::HelmetSparty(Game *game) : AngrySparty(game, HelmetSpartyImageName)
+HelmetSparty::HelmetSparty(Level *level) : AngrySparty(level, HelmetSpartyImageName)
 {
 
 }

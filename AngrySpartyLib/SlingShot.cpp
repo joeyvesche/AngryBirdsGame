@@ -6,8 +6,8 @@
 #include "pch.h"
 #include "SlingShot.h"
 
-SlingShot::SlingShot(Game* game, const std::wstring& filename)
-        :Item(game, filename)
+SlingShot::SlingShot(Level* level, const std::wstring& filename)
+        :Item(level, filename)
 {
     mSlingshot = std::make_unique<wxBitmap>(L"images/slingshot.png", wxBITMAP_TYPE_ANY);
 }

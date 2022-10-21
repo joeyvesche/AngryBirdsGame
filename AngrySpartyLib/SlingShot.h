@@ -22,7 +22,7 @@ public:
     /// Copy constructor (disabled)
     SlingShot(const SlingShot &) = delete;
 
-    SlingShot(Game* game, const std::wstring& filename);
+    SlingShot(Level* level, const std::wstring& filename);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
 

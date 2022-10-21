@@ -12,7 +12,7 @@
 /// GruffSparty filename
 const std::wstring GruffSpartyImageName = L"gruff-sparty.png";
 
-GruffSparty::GruffSparty(Game *game) : AngrySparty(game, GruffSpartyImageName)
+GruffSparty::GruffSparty(Level *level) : AngrySparty(level, GruffSpartyImageName)
 {
 
 }

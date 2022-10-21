@@ -3,7 +3,7 @@
  * @file Item.h
  * @author Joseph Pauls
  *
- * The underlying base class for all items in the game
+ * The underlying base class for all items in the level
  */
 
 
@@ -14,19 +14,20 @@
 #include <wx/xml/xml.h>
 #include <wx/graphics.h>
 #include "Physics.h"
+//#include "Level.h"
 
-class Game;
 class ItemVisitor;
+class Level;
 
 /**
- * Base Class for items used in the game
+ * Base Class for items used in the level
  */
 class Item {
 private:
-    /// The game this Item is contained in
-    Game *mGame;
+    /// The level this Item is contained in
+    Level *mLevel;
 
-    /// Item location in the game
+    /// Item location in the level
     double mX = 0;
     double mY = 0;
     double mAngle = 0;
@@ -37,10 +38,10 @@ private:
     std::unique_ptr<wxBitmap> mItemBitmap;
 
 protected:
-    /// game constructor
-    /// \param game
+    /// level constructor
+    /// \param level
     /// \param filename
-    Item(Game *game, const std::wstring &filename);
+    Item(Level *level, const std::wstring &filename);
 
 public:
 
@@ -103,10 +104,10 @@ public:
     virtual void Update(double elapsed) {}
 
     /**
-     * Get the pointer to the Game object
-     * @return Pointer to Game object
+     * Get the pointer to the level object
+     * @return Pointer to level object
      */
-    Game *GetGame() {return mGame; }
+    Level *GetLevel() {return mLevel; }
 
     /**
     * Get the width of the object

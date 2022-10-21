@@ -24,7 +24,7 @@ public:
     /// Assignment operator
     void operator=(const GruffSparty &) = delete;
 
-    GruffSparty(Game *game);
+    GruffSparty(Level *level);
 
     void Accept(ItemVisitor * visitor) override {};
 };

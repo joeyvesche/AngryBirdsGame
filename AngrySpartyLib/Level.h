@@ -13,10 +13,10 @@
 #include <utility>
 #include <vector>
 #include <memory>
-#include "Item.h"
 #include "AngrySparty.h"
 #include "Physics.h"
 
+class Item;
 /**
  * This class loads and stores the contents of a
  * level XML file

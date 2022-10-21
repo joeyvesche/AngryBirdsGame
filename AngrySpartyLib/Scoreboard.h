@@ -12,7 +12,7 @@
 
 class Scoreboard : public Item{
 public:
-    Scoreboard(Game *game);
+    Scoreboard(Level *level);
 
     /// Default constructor disabled
     Scoreboard() = delete;

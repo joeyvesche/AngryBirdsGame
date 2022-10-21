@@ -19,7 +19,7 @@ private:
     ///File Name. Set when loading in the foe from an XML file
     std::wstring mFoeFileName;
 protected:
-    Foe(Game *game, const std::wstring &filename);
+    Foe(Level *level, const std::wstring &filename);
 
 public:
     /// Default constructor (disabled)
