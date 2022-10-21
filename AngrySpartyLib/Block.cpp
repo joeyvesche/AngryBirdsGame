@@ -23,6 +23,7 @@ void Block::Accept(ItemVisitor* visitor)
     visitor->VisitBlock(this);
 }
 
+
 void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
@@ -41,22 +42,22 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     // And the top
     double y = mSize.y/2 * Consts::MtoCM;
 
-   /** // The width of each repeated block
+    // The width of each repeated block
     double xw = mSize.x / mRepeatX * Consts::MtoCM;
 
-    std::shared_ptr<wxBitmap> bitmap = ;
+    //std::shared_ptr<wxBitmap> bitmap = ;
 
     graphics->Translate(0, y);
     graphics->Scale(1, -1);
     for(int ix=0; ix<mRepeatX;  ix++)
     {
-        graphics->DrawBitmap(mPicture->AsBitmap(),
+        graphics->DrawBitmap(*mBlockBitmap,
                 x,
                 0,
                 xw, mSize.y * Consts::MtoCM);
 
         x += xw;
     }
-*/
+
     graphics->PopState();
 }

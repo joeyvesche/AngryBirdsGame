@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "Level.h"
 #include "Block.h"
+#include "Background.h"
 
 /**
  * Parse the xml node that contains all items
@@ -21,10 +22,13 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if (name == L"background")
         {
+            //Background background(this, L"images/background1.png");
+
 
         } else if (name == L"block")
         {
-
+            //Block(this, child->GetAttribute(L"image"));
+            //ItemBody(Block, Child)
 
         } else if (name == L"poly")
         {

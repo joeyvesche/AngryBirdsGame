@@ -17,13 +17,17 @@
 class Block : public Item {
 private:
 
-    b2Body* mBody; /// Box2d Body for object
+    b2Body* mBody; /// Box2d Body for block
 
-    b2Vec2 mPosition;
 
-    b2Vec2 mSize;
+    b2Vec2 mSize; /// size vector of block
 
-    bool mStatic = 0;
+
+    std::unique_ptr<wxImage> mBlockImage; ///Image for block
+    std::unique_ptr<wxBitmap> mBlockBitmap; ///Bitmap for block
+
+    float mRepeatX = 0;
+
 
 
 
