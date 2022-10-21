@@ -26,7 +26,11 @@ private:
     std::unique_ptr<wxImage> mBlockImage; ///Image for block
     std::unique_ptr<wxBitmap> mBlockBitmap; ///Bitmap for block
 
-    float mRepeatX = 0;
+    int mRepeatX = 0;
+    bool mStatic = false;
+    double mFriction = 0;
+    double mRestitution = 0;
+
 
 
 

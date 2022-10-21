@@ -18,6 +18,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
 {
     for (auto child = items->GetChildren(); child != nullptr; child = child->GetNext())
     {
+        std::shared_ptr<Item> item;
         std::wstring name = child->GetName().ToStdWstring();
 
         if (name == L"background")
@@ -27,9 +28,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         } else if (name == L"block")
         {
-            //Block(this, child->GetAttribute(L"image"));
-            //ItemBody(Block, Child)
-
+           item = std::make_shared<Block>(this, child->GetAttribute(L"image").ToStdWstring());
         } else if (name == L"poly")
         {
 
@@ -42,6 +41,11 @@ void Level::LoadItemsXml(wxXmlNode * items)
         } else if (name == L"goalposts")
         {
 
+        }
+
+        if(item !=nullptr) {
+            mItems.push_back(item);
+            item->XmlLoad(child);
         }
     }
 }
