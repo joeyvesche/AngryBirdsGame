@@ -13,6 +13,8 @@
 // Forward references
 class Scoreboard;
 class Block;
+class Poly;
+
 class ItemVisitor {
 private:
 
@@ -26,6 +28,8 @@ public:
      virtual void VisitScoreboard(Scoreboard* scoreboard) {}
 
      virtual void VisitBlock(Block* block){}
+
+     virtual void VisitPoly(Poly* poly){}
 
 };
 

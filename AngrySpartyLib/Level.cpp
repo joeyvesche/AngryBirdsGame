@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "Level.h"
 #include "Block.h"
+#include "Poly.h"
 #include "Background.h"
 
 /**
@@ -36,6 +37,10 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         } else if (name == L"poly")
         {
+            auto poly = std::make_shared<Poly>(this, child->GetAttribute(L"image").ToStdWstring());
+
+            poly->XmlLoad(child);
+            item = poly;
 
         } else if (name == L"foe")
         {
@@ -50,6 +55,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if(item !=nullptr) {
             mItems.push_back(item);
+            item->XmlLoad(child);
         }
     }
 }
@@ -130,9 +136,4 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
     {
         item->Draw(graphics);
     }
-}
-
-void Level::Add(std::shared_ptr<Item> item)
-{
-    mItems.push_back(item);
 }
