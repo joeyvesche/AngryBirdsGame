@@ -42,9 +42,12 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
 
-    b2Body* body = mBody;
-    auto position = body->GetPosition();
-    auto angle = body->GetAngle();
+    ///b2Body* body = mBody;
+    ///auto position = body->GetPosition();
+    ///auto angle = body->GetAngle();
+    auto position = b2Vec2(GetX(), GetY());
+    auto angle = GetAngle();
+
 
     graphics->Translate(position.x*Consts::MtoCM,
             position.y*Consts::MtoCM);

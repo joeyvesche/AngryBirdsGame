@@ -55,9 +55,8 @@ public:
 
     b2Vec2 GetPosition() {return mBody->GetPosition();}
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
-    ///void Draw(std::shared_ptr<wxGraphicsContext> graphics); -uncoimment later
 
 };
 
