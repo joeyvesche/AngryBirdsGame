@@ -1,6 +1,6 @@
 /**
  * @file Scoreboard.h
- * @author joeyv
+ * @authors joeyv, Joseph Pauls
  *
  *
  */
@@ -10,12 +10,16 @@
 #include "Item.h"
 #include "ItemVisitor.h"
 
-class Scoreboard : public Item{
-public:
-    Scoreboard(Level *level);
+class Scoreboard{
 
-    /// Default constructor disabled
-    Scoreboard() = delete;
+private:
+
+    int mLevelScore = 0;
+    int mGameScore = 0;
+
+
+public:
+    Scoreboard();
 
     /// Copy constructor disabled
     Scoreboard(const Scoreboard &) = delete;
@@ -23,12 +27,13 @@ public:
     /// Assignment operator
     void operator=(const Scoreboard &) = delete;
 
-    /**
-     * Accept a visitor
-     * @param visitor The visitor we accept
-     */
-  //  virtual void Accept(ItemVisitor* visitor) override {visitor->VisitScoreboard(this);}
-  void Accept(ItemVisitor * visitor) override;
+    static void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, double height);
+
+    /// Update the game score by adding current level's score
+    void UpdateGameScore(){
+        mGameScore += mLevelScore;
+        mLevelScore = 0; //Prep Level Score by resetting it to 0 for the next level
+    };
 
 
 };

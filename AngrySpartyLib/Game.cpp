@@ -1,6 +1,6 @@
 /**
  * @file Game.cpp
- * @author Yuqi Pan, Joey Vesche, Will Morant
+ * @authors Yuqi Pan, Joey Vesche, Will Morant
  */
 #include "pch.h"
 #include "Game.h"
@@ -85,23 +85,19 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
             -920,
             350, 900);
     graphics->PopState();
-
-    wxFont bigFont(wxSize(40, 70),
-            wxFONTFAMILY_SWISS,
-            wxFONTSTYLE_NORMAL,
-            wxFONTWEIGHT_BOLD);
-    graphics->SetFont(bigFont, wxColour(255, 0, 0));
-    graphics->GetTextExtent(L"000", &wid, &hit);
-    graphics->DrawText(L"000", 5.5*Consts::MtoCM, 7*Consts::MtoCM);
-    graphics->DrawText(L"000", -6.75*Consts::MtoCM, 7*Consts::MtoCM);
     */
+
+
 
     //
     // From here we are dealing with centimeter pixels
     // and Y up being increase values
     //
     // INSERT YOUR DRAWING CODE HERE
+
     mLevel.OnDraw(graphics);
+
+    mScore.OnDraw(graphics, mWidth, mHeight);
 
     graphics->PopState();
 

@@ -12,6 +12,7 @@
 #include <memory>
 #include <string>
 #include "Level.h"
+#include "Scoreboard.h"
 #include "Physics.h"
 
 class Item;
@@ -36,7 +37,7 @@ private:
     std::vector<Level> mLevels; ///< A list of all levels
     Level mLevel; ///< The currently loaded level
 
-
+    Scoreboard mScore; ///< The scoreboard for the game
 
 public:
     Game();
