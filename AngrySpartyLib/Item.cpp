@@ -16,6 +16,7 @@ Item::Item(Game* game, const wstring& filename) :mGame(game)
 {
     mItemImage = make_unique<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
     mItemBitmap = make_unique<wxBitmap>(*mItemImage);
+
 }
 
 /**
@@ -74,28 +75,16 @@ void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     double wid = mItemBitmap->GetWidth();
     double hit = mItemBitmap->GetHeight();
+    graphics->PushState();
+    graphics->Translate(mX, mY);
+    graphics->Scale(1, -1);	// Negate Y
     graphics->DrawBitmap(*mItemBitmap,
             int(GetX() - wid / 2),
             int(GetY() - hit / 2),
             wid, hit);
+    graphics->PopState();
+
 }
-
-/**
- * Save this item to an XML node
- * @param node The parent node we are going to be a child of
- * @return wxXmlNode that we saved the item into
- */
-wxXmlNode *Item::XmlSave(wxXmlNode *node)
-{
-    auto itemNode = new wxXmlNode(wxXML_ELEMENT_NODE, L"item");
-    node->AddChild(itemNode);
-
-    itemNode->AddAttribute(L"x", wxString::FromDouble(mX));
-    itemNode->AddAttribute(L"y", wxString::FromDouble(mY));
-
-    return itemNode;
-}
-
 
 
 /**

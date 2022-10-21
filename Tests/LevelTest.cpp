@@ -1,24 +1,19 @@
 /**
  * @file LevelTest.cpp
- * @author Will Skaggs
-*/
+ * @author Will Morant
+ */
 
 #include <pch.h>
 #include "gtest/gtest.h"
-#include <string>
 #include <Level.h>
 
-std::wstring const TestLevelDirectory = L"levels/TestLevels/";
-
-TEST(LevelTest, BasicXmlLoad)
+TEST(LevelTest, WidthHeight)
 {
-    // load a level xml file into a level object
-    std::wstring const filepath = TestLevelDirectory + L"basicLevel.xml";
-    Level level(filepath);
-
-    // make sure the root tag was processed correctly
-    auto [width, height] = level.Size();
-    ASSERT_DOUBLE_EQ(width, 14.22);
-    ASSERT_DOUBLE_EQ(height, 8);
+    Level level1(L"levels/level0.xml");
+    double width = level1.GetWidth();
+    double height = level1.GetHeight();
+    ASSERT_EQ(width, 14.22);
+    ASSERT_EQ(height, 8);
 
 }
+

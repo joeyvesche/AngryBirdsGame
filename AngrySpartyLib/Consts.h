@@ -21,6 +21,7 @@ public:
 
     /// Convert of radians to degrees
     static constexpr double RtoD = 57.2957795131;
+
 };
 
 #endif //ANGRYSPARTY_CONSTS_H

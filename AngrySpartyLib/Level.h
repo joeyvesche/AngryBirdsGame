@@ -15,6 +15,7 @@
 #include <memory>
 #include "Item.h"
 #include "AngrySparty.h"
+#include "Physics.h"
 
 /**
  * This class loads and stores the contents of a
@@ -22,11 +23,14 @@
  */
 class Level {
 private:
-    std::pair<double, double> mSize; ///< {width, height} of the level in meters
-    std::vector<Item> mItems; ///< All items in this level
+    double mWidth = 0.0;
+    double mHeight = 0.0;
+    std::vector<std::shared_ptr<Item>> mItems; ///< All items in this level
 
     void LoadItemsXml(wxXmlNode * items);
     void LoadSpartysXml(wxXmlNode * angry);
+
+    Physics *mPhysics; ///The physics system for this level
 
 public:
     /**
@@ -43,7 +47,7 @@ public:
      *
      * @return the {width, height} of this level in meters
      */
-    std::pair<double, double> Size() const { return mSize; }
+    //std::pair<double, double> Size() const { return mSize; }
 
     /**
      * get an iterator to the beginning of the items
@@ -58,6 +62,11 @@ public:
      * @return iterator to one past the end
      */
     auto end() { return mItems.end(); }
+
+    Physics* GetPhysics() {return mPhysics;}
+
+    double GetWidth() {return mWidth;}
+    double GetHeight() {return mHeight;}
 };
 
 

@@ -66,7 +66,7 @@ void GameView::Initialize(wxFrame* parent)
     mStopWatch.Start();
      * --
      */
-    TestAdd();
+    //TestAdd();
 
 }
 

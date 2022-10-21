@@ -1,6 +1,6 @@
 /**
  * @file Game.cpp
- * @author Yuqi Pan, Joey Vesche
+ * @author Yuqi Pan, Joey Vesche, Will Morant
  */
 #include "pch.h"
 #include "Game.h"
@@ -22,9 +22,6 @@ std::vector<std::wstring> const LevelFiles =
  */
 Game::Game()
 {
-    mBackground = std::make_unique<wxBitmap>(L"images/background1.png", wxBITMAP_TYPE_ANY);
-    mSlingshot = std::make_unique<wxBitmap>(L"images/slingshot.png", wxBITMAP_TYPE_ANY);
-
     // load all levels from files
     for (auto const & filename : LevelFiles) {
         mLevels.emplace_back(LevelDirectory + filename);
@@ -69,7 +66,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 
     graphics->Translate(mXOffset, mYOffset);
 
-    auto wid = mWidth*Consts::MtoCM;
+    /**auto wid = mWidth*Consts::MtoCM;
     auto hit = mHeight*Consts::MtoCM;
 
     graphics->PushState();
@@ -96,6 +93,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     graphics->GetTextExtent(L"000", &wid, &hit);
     graphics->DrawText(L"000", 5.5*Consts::MtoCM, 7*Consts::MtoCM);
     graphics->DrawText(L"000", -6.75*Consts::MtoCM, 7*Consts::MtoCM);
+    */
 
     //
     // From here we are dealing with centimeter pixels
@@ -129,27 +127,6 @@ std::shared_ptr<Item> Game::HitTest(int x, int y)
     return nullptr;
 }
 
-/**
- * Save the Game as a .aqua XML file.
- *
- * Open an XML file and stream the Game data to it.
- *
- * @param filename The filename of the file to save the Game to
- */
-void Game::Save(const wxString& filename)
-{
-    wxXmlDocument xmlDoc;
-
-    auto root = new wxXmlNode(wxXML_ELEMENT_NODE, L"aqua");
-    xmlDoc.SetRoot(root);
-
-    // Iterate over all items and save them
-
-    if (!xmlDoc.Save(filename, wxXML_NO_INDENTATION)) {
-        wxMessageBox(L"Write to XML failed");
-        return;
-    }
-}
 
 /**
  * Load the Game from a .aqua XML file.
@@ -186,6 +163,6 @@ void Game::Update(double elapsed)
 void Game::Accept(ItemVisitor* visitor)
 {
     for (auto & item: mLevel) {
-        item.Accept(visitor);
+        item->Accept(visitor);
     }
 }

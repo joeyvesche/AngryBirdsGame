@@ -12,6 +12,7 @@
 #include <memory>
 #include <string>
 #include "Level.h"
+#include "Physics.h"
 
 class Item;
 class ItemVisitor;
@@ -23,7 +24,7 @@ private:
     /// width of game
     double mWidth = 14.22;
     /// height of game
-    int mHeight = 8;
+    double mHeight = 8;
 
     /// scale
     double mScale = 10;
@@ -32,11 +33,10 @@ private:
     /// Y offset
     double mYOffset = 1;
 
-    std::unique_ptr<wxBitmap> mBackground;  ///< Background image to use
-    std::unique_ptr<wxBitmap> mSlingshot; ///< Slingshot image to use
-
     std::vector<Level> mLevels; ///< A list of all levels
     Level mLevel; ///< The currently loaded level
+
+
 
 public:
     Game();
@@ -52,8 +52,6 @@ public:
      * @return Aquarium height in pixels
      */
     int GetHeight() const { return mHeight; }
-
-    void Save(const wxString& filename);
 
     void Load(const wxString& filename);
 

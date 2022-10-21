@@ -1,5 +1,4 @@
-#include <wx/xml/xml.h>
-#include <wx/graphics.h>
+
 /**
  * @file Item.h
  * @author Joseph Pauls
@@ -12,6 +11,9 @@
 #define PROJECT1_ITEM_H
 
 #include <memory>
+#include <wx/xml/xml.h>
+#include <wx/graphics.h>
+#include "Physics.h"
 
 class Game;
 class ItemVisitor;
@@ -90,8 +92,6 @@ public:
     double DistanceTo(std::shared_ptr<Item> item);
 
 
-    virtual wxXmlNode* XmlSave(wxXmlNode* node);
-
     virtual void XmlLoad(wxXmlNode* node);
 
 
@@ -112,13 +112,13 @@ public:
     * Get the width of the object
     * @return int representing the width
     */
-    int GetWidth() const { return mItemBitmap->GetWidth(); }
+    double GetWidth() const { return mItemBitmap->GetWidth(); }
 
     /**
      * Get the height of the object
      * @return int representing the height
      */
-    int GetHeight() const {return mItemBitmap->GetHeight(); }
+    double GetHeight() const {return mItemBitmap->GetHeight(); }
 
 
     virtual void Accept(ItemVisitor * visitor) = 0;

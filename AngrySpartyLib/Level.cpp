@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Level.h"
+#include "Block.h"
 
 /**
  * Parse the xml node that contains all items
@@ -23,6 +24,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         } else if (name == L"block")
         {
+
 
         } else if (name == L"poly")
         {
@@ -86,8 +88,13 @@ Level::Level(std::wstring const & filepath)
     // process root tag attributes
     auto root = doc.GetRoot();
 
-    root->GetAttribute("width").ToDouble(&mSize.first);
-    root->GetAttribute("height").ToDouble(&mSize.second);
+    root->GetAttribute("width").ToDouble(&mWidth);
+    root->GetAttribute("height").ToDouble(&mHeight);
+    b2Vec2 size;
+    size.Set(float(mWidth), float(mHeight));
+    Physics phys(size);
+    mPhysics = &phys;
+
 
     // process everything else
     for (auto child = root->GetChildren(); child != nullptr; child = child->GetNext())
@@ -111,6 +118,6 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     for (auto & item : mItems)
     {
-        item.Draw(graphics);
+        item->Draw(graphics);
     }
 }
