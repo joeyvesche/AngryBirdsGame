@@ -6,6 +6,27 @@
 #include "pch.h"
 #include "ItemBody.h"
 
+ItemBody::ItemBody(Block *block, wxXmlNode *node)
+{
+    node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
+    node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
+    node->GetAttribute(L"restitution", L"0").ToDouble(&mRestitution);
+    node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
+
+    if (node->GetAttribute(L"type", L"0") == "static")
+    {
+        mStatic = 1;
+    }
+
+    node->GetAttribute(L"x", "0").ToDouble(&mX);
+    node->GetAttribute(L"y", "0").ToDouble(&mY);
+    mPosition.Set(mX, mY);
+
+    node->GetAttribute(L"width", "0").ToDouble(&mWidth);
+    node->GetAttribute(L"height", "0").ToDouble(&mHeight);
+    mSize.Set(mWidth, mHeight);
+
+}
 
 /**void ItemBody::MakeBody(Physics *physics)
 {

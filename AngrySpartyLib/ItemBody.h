@@ -11,7 +11,7 @@
 #include "Block.h"
 #include "Physics.h"
 
-class ItemBody: public Item {
+class ItemBody {
 private:
 
     b2Body* mBody; /// Box2d Body for Item
@@ -20,22 +20,27 @@ private:
 
     b2Vec2 mSize; ///Size of the item
 
-    float mFriction = 0; ///Friction of item
+    double mFriction = 0; ///Friction of item
 
-    float mDensity = 0; /// Density of item
+    double mDensity = 0; /// Density of item
 
-    float mRestitution = 0; /// Restitution of item
+    double mRestitution = 0; /// Restitution of item
 
     bool mStatic = 0; /// is this a static image?
 
-    float mAngle = 0; /// Angle for the body
+    double mAngle = 0; /// Angle for the body
+
+    double mX = 0;  /// X value for position
+    double mY = 0;  /// Y value for position
+    double mWidth = 0;  /// Width for size
+    double mHeight = 0; /// Height for size
 
 
 
 
 public:
 
-    ///ItemBody(Block *block, wxXmlNode *node);
+    ItemBody(Block *block, wxXmlNode *node);
 
     ///void MakeBody(Physics *physics);
 

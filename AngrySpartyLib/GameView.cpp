@@ -10,7 +10,6 @@
 #include <wx/graphics.h>
 #include "ids.h"
 #include "Block.h"
-#include "Game.h"
 #include "SlingShot.h"
 #include "Consts.h"
 #include <memory>
@@ -66,7 +65,6 @@ void GameView::Initialize(wxFrame* parent)
     mStopWatch.Start();
      * --
      */
-    //TestAdd();
 
 }
 

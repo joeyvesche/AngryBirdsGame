@@ -14,7 +14,6 @@
 #include <wx/xml/xml.h>
 #include <wx/graphics.h>
 #include "Physics.h"
-//#include "Level.h"
 
 class ItemVisitor;
 class Level;
