@@ -44,7 +44,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     graphics->PushState();
 
     // Get the playing area size in centimeters
-    auto playingAreaSize = wxSize(GetWidth(), GetHeight());
+    b2Vec2 playingAreaSize = b2Vec2(GetWidth(), GetHeight());
     playingAreaSize *= Consts::MtoCM;
 
     //

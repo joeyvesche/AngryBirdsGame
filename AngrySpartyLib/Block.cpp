@@ -47,6 +47,7 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     ///auto angle = body->GetAngle();
     auto position = b2Vec2(GetX(), GetY());
     auto angle = GetAngle();
+    angle *= Consts::DtoR;
 
 
     graphics->Translate(position.x*Consts::MtoCM,
