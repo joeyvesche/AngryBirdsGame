@@ -27,9 +27,6 @@ private:
     std::unique_ptr<wxBitmap> mBlockBitmap; ///Bitmap for block
 
     int mRepeatX = 0;
-    bool mStatic = false;
-    double mFriction = 0;
-    double mRestitution = 0;
 
 
 

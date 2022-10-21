@@ -16,13 +16,8 @@ Block::Block(Level* level, const std::wstring& filename)
 void Block::XmlLoad(wxXmlNode* node)
 {
     Item::XmlLoad(node);
-    auto type = node->GetAttribute(L"type", L"static");
-    if (type==L"static") mStatic = true;
-    else mStatic = false;
 
     node->GetAttribute(L"repeat-x", L"0").ToInt(&mRepeatX);
-    node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
-    node->GetAttribute(L"restitution", L"0").ToDouble(&mRestitution);
     double width, height;
     node->GetAttribute(L"width", L"0").ToDouble(&width);
     node->GetAttribute(L"height", L"0").ToDouble(&height);
@@ -37,7 +32,7 @@ void Block::Accept(ItemVisitor* visitor)
 
 void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    graphics->PushState();
+    /**graphics->PushState();
 
     b2Body* body = GetBody();
     auto position = body->GetPosition();
@@ -69,5 +64,5 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         x += xw;
     }
 
-    graphics->PopState();
+    graphics->PopState();*/
 }

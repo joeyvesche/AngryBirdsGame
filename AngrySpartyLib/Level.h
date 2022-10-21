@@ -67,6 +67,8 @@ public:
 
     double GetWidth() {return mWidth;}
     double GetHeight() {return mHeight;}
+
+    void Add(std::shared_ptr<Item> item);
 };
 
 

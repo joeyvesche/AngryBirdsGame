@@ -17,3 +17,9 @@ TEST(LevelTest, WidthHeight)
 
 }
 
+TEST(LevelTest, Background)
+{
+    Level level1(L"levels/level1.xml");
+
+}
+

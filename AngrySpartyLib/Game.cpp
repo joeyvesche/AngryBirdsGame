@@ -26,6 +26,7 @@ Game::Game()
     for (auto const & filename : LevelFiles) {
         mLevels.emplace_back(LevelDirectory + filename);
     }
+    mLevel = mLevels[1];
 }
 
 /**

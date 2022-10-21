@@ -23,8 +23,9 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if (name == L"background")
         {
-            //Background background(this, L"images/background1.png");
-
+            auto background = std::make_shared<Background>(this, L"background1.png");
+            background->XmlLoad(child);
+            item = background;
 
         } else if (name == L"block")
         {
@@ -45,7 +46,6 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if(item !=nullptr) {
             mItems.push_back(item);
-            item->XmlLoad(child);
         }
     }
 }
@@ -128,4 +128,9 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
     {
         item->Draw(graphics);
     }
+}
+
+void Level::Add(std::shared_ptr<Item> item)
+{
+    mItems.push_back(item);
 }
