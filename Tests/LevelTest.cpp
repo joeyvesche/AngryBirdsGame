@@ -1,11 +1,13 @@
 /**
  * @file LevelTest.cpp
- * @author Will Morant
+ * @author Will Morant, Will Skaggs
  */
 
 #include <pch.h>
 #include "gtest/gtest.h"
 #include <Level.h>
+#include <algorithm>
+#include <vector>
 
 TEST(LevelTest, WidthHeight)
 {
@@ -20,6 +22,15 @@ TEST(LevelTest, WidthHeight)
 TEST(LevelTest, Load)
 {
     Level level1(L"levels/level1.xml");
+
+    // assert the correct number of items are loaded
+    ASSERT_EQ(std::distance(level1.begin(), level1.end()), 23) << "Check all objects loaded from xml";
+
+    // assert all have the correct x, y coordinates
+    std::vector<std::pair<double, double>> expected =
+            {
+                {}
+            };
 
 
 

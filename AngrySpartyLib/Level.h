@@ -65,8 +65,8 @@ public:
 
     std::shared_ptr<Physics> GetPhysics() {return mPhysics;}
 
-    double GetWidth() {return mWidth;}
-    double GetHeight() {return mHeight;}
+    double GetWidth() const {return mWidth;}
+    double GetHeight() const {return mHeight;}
 
     void Add(std::shared_ptr<Item> item);
 };

@@ -1,6 +1,6 @@
 /**
  * @file SlingShot.cpp
- * @authors joeyv, Joseph Pauls
+ * @author joeyv
  */
 
 #include "pch.h"
@@ -56,9 +56,9 @@ void SlingShot::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     // draw the actual slingshot
     graphics->Scale(1, -1);
     graphics->DrawBitmap(*GetBitmap(),
-            -width / 2,
-            -height,
-            width, height);
+                         -width / 2,
+                         -height,
+                         width, height);
     graphics->Scale(1, -1);
 
     // draw the band on the slingshot
@@ -66,9 +66,9 @@ void SlingShot::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->SetPen(pen);
 
     graphics->StrokeLine(WoodSlingshotBandAttachBack.x * Consts::MtoCM,
-            WoodSlingshotBandAttachBack.y * Consts::MtoCM,
-            WoodSlingshotBandAttachFront.x * Consts::MtoCM,
-            WoodSlingshotBandAttachFront.y * Consts::MtoCM);
+                         WoodSlingshotBandAttachBack.y * Consts::MtoCM,
+                         WoodSlingshotBandAttachFront.x * Consts::MtoCM,
+                         WoodSlingshotBandAttachFront.y * Consts::MtoCM);
 
     graphics->PopState();
 

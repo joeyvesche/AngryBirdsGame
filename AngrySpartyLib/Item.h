@@ -31,10 +31,10 @@ private:
     double mY = 0;
     double mAngle = 0;
     /// The underlying Item image
-    std::unique_ptr<wxImage> mItemImage;
+    std::shared_ptr<wxImage> mItemImage;
 
     /// The displayable bitmap for this Item
-    std::unique_ptr<wxBitmap> mItemBitmap;
+    std::shared_ptr<wxBitmap> mItemBitmap;
 
 protected:
     /// level constructor
@@ -120,6 +120,12 @@ public:
      */
     double GetHeight() const {return mItemBitmap->GetHeight(); }
 
+    /**
+     * Get the bitmap image of this item
+     *
+     * @return shared_ptr to a bitmap
+     */
+    std::shared_ptr<wxBitmap> GetBitmap() const { return mItemBitmap; }
 
     virtual void Accept(ItemVisitor * visitor) = 0;
 

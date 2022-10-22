@@ -14,8 +14,8 @@ const std::wstring ResDir = L"./images/";
 */
 Item::Item(Level* level, const wstring& filename) :mLevel(level)
 {
-    mItemImage = make_unique<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
-    mItemBitmap = make_unique<wxBitmap>(*mItemImage);
+    mItemImage = make_shared<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
+    mItemBitmap = make_shared<wxBitmap>(*mItemImage);
 
 }
 

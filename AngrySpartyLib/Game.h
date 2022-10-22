@@ -22,11 +22,6 @@ class ItemVisitor;
  */
 class Game {
 private:
-    /// width of game
-    double mWidth = 14.22;
-    /// height of game
-    double mHeight = 8;
-
     /// scale
     double mScale = 10;
     /// X offset
@@ -44,15 +39,15 @@ public:
 
     /**
      * Get the width of the aquarium
-     * @return Aquarium width in pixels
+     * @return Aquarium width in meters
      */
-    int GetWidth() const { return mWidth; }
+    double GetWidth() const { return mLevel.GetWidth(); }
 
     /**
      * Get the height of the aquarium
-     * @return Aquarium height in pixels
+     * @return Aquarium height in meters
      */
-    int GetHeight() const { return mHeight; }
+    int GetHeight() const { return mLevel.GetHeight(); }
 
     void Load(const wxString& filename);
 
@@ -65,18 +60,6 @@ public:
     std::shared_ptr<Item> HitTest(int x, int y);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
-
-    /**
-     * Set width of game to n meters
-     * @param meters n
-     */
-    void SetWidth(int meters) { mWidth = meters; }
-
-    /**
-     * Set Height of game to n meters
-     * @param meters n
-     */
-    void SetHeight(int meters) { mHeight = meters; }
 
     void Accept(ItemVisitor * visitor);
 

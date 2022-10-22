@@ -97,7 +97,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 
     mLevel.OnDraw(graphics);
 
-    mScore.OnDraw(graphics, mWidth, mHeight);
+    mScore.OnDraw(graphics, GetWidth(), GetHeight());
 
     graphics->PopState();
 
