@@ -8,6 +8,9 @@
 #include "Block.h"
 #include "Poly.h"
 #include "Background.h"
+#include "Foe.h"
+#include "GruffSparty.h"
+#include "HelmetSparty.h"
 
 /**
  * Parse the xml node that contains all items
@@ -44,6 +47,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         } else if (name == L"foe")
         {
+            item = std::make_shared<Foe>(this, child->GetAttribute(L"image").ToStdWstring());
 
         } else if (name == L"slingshot")
         {
@@ -79,14 +83,17 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
     for (auto child = angry->GetChildren(); child != nullptr; child = child->GetNext())
     {
         std::wstring name = child->GetName().ToStdWstring();
-
+        std::shared_ptr<AngrySparty> sparty;
         if (name == L"gruff-sparty")
         {
-
+            sparty = std::make_shared<GruffSparty>(this);
         } else if (name == L"helmet-sparty")
         {
-
+            sparty = std::make_shared<HelmetSparty>(this);
         }
+        mItems.push_back(sparty);
+        sparty->SetLocation(x, y);
+        x -= spacing;
     }
 }
 

@@ -28,6 +28,12 @@ public:
 
     /// Assignment operator
     void operator=(const AngrySparty &) = delete;
+
+    /**
+     * Draw this item
+     * @param dc Device context to draw on
+     */
+     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H

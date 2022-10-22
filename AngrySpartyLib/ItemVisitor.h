@@ -14,7 +14,7 @@
 class Scoreboard;
 class Block;
 class Poly;
-
+class Foe;
 class ItemVisitor {
 private:
 
@@ -29,7 +29,8 @@ public:
 
      virtual void VisitBlock(Block* block){}
 
-     virtual void VisitPoly(Poly* poly){}
+    virtual void VisitPoly(Poly* poly){}
+    virtual void VisitFoe(Foe* foe){}
 
 };
 

@@ -10,3 +10,8 @@
 AngrySparty::AngrySparty(Level *level, const std::wstring &filename) : Item(level, filename)
 {
 }
+
+void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
+{
+
+}

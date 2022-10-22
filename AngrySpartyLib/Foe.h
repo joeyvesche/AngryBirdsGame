@@ -15,11 +15,10 @@
  */
 class Foe : public Item {
 private:
-
+    double mRadius = 0;
+    double mDown = 0;
     ///File Name. Set when loading in the foe from an XML file
-    std::wstring mFoeFileName;
-protected:
-    Foe(Level *level, const std::wstring &filename);
+
 
 public:
     /// Default constructor (disabled)
@@ -30,6 +29,16 @@ public:
 
     /// Assignment operator
     void operator=(const Foe &) = delete;
+
+    void XmlLoad(wxXmlNode* node) override;
+
+    void Accept(ItemVisitor * visitor) override;
+    Foe(Level *level, const std::wstring &filename);
+    /**
+     * Draw this item
+     * @param dc Device context to draw on
+     */
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 };
 
 #endif //PROJECT1_FOE_H
