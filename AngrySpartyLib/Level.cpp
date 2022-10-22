@@ -42,15 +42,23 @@ void Level::LoadItemsXml(wxXmlNode * items)
             poly->XmlLoad(child);
             item = poly;
 
-        } else if (name == L"foe")
+        }
+        else if (name == L"foe")
         {
 
-        } else if (name == L"slingshot")
+        }
+        else if (name == L"slingshot")
         {
+            auto slingshot = std::make_shared<SlingShot>(this);
+            slingshot->XmlLoad(child);
+            item = slingshot;
 
-        } else if (name == L"goalposts")
+        }
+        else if (name == L"goalposts")
         {
-
+            auto goalpost = std::make_shared<Goalposts>(this);
+            goalpost->XmlLoad(child);
+            item = goalpost;
         }
 
         if(item !=nullptr) {
