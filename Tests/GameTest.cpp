@@ -12,7 +12,7 @@
 #include <wx/filename.h>
 
 #include "gtest/gtest.h"
-#include <Game.h>
+#include <Level.h>
 #include <Item.h>
 #include <ItemVisitor.h>
 #include <Block.h>
@@ -22,7 +22,7 @@ const std::wstring HelmetSpartyImageName = L"images/helmet-sparty.png";
 const std::wstring TestXml = L"test/test.xml";
 class ItemMock : public Item {
 public:
-    ItemMock(Game *game) : Item(game, HelmetSpartyImageName) {}
+    ItemMock(Level *level) : Item(level, HelmetSpartyImageName) {}
 
     void Draw(wxDC *dc) {}
 
