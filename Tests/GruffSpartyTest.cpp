@@ -5,13 +5,13 @@
 
 #include <pch.h>
 #include <GruffSparty.h>
-#include <Game.h>
+#include <Level.h>
 #include "gtest/gtest.h"
 
 
 
 TEST(GruffSpartyTest, Construct)
 {
-    Game game;
-    GruffSparty gruff(&game);
+    Level level;
+    GruffSparty gruff(&level);
 }

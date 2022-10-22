@@ -6,7 +6,7 @@
 #include <pch.h>
 #include "gtest/gtest.h"
 #include <Item.h>
-#include <Game.h>
+#include <Level.h>
 
 /// Demo item filename, in this case a helmet sparty
 const std::wstring HelmetSpartyImageName = L"helmet-sparty.png";
@@ -14,7 +14,7 @@ class ItemVisitor;
 /** Mock class for testing the class Item */
 class ItemMock : public Item {
 public:
-    ItemMock(Game *game) : Item(game, HelmetSpartyImageName) {}
+    ItemMock(Level *level) : Item(level, HelmetSpartyImageName) {}
 
     void Draw(wxDC *dc) {}
     void Accept(ItemVisitor *) {}
@@ -24,15 +24,15 @@ public:
 // Test Item construction
 TEST(ItemTest, Construct)
 {
-    Game game;
-    ItemMock item(&game);
+    Level level;
+    ItemMock item(&level);
 
 }
 
 // Test our item getters and setters
 TEST(ItemTest, GettersSetters){
-    Game game;
-    ItemMock item(&game);
+    Level level;
+    ItemMock item(&level);
 
     // Test initial values
     ASSERT_NEAR(0, item.GetX(), 0.0001);
@@ -51,8 +51,8 @@ TEST(ItemTest, GettersSetters){
 
 TEST(ItemTest, HitTest) {
     // Create an item to test
-    Game game;
-    ItemMock item(&game);
+    Level level;
+    ItemMock item(&level);
 
     // Give it a location
     // Always make the numbers different, in case they are mixed up
