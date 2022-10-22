@@ -14,9 +14,16 @@ const std::wstring ResDir = L"./images/";
 */
 Item::Item(Level* level, const wstring& filename) :mLevel(level)
 {
-    mItemImage = make_shared<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
-    mItemBitmap = make_shared<wxBitmap>(*mItemImage);
+    // if this is the first time we are loading in the file image, save it in the texture packs
+    if (mImagePack.find(filename) == mImagePack.end())
+    {
+        auto img = mImagePack[filename] = make_shared<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
+        mBitmapPack[filename] = make_shared<wxBitmap>(*img);
+    }
 
+    // load shared image and bitmap into this object
+    mItemImage = mImagePack[filename];
+    mItemBitmap = mBitmapPack[filename];
 }
 
 /**

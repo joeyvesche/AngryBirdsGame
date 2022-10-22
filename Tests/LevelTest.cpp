@@ -50,3 +50,40 @@ TEST(LevelTest, Load)
     ASSERT_EQ(xyPairs, expected) << "Test all items are positioned correctly";
 }
 
+TEST(LevelTest, Load2)
+{
+    Level level(L"levels/TestLevels/test.xml");
+
+    // Check width and height are correctly loaded from root
+    ASSERT_EQ(level.GetWidth(), 12);
+    ASSERT_EQ(level.GetHeight(), 8);
+
+    // make sure the correct number of items were loaded
+    ASSERT_EQ(std::distance(level.begin(), level.end()), 8);
+
+    // Check all values were loaded correctly
+    std::vector<std::pair<double, double>> items;
+
+    std::transform(level.begin(), level.end(), std::back_inserter(items),
+                   [](auto item) { return std::make_pair(item->GetX(), item->GetY()); });
+
+    std::vector<std::pair<double, double>> expected =
+            {
+                    {100, 100},
+                    {200, 200},
+                    {300, 300},
+                    {400, 400},
+                    {700, 700},
+                    {-6.5, 0.3},
+                    {-5.9, 0.3},
+                    {-5.3, 0.3}
+            };
+
+    // This one seems to have some rounding errors (need to assert for each double)
+    ASSERT_EQ(items.size(), expected.size());
+
+    for (int i = 0; i < static_cast<int>(items.size()); ++i) {
+        ASSERT_DOUBLE_EQ(items[i].first, expected[i].first);
+        ASSERT_DOUBLE_EQ(items[i].second, expected[i].second);
+    }
+}

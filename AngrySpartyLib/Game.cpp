@@ -26,6 +26,7 @@ Game::Game()
     for (auto const & filename : LevelFiles) {
         mLevels.emplace_back(LevelDirectory + filename);
     }
+    // TODO: make a COPY of the stored level to allow reloading
     mLevel = mLevels[1];
 }
 

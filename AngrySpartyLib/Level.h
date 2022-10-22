@@ -68,7 +68,12 @@ public:
     double GetWidth() const {return mWidth;}
     double GetHeight() const {return mHeight;}
 
-    void Add(std::shared_ptr<Item> item);
+    /**
+     * Add an item to this level
+     *
+     * @param item the item to add to this level
+     */
+    void Add(std::shared_ptr<Item> item) { mItems.push_back(item); }
 };
 
 

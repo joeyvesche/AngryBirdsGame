@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level width="12" height="8">
     <items>
-        <block x="100" y="100" image="elementMetal013.png" angle="1"/>
-        <block x="200" y="200" image="elementMetal029.png" angle="2"/>
-        <block x="300" y="300" image="elementStone047.png" angle="3"/>
-        <block x="400" y="400" image="elementStone047.png" angle="4"/>
-        <block x="700" y="700" image="elementWood015.png" angle="5"/>
+        <block x="100" y="100" width="0.25" height="0.25" image="elementMetal013.png" angle="1"/>
+        <block x="200" y="200" width="0.5" height="0.5" image="elementMetal029.png" angle="2"/>
+        <block x="300" y="300" width="0.75" height="0.75" image="elementStone047.png" angle="3"/>
+        <block x="400" y="400" width="1" height="1" image="elementStone047.png" angle="4"/>
+        <block x="700" y="700" width="1.25" height="1.25" image="elementWood015.png" angle="5"/>
     </items>
     <angry x="-6.5" y="0.3" spacing="0.6">
         <gruff-sparty/>

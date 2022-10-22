@@ -14,6 +14,7 @@
 #include <wx/xml/xml.h>
 #include <wx/graphics.h>
 #include "Physics.h"
+#include <unordered_map>
 
 class ItemVisitor;
 class Level;
@@ -25,6 +26,12 @@ class Item {
 private:
     /// The level this Item is contained in
     Level *mLevel;
+
+    /// shared collection of images used for items
+    inline static std::unordered_map<std::wstring, std::shared_ptr<wxImage>> mImagePack;
+
+    /// shared collection of bitmaps used for items
+    inline static std::unordered_map<std::wstring, std::shared_ptr<wxBitmap>> mBitmapPack;
 
     /// Item location in the level
     double mX = 0;

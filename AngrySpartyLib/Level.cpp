@@ -30,7 +30,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
         if (name == L"background")
         {
             std::shared_ptr<Background> background;
-            background = std::make_shared<Background>(this, L"background1.png");
+            background = std::make_shared<Background>(this, child->GetAttribute(L"image").ToStdWstring());
             background->XmlLoad(child);
             item = background;
 
