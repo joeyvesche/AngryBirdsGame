@@ -9,10 +9,10 @@
 /**
  * Goalposts Constants
  */
-/// Base filename for the slingshot image
+/// Base filename for the Goalpost image
 const std::wstring GoalpostsBaseName = L"goalposts";
 
-/// Size of the slingshot image in meters
+/// Size of the Goalpost image in meters
 const b2Vec2 GoalpostsSize = b2Vec2(1, 2.649);
 
 /// Back band attachment point
@@ -21,8 +21,14 @@ const b2Vec2 GoalpostsBandAttachBack = b2Vec2(-0.42f, 2.3f);
 /// Front band attachment point
 const b2Vec2 GoalpostsBandAttachFront = b2Vec2(0.34f, 2.32f);
 
-/// Maximum amount the slingshot can be pulled in meters
+/// Maximum amount the Goalpost can be pulled in meters
 const double GoalpostsMaximumPull = 2;
+
+/// The Goalpost band colour
+const wxColour GoalpostBandColor = wxColour(55, 18, 1);
+
+/// Width of the Goalpost band in centimeters
+const int GoalpostBandWidth = 15;
 
 
 /**
@@ -50,27 +56,35 @@ void Goalposts::XmlLoad(wxXmlNode *node)
  */
 void Goalposts::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    b2Vec2 position(GetX(), GetY());
     graphics->PushState();
 
-    graphics->Translate(position.x*Consts::MtoCM,
-            position.y*Consts::MtoCM);
+    // Get the center x and y position of this item
+    auto posX = GetX() * Consts::MtoCM, posY= GetY() * Consts::MtoCM;
 
-    // Make this is left side of the rectangle
-    double x = -GoalpostsSize.x/2*Consts::MtoCM;
+    // Calculate the width and height of the item in centimeters
+    double width = GoalpostsSize.x * Consts::MtoCM;
+    double height = GoalpostsSize.y * Consts::MtoCM;
 
-    // And the top
-    double y = GoalpostsSize.y/2*Consts::MtoCM;
+    // translate to the correct location to draw the image
+    graphics->Translate(posX, posY);
 
-    // The width of the slingshot
-    double xw = GoalpostsSize.x/1*Consts::MtoCM;
-
-    graphics->Translate(0, y);
+    // draw the actual Goalpost
     graphics->Scale(1, -1);
-    graphics->DrawBitmap(*mGoalpost,
-            x,
-            -y,
-            xw, GoalpostsSize.y*Consts::MtoCM);
+    graphics->DrawBitmap(*GetBitmap(),
+            -width / 2,
+            -height,
+            width, height);
+    graphics->Scale(1, -1);
+
+    // draw the band on the Goalpost
+    wxPen pen(GoalpostBandColor, GoalpostBandWidth);
+    graphics->SetPen(pen);
+
+    graphics->StrokeLine(GoalpostsBandAttachBack.x * Consts::MtoCM,
+            GoalpostsBandAttachBack.y * Consts::MtoCM,
+            GoalpostsBandAttachFront.x * Consts::MtoCM,
+            GoalpostsBandAttachFront.y * Consts::MtoCM);
+
     graphics->PopState();
 
 }
