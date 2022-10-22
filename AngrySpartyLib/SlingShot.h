@@ -1,6 +1,6 @@
 /**
  * @file SlingShot.h
- * @author joeyv
+ * @authors joeyv, Joseph Pauls
  *
  *
  */
@@ -13,7 +13,6 @@
 
 class SlingShot : public Item{
 private:
-    std::unique_ptr<wxBitmap> mSlingshot;
 
 public:
     /// Default constructor (disabled)
@@ -22,10 +21,11 @@ public:
     /// Copy constructor (disabled)
     SlingShot(const SlingShot &) = delete;
 
-    SlingShot(Level* level, const std::wstring& filename);
+    SlingShot(Level* level);
 
-    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
+    void Accept(ItemVisitor * visitor) override {}
 };
 
 #endif //PROJECT1_SLINGSHOT_H
