@@ -35,7 +35,7 @@ const int SlingshotBandWidth = 15;
 /// The slingshot band colour
 const wxColour SlingshotBandColor = wxColour(55, 18, 1);
 
-SlingShot::SlingShot(Level* level) :Item(level, WoodSlingshotBaseName)
+SlingShot::SlingShot(Level* level) : Item(level, WoodSlingshotBaseName)
 {
 }
 

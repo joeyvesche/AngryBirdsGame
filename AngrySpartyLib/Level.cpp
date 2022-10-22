@@ -99,7 +99,7 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
         }
         mItems.push_back(sparty);
         sparty->SetLocation(x, y);
-        x -= spacing;
+        x += spacing;
     }
 }
 
