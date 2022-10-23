@@ -10,9 +10,12 @@
 
 #include "Item.h"
 #include <string>
+#include <memory>
 
 class SlingShot : public Item{
 private:
+    std::shared_ptr<wxImage> mArmImage; ///< Image of the slingshot arm
+    std::shared_ptr<wxBitmap> mArmBitmap; ///< Bitmap of the slingshot arm
 
 public:
     /// Default constructor (disabled)

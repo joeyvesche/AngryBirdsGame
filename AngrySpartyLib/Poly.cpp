@@ -10,9 +10,6 @@
 
 Poly::Poly(Level *level, const std::wstring &filename) : Item(level, filename)
 {
-    mPolyImage = std::make_shared<wxImage>(L"images/" + filename, wxBITMAP_TYPE_ANY);
-    mPolyBitmap = std::make_shared<wxBitmap>(*mPolyImage);
-
 }
 
 void Poly::XmlLoad(wxXmlNode *node)
@@ -67,7 +64,7 @@ void Poly::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->Rotate(angle);
 
     graphics->Scale(1, -1);
-    graphics->DrawBitmap(*mPolyBitmap,
+    graphics->DrawBitmap(*GetBitmap(),
             minimums.x * Consts::MtoCM,
             minimums.y * Consts::MtoCM,
             size.x * Consts::MtoCM,

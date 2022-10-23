@@ -8,8 +8,11 @@
 #include <string>
 #include "Consts.h"
 
-/// Base filename for the slingshot image
+/// Filename for the slingshot image
 const std::wstring WoodSlingshotBaseName = L"slingshot.png";
+
+/// Filename for the extra slingshot arm to draw when loaded
+const std::wstring WoodSlingshotArmFilename = L"slingshot-front.png";
 
 /// Size of the slingshot image in meters
 const b2Vec2 WoodSlingshotSize = b2Vec2(0.5, 1.446);
@@ -37,6 +40,9 @@ const wxColour SlingshotBandColor = wxColour(55, 18, 1);
 
 SlingShot::SlingShot(Level* level) : Item(level, WoodSlingshotBaseName)
 {
+    auto [img, bitmap] = LoadImage(WoodSlingshotArmFilename);
+    mArmImage = img;
+    mArmBitmap = bitmap;
 }
 
 void SlingShot::Draw(std::shared_ptr<wxGraphicsContext> graphics)

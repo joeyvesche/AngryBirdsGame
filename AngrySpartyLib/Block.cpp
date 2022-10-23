@@ -7,12 +7,8 @@
 #include "Block.h"
 #include "ItemVisitor.h"
 
-Block::Block(Level* level, const std::wstring& filename)
-        :Item(level, filename)
+Block::Block(Level* level, const std::wstring& filename) : Item(level, filename)
 {
-    mBlockImage = std::make_shared<wxImage>(L"images/" + filename, wxBITMAP_TYPE_ANY);
-    mBlockBitmap = std::make_shared<wxBitmap>(*mBlockImage);
-
 }
 
 void Block::XmlLoad(wxXmlNode* node)
@@ -68,7 +64,7 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->Translate(0, y);
     graphics->Scale(1, -1);
     for (int ix = 0; ix<mRepeatX; ix++) {
-        graphics->DrawBitmap(*mBlockBitmap,
+        graphics->DrawBitmap(*GetBitmap(),
                 x,
                 0,
                 xw, mSize.y*Consts::MtoCM);

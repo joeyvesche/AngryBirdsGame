@@ -17,6 +17,7 @@ class AngrySparty: public Item {
 private:
 
 protected:
+    // TODO: why is this protected?
     AngrySparty(Level *level, const std::wstring &filename);
 
 public:

@@ -12,12 +12,14 @@
 #include "Consts.h"
 
 class Level;
+
 /**
  * A class that describes a goalpost
  */
 class Goalposts : public Item {
 private:
-    std::shared_ptr<wxBitmap> mGoalpost;
+    std::shared_ptr<wxImage> mArmImage; ///< Image of the goalpost arm
+    std::shared_ptr<wxBitmap> mArmBitmap; ///< Bitmap of the goalpost arm
 
 public:
 

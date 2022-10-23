@@ -25,18 +25,7 @@ private:
 
     b2Vec2 mSize; /// size vector of block
 
-
-    std::shared_ptr<wxImage> mBlockImage; ///Image for block
-    std::shared_ptr<wxBitmap> mBlockBitmap; ///Bitmap for block
-
     int mRepeatX = 1; /// Amount of times to repeat block
-
-
-
-
-
-
-
 
 public:
     /// Default constructor (disabled)

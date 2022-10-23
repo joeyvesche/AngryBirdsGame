@@ -6,24 +6,18 @@
 #include "pch.h"
 #include "Item.h"
 #include "Consts.h"
+#include <utility>
 
 using namespace std;
 const std::wstring ResDir = L"./images/";
 /**
 *  Constructor
 */
-Item::Item(Level* level, const wstring& filename) :mLevel(level)
+Item::Item(Level* level, const wstring& filename) : mLevel(level)
 {
-    // if this is the first time we are loading in the file image, save it in the texture packs
-    if (mImagePack.find(filename) == mImagePack.end())
-    {
-        auto img = mImagePack[filename] = make_shared<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY);
-        mBitmapPack[filename] = make_shared<wxBitmap>(*img);
-    }
-
-    // load shared image and bitmap into this object
-    mItemImage = mImagePack[filename];
-    mItemBitmap = mBitmapPack[filename];
+    auto [img, bitmap] = LoadImage(filename);
+    mItemImage = img;
+    mItemBitmap = bitmap;
 }
 
 /**
@@ -33,6 +27,27 @@ Item::~Item()
 {
 
 }
+
+/**
+ * Loads an image file and stores it in a common database of item images.
+ * If the image file was previously loaded, it will not be loaded again
+ *
+ * @param filename the filename and extension of the image file
+ * @return shared_ptr to both the loaded image and bitmap objects
+ */
+std::pair<std::shared_ptr<wxImage>, std::shared_ptr<wxBitmap>> Item::LoadImage(std::wstring const & filename)
+{
+    // if this is the first time we are loading in the file image, save it in the texture packs
+    if (mImagePack.find(filename) == mImagePack.end())
+    {
+        mImagePack.insert({filename, make_shared<wxImage>(ResDir + filename, wxBITMAP_TYPE_ANY)});
+        mBitmapPack.insert({filename, make_shared<wxBitmap>(*mImagePack[filename])});
+    }
+
+    // load shared image and bitmap into this object
+    return {mImagePack[filename], mBitmapPack[filename]};
+}
+
 
 /**
  * Compute the distance from this item to another item
@@ -108,6 +123,4 @@ void Item::XmlLoad(wxXmlNode *node)
     node->GetAttribute(L"x", L"0").ToDouble(&mX);
     node->GetAttribute(L"y", L"0").ToDouble(&mY);
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
-
-    //SetLocation(GetX() * Consts::MtoCM, GetY() * Consts::MtoCM);
 }

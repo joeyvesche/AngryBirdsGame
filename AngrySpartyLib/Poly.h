@@ -21,9 +21,6 @@ private:
     /// Each set of vertices
     b2Vec2 mVertex;
 
-    std::shared_ptr<wxImage> mPolyImage; ///Image for poly
-    std::shared_ptr<wxBitmap> mPolyBitmap; ///Bitmap for poly
-
 public:
     /// Default constructor (disabled)
     Poly() = delete;

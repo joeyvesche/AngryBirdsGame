@@ -18,12 +18,6 @@ private:
    double mWidth = 0.0; /// Width of the background
    double mHeight = 0.0; /// Height of the background
 
-    /// The underlying Item image
-    std::shared_ptr<wxImage> mBackgroundImage;
-
-    /// The displayable bitmap for this Item
-    std::shared_ptr<wxBitmap> mBackgroundBitmap;
-
 public:
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;

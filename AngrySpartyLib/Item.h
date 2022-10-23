@@ -28,10 +28,10 @@ private:
     Level *mLevel;
 
     /// shared collection of images used for items
-    inline static std::unordered_map<std::wstring, std::shared_ptr<wxImage>> mImagePack;
+    inline static std::unordered_map<std::wstring, const std::shared_ptr<wxImage>> mImagePack;
 
     /// shared collection of bitmaps used for items
-    inline static std::unordered_map<std::wstring, std::shared_ptr<wxBitmap>> mBitmapPack;
+    inline static std::unordered_map<std::wstring, const std::shared_ptr<wxBitmap>> mBitmapPack;
 
     /// Item location in the level
     double mX = 0;
@@ -115,6 +115,8 @@ public:
      */
     Level *GetLevel() {return mLevel; }
 
+    std::pair<std::shared_ptr<wxImage>, std::shared_ptr<wxBitmap>> LoadImage(std::wstring const & filename);
+
     /**
     * Get the width of the object
     * @return int representing the width
@@ -136,7 +138,7 @@ public:
 
     virtual void Accept(ItemVisitor * visitor) = 0;
 
-    double GetAngle(){return mAngle;}
+    double GetAngle(){ return mAngle; }
 
 };
 

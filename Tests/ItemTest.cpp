@@ -89,7 +89,7 @@ TEST(ItemTest, HitTest) {
  * are only loaded once. If two items use the same image,
  * they should have pointers to the same image object.
  *
- * Note for slingshots/goalposts : these classes have additional
+ * Note for slingshots/goalposts: these classes have additional
  * images for when a sparty is loaded on them. This test does not
  * account for these extra images
  */

@@ -10,7 +10,10 @@
  * Goalposts Constants
  */
 /// Base filename for the Goalpost image
-const std::wstring GoalpostsBaseName = L"goalposts";
+const std::wstring GoalpostsBaseName = L"goalposts.png";
+
+/// filename of the extra goalpost arm to draw when it is loaded
+const std::wstring GoalPostsArmImageFilename = L"goalposts-front.png";
 
 /// Size of the Goalpost image in meters
 const b2Vec2 GoalpostsSize = b2Vec2(1, 2.649);
@@ -35,10 +38,11 @@ const int GoalpostBandWidth = 15;
  * Goalpost constructor
  * @param level
  */
-Goalposts::Goalposts(Level* level)
-        :Item(level, L"goalposts.png")
+Goalposts::Goalposts(Level* level) :Item(level, GoalpostsBaseName)
 {
-    mGoalpost = std::make_shared<wxBitmap>(L"images/goalposts.png", wxBITMAP_TYPE_ANY);
+    auto [img, bitmap] = LoadImage(GoalPostsArmImageFilename);
+    mArmImage = img;
+    mArmBitmap = bitmap;
 }
 
 /**
