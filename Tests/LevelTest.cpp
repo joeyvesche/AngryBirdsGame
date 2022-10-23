@@ -87,3 +87,32 @@ TEST(LevelTest, Load2)
         ASSERT_DOUBLE_EQ(items[i].second, expected[i].second);
     }
 }
+
+TEST(LevelTest, ResetLevels)
+{
+    Level level1Original(L"levels/level1.xml");
+    Level level1Modified(L"levels/level1.xml");
+
+    std::shared_ptr<Item> original = *level1Original.begin();
+    std::shared_ptr<Item> modified = *level1Modified.begin();
+
+    int modifiedX = original->GetX() + 5;
+    int modifiedY = original->GetY() + 2;
+
+    // apply changes to an item and make sure the changes are applied
+    modified->SetLocation(modifiedX, modifiedY);
+    ASSERT_EQ(modified->GetX(), modifiedX);
+    ASSERT_EQ(modified->GetY(), modifiedY);
+
+    // reset the level and see if the changes are reverted
+    level1Modified.Reset();
+
+    ASSERT_EQ(std::distance(level1Original.begin(), level1Original.end()),
+              std::distance(level1Modified.begin(), level1Modified.end())) << "Contains the same number of elements";
+
+    ASSERT_TRUE(modified != *level1Modified.begin()) << "Make sure the modified element was deleted and reconstructed";
+
+    modified = *level1Modified.begin();
+    ASSERT_EQ(modified->GetX(), original->GetX()) << "X location was restored to its original state";
+    ASSERT_EQ(modified->GetY(), original->GetY()) << "Y location was restored to its original state";
+}

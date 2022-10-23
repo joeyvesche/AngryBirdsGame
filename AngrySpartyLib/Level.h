@@ -23,6 +23,8 @@ class Item;
  */
 class Level {
 private:
+    wxXmlDocument mDoc; ///< the xml document that represents this level
+
     double mWidth = 0.0;
     double mHeight = 0.0;
     std::vector<std::shared_ptr<Item>> mItems; ///< All items in this level
@@ -32,15 +34,16 @@ private:
 
     std::shared_ptr<Physics> mPhysics; ///The physics system for this level
 
+
 public:
-    /**
-     * Construct a new empty level object
-     */
-    Level() = default;
+    /// Default constructor (disabled)
+    Level() = delete;
 
     Level(std::wstring const & filepath);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
+
+    void Reset();
 
     /**
      * Get the size of the level in meters

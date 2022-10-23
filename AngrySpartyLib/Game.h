@@ -29,8 +29,8 @@ private:
     /// Y offset
     double mYOffset = 1;
 
-    std::vector<Level> mLevels; ///< A list of all levels
-    Level mLevel; ///< The currently loaded level
+    std::vector<std::shared_ptr<Level>> mLevels; ///< A list of all levels
+    std::shared_ptr<Level> mLevel; ///< The currently loaded level
 
     Scoreboard mScore; ///< The scoreboard for the game
 
@@ -41,13 +41,13 @@ public:
      * Get the width of the aquarium
      * @return Aquarium width in meters
      */
-    double GetWidth() const { return mLevel.GetWidth(); }
+    double GetWidth() const { return mLevel->GetWidth(); }
 
     /**
      * Get the height of the aquarium
      * @return Aquarium height in meters
      */
-    int GetHeight() const { return mLevel.GetHeight(); }
+    int GetHeight() const { return mLevel->GetHeight(); }
 
     void Load(const wxString& filename);
 
@@ -64,6 +64,9 @@ public:
     void Accept(ItemVisitor * visitor);
 
     void SetLevel(int index);
+
+    /// Get the currently loaded level
+    std::shared_ptr<Level> GetLevel() { return mLevel; }
 };
 
 #endif //PROJECT1_GAME_H

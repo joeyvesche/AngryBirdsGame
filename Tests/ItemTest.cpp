@@ -29,15 +29,13 @@ public:
 // Test Item construction
 TEST(ItemTest, Construct)
 {
-    Level level;
-    ItemMock item(&level, L"helmet-sparty.png");
+    ItemMock item(nullptr, L"helmet-sparty.png");
 
 }
 
 // Test our item getters and setters
 TEST(ItemTest, GettersSetters){
-    Level level;
-    ItemMock item(&level, L"helmet-sparty.png");
+    ItemMock item(nullptr, L"helmet-sparty.png");
 
     // Test initial values
     ASSERT_NEAR(0, item.GetX(), 0.0001);
@@ -56,8 +54,7 @@ TEST(ItemTest, GettersSetters){
 
 TEST(ItemTest, HitTest) {
     // Create an item to test
-    Level level;
-    ItemMock item(&level, L"helmet-sparty.png");
+    ItemMock item(nullptr, L"helmet-sparty.png");
 
     // Give it a location
     // Always make the numbers different, in case they are mixed up
@@ -96,9 +93,8 @@ TEST(ItemTest, HitTest) {
 TEST(ItemTest, ImagesLoadOnlyOnce)
 {
     // Basic: two items with the same image
-    Level basicLevel;
-    ItemMock basicItem1(&basicLevel, HelmetSpartyImageName);
-    ItemMock basicItem2(&basicLevel, HelmetSpartyImageName);
+    ItemMock basicItem1(nullptr, HelmetSpartyImageName);
+    ItemMock basicItem2(nullptr, HelmetSpartyImageName);
 
     ASSERT_EQ(basicItem1.GetBitmap(), basicItem2.GetBitmap());
 

@@ -12,6 +12,5 @@
 
 TEST(GruffSpartyTest, Construct)
 {
-    Level level;
-    GruffSparty gruff(&level);
+    GruffSparty gruff(nullptr);
 }

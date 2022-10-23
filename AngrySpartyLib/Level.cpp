@@ -111,13 +111,21 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
  */
 Level::Level(std::wstring const & filepath)
 {
-    wxXmlDocument doc;
+    mDoc.Load(filepath);
+    Reset();
+}
 
-    // exit if loading the xml file was unsuccessful
-    if (!doc.Load(filepath)) return;
+/**
+ * Reset the level to its original state from
+ * the xml file
+ */
+void Level::Reset()
+{
+    // clear any previously stored items
+    mItems.clear();
 
     // process root tag attributes
-    auto root = doc.GetRoot();
+    auto root = mDoc.GetRoot();
 
     root->GetAttribute("width").ToDouble(&mWidth);
     root->GetAttribute("height").ToDouble(&mHeight);

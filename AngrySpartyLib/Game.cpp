@@ -24,7 +24,7 @@ Game::Game()
 {
     // load all levels from files
     for (auto const & filename : LevelFiles) {
-        mLevels.emplace_back(LevelDirectory + filename);
+        mLevels.push_back(std::make_shared<Level>(LevelDirectory + filename));
     }
     // TODO: make a COPY of the stored level to allow reloading
     mLevel = mLevels[1];
@@ -96,7 +96,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     //
     // INSERT YOUR DRAWING CODE HERE
 
-    mLevel.OnDraw(graphics);
+    mLevel->OnDraw(graphics);
 
     mScore.OnDraw(graphics, GetWidth(), GetHeight());
 
@@ -160,7 +160,7 @@ void Game::Update(double elapsed)
 
 void Game::Accept(ItemVisitor* visitor)
 {
-    for (auto & item: mLevel) {
+    for (auto item: *mLevel) {
         item->Accept(visitor);
     }
 }
@@ -168,4 +168,5 @@ void Game::Accept(ItemVisitor* visitor)
 void Game::SetLevel(int index)
 {
     mLevel = mLevels[index];
+    mLevel->Reset();
 }
