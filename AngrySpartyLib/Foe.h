@@ -9,7 +9,8 @@
 #define PROJECT1_FOE_H
 
 #include "Item.h"
-#include <string>
+#include "Level.h"
+#include "ItemBody.h"
 /**
  * Class that describes a foe object
  */
@@ -19,6 +20,8 @@ private:
     double mDown = 0;
     ///File Name. Set when loading in the foe from an XML file
 
+    ///Body of the AngrySparty object
+    b2Body* mBody;
 
 public:
     /// Default constructor (disabled)

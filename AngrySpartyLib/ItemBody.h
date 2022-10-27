@@ -8,12 +8,12 @@
 #ifndef PROJECT1_ITEMBODY_H
 #define PROJECT1_ITEMBODY_H
 #include "Item.h"
-//#include "Block.h"
 #include "Physics.h"
 #include <memory>
 
 class Block;
 class AngrySparty;
+class Foe;
 class ItemBody {
 private:
 
@@ -38,6 +38,7 @@ private:
     double mWidth = 0;  /// Width for size
     double mHeight = 0; /// Height for size
     double mRadius = 0; ///Radius for the object
+    double mDown = 0;  /// Down for foe
 
 
 
@@ -46,6 +47,7 @@ public:
 
     ItemBody(Block* block, wxXmlNode* node);
     ItemBody(AngrySparty * angry);
+    ItemBody(Foe *foe, wxXmlNode* node);
 
     void MakeBody(std::shared_ptr<Physics> physics, int key);
 

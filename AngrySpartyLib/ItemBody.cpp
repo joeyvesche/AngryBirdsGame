@@ -32,6 +32,13 @@ ItemBody::ItemBody(AngrySparty *angry)
 
 }
 
+ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
+{
+    node->GetAttribute(L"radius", L"0").ToDouble(&mRadius);
+    node->GetAttribute(L"down", L"0").ToDouble(&mDown);
+
+}
+
 /**
  * Make the physics body for an object.
  * @param physics physics system for this level
@@ -82,6 +89,19 @@ void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
     if (key == 1)
     {
 
+        // Create the shape
+        b2CircleShape circle;
+
+        circle.m_radius = (float)mRadius;
+
+        body->CreateFixture(&circle, 0.0f);
+
+        mBody = body;
+    }
+
+    ///Foe object
+    if (key == 2)
+    {
         // Create the shape
         b2CircleShape circle;
 

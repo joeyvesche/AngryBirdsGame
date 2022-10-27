@@ -64,6 +64,10 @@ public:
 
     void AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar, wxMenu* viewMenu);
 
+    /**
+     * Stop the timer so the window can close
+     */
+    void Stop() {mTimer.Stop();}
 };
 
 #endif //PROJECT1_GAMEVIEW_H
