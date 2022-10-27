@@ -13,6 +13,7 @@
 #include <memory>
 
 class Block;
+class AngrySparty;
 class ItemBody {
 private:
 
@@ -36,6 +37,7 @@ private:
     double mY = 0;  /// Y value for position
     double mWidth = 0;  /// Width for size
     double mHeight = 0; /// Height for size
+    double mRadius = 0; ///Radius for the object
 
 
 
@@ -43,8 +45,9 @@ private:
 public:
 
     ItemBody(Block* block, wxXmlNode* node);
+    ItemBody(AngrySparty * angry);
 
-    void MakeBody(std::shared_ptr<Physics> physics);
+    void MakeBody(std::shared_ptr<Physics> physics, int key);
 
     b2Body* GetBody() {return mBody;}
 

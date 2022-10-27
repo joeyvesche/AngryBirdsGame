@@ -9,8 +9,10 @@
 #include "gtest/gtest.h"
 #include <Background.h>
 #include <Level.h>
+#include <Item.h>
 
-TEST(BackgroundTest, Load)
+TEST(BackgroundTest, Construct)
 {
-
+    Level level1(L"levels/level1.xml");
 }
+

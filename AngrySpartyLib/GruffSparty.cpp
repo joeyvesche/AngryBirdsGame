@@ -9,10 +9,17 @@
 #include "Game.h"
 #include "AngrySparty.h"
 
-/// GruffSparty filename
-const std::wstring GruffSpartyImageName = L"gruff-sparty.png";
+///Useful Constants
+/// The image to use for this sparty
+const std::wstring GruffSpartyImage = L"gruff-sparty.png";
 
-GruffSparty::GruffSparty(Level *level) : AngrySparty(level, GruffSpartyImageName)
+/// The radius in meters
+const double GruffSpartyRadius = 0.25;
+
+/// The velocity factor for Gruff Sparty
+const float GruffSpartyVelocityFactor = 12.0;
+
+GruffSparty::GruffSparty(Level *level) : AngrySparty(level, GruffSpartyImage)
 {
 
 }

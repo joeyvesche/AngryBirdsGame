@@ -27,36 +27,68 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
 
 }
 
-void ItemBody::MakeBody(std::shared_ptr<Physics> physics)
+ItemBody::ItemBody(AngrySparty *angry)
+{
+
+}
+
+/**
+ * Make the physics body for an object.
+ * @param physics physics system for this level
+ * @param key key that determines which item was passed to this function
+ */
+void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
 {
 
     b2World* world = physics->GetWorld();
 
-    // Create the box
-    b2PolygonShape box;
-    box.SetAsBox(mSize.x/2, mSize.y/2);
 
     // Create the body definition
     b2BodyDef bodyDefinition;
     bodyDefinition.position = mPosition;
     bodyDefinition.angle = mAngle;
+
+    ///Set static for objects that dont load it
+    if (key == 1)
+    {
+        mStatic = 1;
+    }
     bodyDefinition.type = mStatic ? b2_staticBody : b2_dynamicBody;
     auto body = world->CreateBody(&bodyDefinition);
 
-    if(mStatic)
+    /// Block
+    if (key == 0)
     {
-        body->CreateFixture(&box, 0.0f);
+        // Create the box
+        b2PolygonShape box;
+        box.SetAsBox(mSize.x/2, mSize.y/2);
+
+        if (mStatic) {
+            body->CreateFixture(&box, 0.0f);
+        }
+        else {
+            b2FixtureDef fixtureDef;
+            fixtureDef.shape = &box;
+            fixtureDef.density = (float) mDensity;
+            fixtureDef.friction = (float) mFriction;
+            fixtureDef.restitution = (float) mRestitution;
+
+            body->CreateFixture(&fixtureDef);
+
+        }
+        mBody = body;
     }
-    else
+    ///Angry Sparty object
+    if (key == 1)
     {
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape = &box;
-        fixtureDef.density = (float)mDensity;
-        fixtureDef.friction = (float)mFriction;
-        fixtureDef.restitution = (float)mRestitution;
 
-        body->CreateFixture(&fixtureDef);
+        // Create the shape
+        b2CircleShape circle;
 
+        circle.m_radius = (float)mRadius;
+
+        body->CreateFixture(&circle, 0.0f);
+
+        mBody = body;
     }
-    mBody = body;
 }

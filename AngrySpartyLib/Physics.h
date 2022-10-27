@@ -13,6 +13,8 @@
 #include <b2_polygon_shape.h>
 #include <b2_mouse_joint.h>
 #include <b2_fixture.h>
+#include <b2_collision.h>
+#include <b2_circle_shape.h>
 
 /**
  * Physics system for a level.
@@ -29,6 +31,8 @@ public:
     Physics(const b2Vec2& size);
 
     b2World *GetWorld() {return &mWorld;}
+
+    b2Body* CreateBody(b2BodyDef definition);
 };
 
 #endif //PROJECT1_PHYSICS_H

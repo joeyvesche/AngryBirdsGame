@@ -9,18 +9,23 @@
 #define PROJECT1_ANGRYSPARTY_H
 
 #include "Item.h"
+#include "Level.h"
+#include "ItemBody.h"
+
 
 /**
- * Base class that describes anb AngrySparty Object
+ * Base class that describes any AngrySparty Object
  */
 class AngrySparty: public Item {
 private:
+        ///Body of the AngrySparty object
+        b2Body* mBody;
 
-protected:
-    // TODO: why is this protected?
-    AngrySparty(Level *level, const std::wstring &filename);
 
 public:
+
+    AngrySparty(Level *level, const std::wstring &filename);
+
     /// Default constructor (disabled)
     AngrySparty() = delete;
 
@@ -35,6 +40,7 @@ public:
      * @param dc Device context to draw on
      */
      void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H
