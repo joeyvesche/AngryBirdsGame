@@ -19,22 +19,14 @@ private:
 
     Game mGame;
 
-    /// Any item we are currently dragging
-    ///std::shared_ptr<int> mGrabbedObject; - Uncomment when Object class is created
+    bool mOutlines = false;
+    double mTime = 0;
 
-    /**
-     * Might need these later for object movement
     /// The timer that allows for animation
     wxTimer mTimer;
 
     /// Stopwatch used to measure elapsed time
     wxStopWatch mStopWatch;
-
-    /// The last stopwatch time
-    long mTime = 0;
-     */
-
-    bool mOutlines = false;
 
     void OnLeftDown(wxMouseEvent &event);
     void OnLeftUp(wxMouseEvent &event);
@@ -65,11 +57,12 @@ private:
 
     void TestAdd();
 
+    void OnTimeGo(wxTimerEvent& event);
+
 public:
     void Initialize(wxFrame* parent);
 
     void AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar, wxMenu* viewMenu);
-
 
 };
 

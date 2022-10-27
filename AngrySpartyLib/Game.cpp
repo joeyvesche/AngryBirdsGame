@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "Block.h"
 #include <vector>
+#include "DebugDraw.h"
 
 // The directory that contains all level xml files
 std::wstring const LevelDirectory = L"levels/";
@@ -87,6 +88,12 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
             350, 900);
     graphics->PopState();
     */
+    if(mDebug) {
+        DebugDraw debugDraw(graphics);
+        debugDraw.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+        mLevel->GetPhysics()->GetWorld()->SetDebugDraw(&debugDraw);
+        mLevel->GetPhysics()->GetWorld()->DebugDraw();
+    }
 
 
 
@@ -101,6 +108,8 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     mScore.OnDraw(graphics, GetWidth(), GetHeight());
 
     graphics->PopState();
+
+
 
 }
 

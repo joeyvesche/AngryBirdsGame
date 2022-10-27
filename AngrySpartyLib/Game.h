@@ -34,6 +34,7 @@ private:
 
     Scoreboard mScore; ///< The scoreboard for the game
 
+    bool mDebug = false;
 public:
     Game();
 
@@ -67,6 +68,9 @@ public:
 
     /// Get the currently loaded level
     std::shared_ptr<Level> GetLevel() { return mLevel; }
+
+    bool isDebug() {return mDebug; }
+    void Debug(bool debug) { mDebug = debug; }
 };
 
 #endif //PROJECT1_GAME_H

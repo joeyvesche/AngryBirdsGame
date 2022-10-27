@@ -3,6 +3,7 @@
  * @author Will Morant
  * @author Joey Vesche
  * @author Joseph Pauls
+ * @author Yuqi Pan
  */
 #include "pch.h"
 #include "GameView.h"
@@ -14,6 +15,8 @@
 #include "Consts.h"
 #include <memory>
 
+/// Frame duration in seconds
+const double FrameDuration = 1.0/60.0;
 
 /**
  * Add menus specific to the view
@@ -53,6 +56,11 @@ void GameView::Initialize(wxFrame* parent)
     Bind(wxEVT_LEFT_DOWN, &GameView::OnLeftDown, this);
     Bind(wxEVT_LEFT_UP, &GameView::OnLeftUp, this);
     Bind(wxEVT_MOTION, &GameView::OnMouseMove, this);
+    Bind(wxEVT_TIMER, &GameView::OnTimeGo, this);
+
+    mTimer.SetOwner(this);
+    mTimer.Start(FrameDuration);
+    mStopWatch.Start();
 
     /// Load all of the levels when the game is launched and store them for later use.
 
@@ -74,20 +82,16 @@ void GameView::Initialize(wxFrame* parent)
  */
 void GameView::OnPaint(wxPaintEvent& event)
 {
-    /**
-     * May need these later for moving objects
-    /// Compute the time that has elapsed
-    /// since the last call to OnPaint.
-    auto newTime = mStopWatch.Time();
-    auto elapsed = (double)(newTime - mTime) * 0.001;
-     */
 
-    /**
-     * Might need this later for moving objects
-    mTime = newTime;
-     */
+    // Update until the game time matches
+    // the current time.
+    auto newTime = mStopWatch.Time() * 0.001;
+    while(mTime < newTime)
+    {
+        mTime += FrameDuration;
+        mGame.Update(FrameDuration);
+    }
 
-    ///mGame.Update(elapsed); - Uncomment when Game class is initialized
 
     wxAutoBufferedPaintDC dc(this);
 
@@ -102,6 +106,7 @@ void GameView::OnPaint(wxPaintEvent& event)
     graphics->SetInterpolationQuality(wxINTERPOLATION_BEST);
 
     mGame.OnDraw(graphics, size.GetWidth(), size.GetHeight());
+
 }
 
 
@@ -143,6 +148,8 @@ void GameView::OnMouseMove(wxMouseEvent &event)
 void GameView::OnDebugView(wxCommandEvent& event)
 {
     mOutlines = !mOutlines;
+
+    mGame.Debug(mOutlines);
 }
 
 /**
@@ -206,6 +213,11 @@ void GameView::LoadItems(wxCommandEvent& event)
     auto filename = loadFileDialog.GetPath();
 
     mGame.Load(filename);
+    Refresh();
+}
+
+void GameView::OnTimeGo(wxTimerEvent& event)
+{
     Refresh();
 }
 
