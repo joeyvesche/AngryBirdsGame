@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "Level.h"
 #include "Block.h"
+#include "SlingShot.h"
 #include "Poly.h"
 #include "Background.h"
 #include "SlingShot.h"
