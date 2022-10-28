@@ -10,6 +10,7 @@
 #include "Block.h"
 #include <vector>
 #include "DebugDraw.h"
+#include "Level.h"
 
 // The directory that contains all level xml files
 std::wstring const LevelDirectory = L"levels/";
@@ -163,7 +164,7 @@ void Game::Clear()
  */
 void Game::Update(double elapsed)
 {
-
+ //   mLevel->UpdateL(elapsed);     /// Uncomment when we figure out why the blocks are exploding
 }
 
 void Game::Accept(ItemVisitor* visitor)

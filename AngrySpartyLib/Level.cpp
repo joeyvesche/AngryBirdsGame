@@ -14,6 +14,7 @@
 #include "Foe.h"
 #include "GruffSparty.h"
 #include "HelmetSparty.h"
+#include "Physics.h"
 
 /**
  * Parse the xml node that contains all items
@@ -163,4 +164,13 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
         item->Draw(graphics);
 
     }
+}
+
+/**
+ * Handle updates for animation
+ * @param elapsed The time since the last update
+ */
+void Level::UpdateL(double elapsed)
+{
+    mPhysics->UpdateP(elapsed);
 }

@@ -39,7 +39,7 @@ ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
     node->GetAttribute(L"down", L"0").ToDouble(&mDown);
     node->GetAttribute(L"x", "0").ToDouble(&mX);
     node->GetAttribute("y", "0").ToDouble(&mY);
-    mPosition = b2Vec2(mX, mY);
+    mPosition.Set(float(mX), float(mY));
 }
 
 /**

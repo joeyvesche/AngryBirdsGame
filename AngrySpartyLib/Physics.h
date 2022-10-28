@@ -33,6 +33,8 @@ public:
     b2World *GetWorld() {return &mWorld;}
 
     b2Body* CreateBody(b2BodyDef definition);
+
+    void UpdateP(double elapsed);
 };
 
 #endif //PROJECT1_PHYSICS_H

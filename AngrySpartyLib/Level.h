@@ -77,6 +77,8 @@ public:
      * @param item the item to add to this level
      */
     void Add(std::shared_ptr<Item> item) { mItems.push_back(item); }
+
+    void UpdateL(double elapsed);
 };
 
 
