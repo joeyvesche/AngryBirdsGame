@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "ItemBody.h"
+#include "AngrySparty.h"
 
 ItemBody::ItemBody(Block *block, wxXmlNode *node)
 {
@@ -29,7 +30,7 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
 
 ItemBody::ItemBody(AngrySparty *angry)
 {
-
+    mPosition.Set(float(angry->GetX()), float(angry->GetY()));
 }
 
 ItemBody::ItemBody(Foe *foe, wxXmlNode* node)

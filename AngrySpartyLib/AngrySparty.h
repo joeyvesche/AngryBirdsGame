@@ -40,7 +40,7 @@ public:
      * @param dc Device context to draw on
      */
      void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-
+     void SetBody(Level *level);
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H

@@ -13,9 +13,13 @@
  * @param level
  * @param filename
  */
-AngrySparty::AngrySparty(Level *level, const std::wstring &filename) : Item(level, filename)
+AngrySparty::AngrySparty(Level *level, const std::wstring &filename) :Item(level, filename)
 {
 
+}
+
+void AngrySparty::SetBody(Level *level)
+{
     std::shared_ptr<Physics> physics = level->GetPhysics();
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this);
     body->MakeBody(physics, 1);

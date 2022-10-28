@@ -90,6 +90,7 @@ void GameView::OnPaint(wxPaintEvent& event)
     {
         mTime += FrameDuration;
         mGame.Update(FrameDuration);
+        Refresh();
     }
 
 
@@ -118,9 +119,9 @@ void GameView::OnLeftDown(wxMouseEvent &event)
 {
     // DEBUG: each click moves the slingshot slightly to the right
     // This is done for testing reloading of levels
-    std::shared_ptr<Item> hit = mGame.GetLevel()->begin()[1];
-    hit->SetLocation(hit->GetX() + 0.25, hit->GetY());
-    Refresh();
+    //std::shared_ptr<Item> hit = mGame.GetLevel()->begin()[1];
+    //hit->SetLocation(hit->GetX() + 0.25, hit->GetY());
+    //Refresh();
 }
 
 /**
