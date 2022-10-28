@@ -1,6 +1,6 @@
 /**
  * @file SlingShot.cpp
- * @author joeyv
+ * @authors Joseph Pauls, joeyv
  */
 
 #include "pch.h"

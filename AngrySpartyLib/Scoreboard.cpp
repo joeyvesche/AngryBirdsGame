@@ -34,7 +34,15 @@ void Scoreboard::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double widt
             wxFONTWEIGHT_BOLD);
     graphics->SetFont(bigFont, wxColour(255, 0, 0));
     graphics->GetTextExtent(L"000", &wid, &hit);
-    graphics->DrawText(L"000", 5.5*Consts::MtoCM, 7*Consts::MtoCM);
-    graphics->DrawText(L"000", -6.75*Consts::MtoCM, 7*Consts::MtoCM);
-
+    if (width!=20)
+    {
+        graphics->DrawText(L"000", 5.5*Consts::MtoCM, 7*Consts::MtoCM);
+        graphics->DrawText(L"000", -6.75*Consts::MtoCM, 7*Consts::MtoCM);
+    }
+    // account for level 2 being wider than the others
+    else
+    {
+        graphics->DrawText(L"000", 8.5*Consts::MtoCM, 7*Consts::MtoCM);
+        graphics->DrawText(L"000", -9.75*Consts::MtoCM, 7*Consts::MtoCM);
+    }
 }

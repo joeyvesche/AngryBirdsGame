@@ -1,6 +1,6 @@
 /**
  * @file Game.cpp
- * @authors Yuqi Pan, Joey Vesche, Will Morant
+ * @authors Yuqi Pan, Joey Vesche, Will Morant, Joseph Pauls
  */
 #include "pch.h"
 #include "Game.h"
