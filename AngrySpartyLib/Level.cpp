@@ -1,6 +1,6 @@
 /**
  * @file level.cpp
- * @author Will Skaggs
+ * @authors Will Skaggs, Joseph Pauls
 */
 
 #include "pch.h"
@@ -101,6 +101,7 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
             sparty = std::make_shared<HelmetSparty>(this);
         }
         mItems.push_back(sparty);
+        mSpartys.push_back(sparty);
         sparty->SetLocation(x, y);
         sparty->SetBody(this);
         x += spacing;

@@ -79,3 +79,6 @@ void SlingShot::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PopState();
 
 }
+
+
+

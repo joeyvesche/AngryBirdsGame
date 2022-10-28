@@ -1,6 +1,6 @@
 /**
  * @file Level.h
- * @author Will Skaggs
+ * @authors Will Skaggs, Joseph Pauls
  *
  * This class loads and stores the contents of an
  * XML level file
@@ -28,6 +28,7 @@ private:
     double mWidth = 0.0;
     double mHeight = 0.0;
     std::vector<std::shared_ptr<Item>> mItems; ///< All items in this level
+    std::vector<std::shared_ptr<Item>> mSpartys; ///< All Spartys in this level
 
     void LoadItemsXml(wxXmlNode * items);
     void LoadSpartysXml(wxXmlNode * angry);
