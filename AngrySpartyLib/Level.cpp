@@ -159,5 +159,6 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
     for (auto & item : mItems)
     {
         item->Draw(graphics);
+
     }
 }

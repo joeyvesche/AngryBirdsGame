@@ -1,10 +1,12 @@
 /**
  * @file AngrySparty.cpp
- * @author Will Morant
+ * @authors Will Morant, Joseph Pauls
  */
 
 #include "pch.h"
 #include "AngrySparty.h"
+#include "Game.h"
+#include "Consts.h"
 
 /**
  * Constructs the angry sparty object
@@ -20,10 +22,33 @@ AngrySparty::AngrySparty(Level *level, const std::wstring &filename) : Item(leve
     mBody = body->GetBody();
 }
 
-
+/**
+ *  Draws the Angry Spartys
+ * @param graphics
+ */
 void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    graphics->PushState();
+    auto position = mBody->GetPosition();
+    auto angle = mBody->GetAngle();
 
+    auto wid = 0.25 * Consts::MtoCM * 2;
+    auto x = position.x * Consts::MtoCM;
+    auto y = position.y * Consts::MtoCM;
+
+    graphics->PushState();
+    graphics->Translate(x, y);
+    graphics->Rotate(angle);
+
+
+    graphics->Scale(1, -1);
+    graphics->DrawBitmap(*GetBitmap(),
+            -wid/2,
+            -wid/2,
+            wid, wid);
+
+    graphics->PopState();
+    graphics->PopState();
 }
 
 
