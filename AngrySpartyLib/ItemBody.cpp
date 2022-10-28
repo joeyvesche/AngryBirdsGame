@@ -1,6 +1,6 @@
 /**
  * @file ItemBody.cpp
- * @author Will
+ * @author Will, Joey Vesche
  */
 
 #include "pch.h"

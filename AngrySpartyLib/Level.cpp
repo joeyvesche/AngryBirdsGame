@@ -37,9 +37,9 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         } else if (name == L"block")
         {
-           auto block = std::make_shared<Block>(this, child->GetAttribute(L"image").ToStdWstring());
-           block->XmlLoad(child);
-           item = block;
+            auto block = std::make_shared<Block>(this, child->GetAttribute(L"image").ToStdWstring());
+            block->XmlLoad(child);
+            item = block;
 
         } else if (name == L"poly")
         {
@@ -50,8 +50,9 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         } else if (name == L"foe")
         {
-            item = std::make_shared<Foe>(this, child->GetAttribute(L"image").ToStdWstring());
-
+            auto foe = std::make_shared<Foe>(this, child->GetAttribute(L"image").ToStdWstring());
+            foe->XmlLoad(child);
+            item = foe;
         } else if (name == L"slingshot")
         {
             auto slingshot = std::make_shared<SlingShot>(this);
