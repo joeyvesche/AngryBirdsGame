@@ -10,7 +10,9 @@
 
 #include "Item.h"
 #include "Level.h"
-#include "ItemBody.h"
+
+class ItemBody;
+
 /**
  * Class that describes a foe object
  */
@@ -43,5 +45,7 @@ public:
      */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 };
+
+#include "ItemBody.h"
 
 #endif //PROJECT1_FOE_H

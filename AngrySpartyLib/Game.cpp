@@ -27,8 +27,8 @@ Game::Game()
     for (auto const & filename : LevelFiles) {
         mLevels.push_back(std::make_shared<Level>(LevelDirectory + filename));
     }
-    // TODO: make a COPY of the stored level to allow reloading
-    mLevel = mLevels[1];
+
+    SetLevel(1);
 }
 
 /**
@@ -155,7 +155,6 @@ void Game::Load(const wxString& filename)
 void Game::Clear()
 {
 }
-
 
 
 /**

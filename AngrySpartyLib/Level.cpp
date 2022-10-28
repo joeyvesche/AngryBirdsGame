@@ -130,8 +130,10 @@ void Level::Reset()
 
     root->GetAttribute("width").ToDouble(&mWidth);
     root->GetAttribute("height").ToDouble(&mHeight);
+
+    // Create a new physics world for our items
     b2Vec2 size;
-    size.Set(float(mWidth), float(mHeight));
+    size.Set(mWidth, mHeight);
     mPhysics = std::make_shared<Physics>(size);
 
     // process everything else
