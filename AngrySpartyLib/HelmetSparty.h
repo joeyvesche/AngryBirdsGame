@@ -13,6 +13,12 @@
 class HelmetSparty: public AngrySparty {
 private:
 
+    /// The radius in meters
+    const double mHelmetSpartyRadius = 0.25;
+
+    /// The velocity factor for Helmet Sparty
+    const float mHelmetSpartyVelocityFactor = 20.0;
+
 public:
     /// Default constructor (disabled)
     HelmetSparty() = delete;
@@ -24,6 +30,8 @@ public:
     void operator=(const HelmetSparty &) = delete;
 
     HelmetSparty(Level *level);
+
+    std::pair<double,float> GetConstants() override;
 
     void Accept(ItemVisitor * visitor) override {};
 

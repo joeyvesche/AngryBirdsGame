@@ -68,6 +68,7 @@ public:
     auto end() { return mItems.end(); }
 
     std::shared_ptr<Physics> GetPhysics() {return mPhysics;}
+    void SetPhysics(std::shared_ptr<Physics> physics) {mPhysics = physics;}
 
     double GetWidth() const {return mWidth;}
     double GetHeight() const {return mHeight;}

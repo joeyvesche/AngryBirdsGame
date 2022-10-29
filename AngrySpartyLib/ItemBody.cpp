@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "ItemBody.h"
 #include "AngrySparty.h"
+#include "Consts.h"
 
 ItemBody::ItemBody(Block *block, wxXmlNode *node)
 {
@@ -31,6 +32,8 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
 ItemBody::ItemBody(AngrySparty *angry)
 {
     mPosition.Set(float(angry->GetX()), float(angry->GetY()));
+    std::pair<double, float> constants = angry->GetConstants();
+    mRadius = constants.first;
 }
 
 ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
@@ -43,6 +46,28 @@ ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
 }
 
 /**
+ * Creates a new b2Body in the world
+ * @param physics physics system in this world
+ * @return
+ */
+b2Body* ItemBody::CreateBody(std::shared_ptr<Physics> physics)
+{
+    b2World* world = physics->GetWorld(); ///Get world from physics
+
+
+    // Create the body definition
+    b2BodyDef bodyDefinition;
+    bodyDefinition.position = mPosition;
+    bodyDefinition.angle = mAngle * Consts::DtoR;
+
+    bodyDefinition.type = mStatic ? b2_staticBody : b2_dynamicBody;
+    auto body = world->CreateBody(&bodyDefinition);
+
+    return body;
+
+}
+
+/**
  * Make the physics body for an object.
  * @param physics physics system for this level
  * @param key key that determines which item was passed to this function
@@ -50,30 +75,16 @@ ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
 void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
 {
 
-    b2World* world = physics->GetWorld();
-
-
-    // Create the body definition
-    b2BodyDef bodyDefinition;
-    bodyDefinition.position = mPosition;
-    bodyDefinition.angle = mAngle;
-
-    ///Set static for objects that dont load it
-    if (key == 1)
-    {
-        mStatic = 1;
-    }
-    bodyDefinition.type = mStatic ? b2_staticBody : b2_dynamicBody;
-    auto body = world->CreateBody(&bodyDefinition);
-
     /// Block
+    b2Body* body = CreateBody(physics);
+
     if (key == 0)
     {
         // Create the box
         b2PolygonShape box;
         box.SetAsBox(mSize.x/2, mSize.y/2);
 
-        if (mStatic) {
+        if (mStatic == 1) {
             body->CreateFixture(&box, 0.0f);
         }
         else {
@@ -88,19 +99,6 @@ void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
         }
         mBody = body;
     }
-    ///Angry Sparty object
-    if (key == 1)
-    {
-
-        // Create the shape
-        b2CircleShape circle;
-
-        circle.m_radius = (float)mRadius;
-
-        body->CreateFixture(&circle, 0.0f);
-
-        mBody = body;
-    }
 
     ///Foe object
     if (key == 2)
@@ -110,8 +108,32 @@ void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
 
         circle.m_radius = (float)mRadius;
 
-        body->CreateFixture(&circle, 0.0f);
+        body->CreateFixture(&circle, 1.0f);
 
         mBody = body;
     }
 }
+
+/**
+ * Creates the physics body for a sparty
+ * @param key  static(1) or dynamic(0)
+ */
+
+void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
+{
+    mStatic = key;
+    b2Body* body = CreateBody(physics);
+
+    // Create the shape
+    b2CircleShape circle;
+
+    circle.m_radius = (float)mRadius;
+
+    body->CreateFixture(&circle, 0.0f);
+
+    mBody = body;
+
+}
+
+
+

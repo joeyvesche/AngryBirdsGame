@@ -13,13 +13,13 @@
 /// The image to use for this sparty
 const std::wstring GruffSpartyImage = L"gruff-sparty.png";
 
-/// The radius in meters
-const double GruffSpartyRadius = 0.25;
-
-/// The velocity factor for Gruff Sparty
-const float GruffSpartyVelocityFactor = 12.0;
 
 GruffSparty::GruffSparty(Level *level) : AngrySparty(level, GruffSpartyImage)
 {
 
+}
+
+std::pair<double,float> GruffSparty::GetConstants()
+{
+    return std::pair<double,float>(mGruffSpartyRadius, mGruffSpartyVelocityFactor);
 }

@@ -12,7 +12,11 @@
 
 class GruffSparty: public AngrySparty {
 private:
+    /// The radius in meters
+    const double mGruffSpartyRadius = 0.25;
 
+    /// The velocity factor for Gruff Sparty
+    const float mGruffSpartyVelocityFactor = 12.0;
 public:
 
     /// Default constructor (disabled)
@@ -27,6 +31,10 @@ public:
     GruffSparty(Level *level);
 
     void Accept(ItemVisitor * visitor) override {};
+
+    std::pair<double,float> GetConstants() override;
+
+
 };
 
 #endif //PROJECT1_GRUFFSPARTY_H

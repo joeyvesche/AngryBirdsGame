@@ -22,7 +22,7 @@ void AngrySparty::SetBody(Level *level)
 {
     std::shared_ptr<Physics> physics = level->GetPhysics();
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this);
-    body->MakeBody(physics, 1);
+    body->CreateSparty(physics, 1); /// key = 1 for static body
     mBody = body->GetBody();
 }
 
@@ -54,5 +54,4 @@ void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PopState();
     graphics->PopState();
 }
-
 

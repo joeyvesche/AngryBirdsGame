@@ -27,6 +27,7 @@ private:
 
     int mRepeatX = 1; /// Amount of times to repeat block
 
+
 public:
     /// Default constructor (disabled)
     Block() = delete;
@@ -43,6 +44,8 @@ public:
     b2Body *GetBody() {return mBody;}
 
     b2Vec2 GetPosition() {return mBody->GetPosition();}
+
+    b2Vec2 GetSize() {return mSize;};
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 

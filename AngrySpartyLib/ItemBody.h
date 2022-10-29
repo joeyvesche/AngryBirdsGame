@@ -54,6 +54,10 @@ public:
     b2Body* GetBody() {return mBody;}
 
     b2Vec2 GetPosition() {return mPosition;}
+
+    b2Body* CreateBody(std::shared_ptr<Physics> physics);
+
+    void CreateSparty(std::shared_ptr<Physics> physics, int key);
 };
 
 #endif //PROJECT1_ITEMBODY_H

@@ -35,6 +35,8 @@ private:
     Scoreboard mScore; ///< The scoreboard for the game
 
     bool mDebug = false;
+
+    std::shared_ptr<Physics> mPhysics;
 public:
     Game();
 

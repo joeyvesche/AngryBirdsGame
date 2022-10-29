@@ -163,7 +163,7 @@ void Game::Clear()
  */
 void Game::Update(double elapsed)
 {
- //   mLevel->UpdateL(elapsed);     /// Uncomment when we figure out why the blocks are exploding
+    mLevel->UpdateL(elapsed);     /// Uncomment when we figure out why the blocks are exploding
 }
 
 void Game::Accept(ItemVisitor* visitor)

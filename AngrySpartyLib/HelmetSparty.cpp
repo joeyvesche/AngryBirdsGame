@@ -13,13 +13,6 @@
 /// The image to use for this sparty
 const std::wstring HelmetSpartyImage = L"helmet-sparty.png";
 
-/// The radius in meters
-const double HelmetSpartyRadius = 0.25;
-
-/// The velocity factor for Helmet Sparty
-const float HelmetSpartyVelocityFactor = 20.0;
-///
-
 
 /**
  * Helmet Sparty initializer
@@ -32,3 +25,7 @@ HelmetSparty::HelmetSparty(Level *level) : AngrySparty(level, HelmetSpartyImage)
 }
 
 
+std::pair<double,float> HelmetSparty::GetConstants()
+{
+    return std::pair<double,float>(mHelmetSpartyRadius, mHelmetSpartyVelocityFactor);
+}

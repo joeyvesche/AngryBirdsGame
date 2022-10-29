@@ -41,6 +41,8 @@ public:
      */
      void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
      void SetBody(Level *level);
+
+     virtual std::pair<double,float> GetConstants() = 0;
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H
