@@ -21,6 +21,9 @@ private:
     /// Each set of vertices
     b2Vec2 mVertex;
 
+    /// the body of the poly in the physics engine
+    b2Body * mBody;
+
 public:
     /// Default constructor (disabled)
     Poly() = delete;

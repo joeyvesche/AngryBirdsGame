@@ -14,7 +14,7 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
     node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
     node->GetAttribute(L"restitution", L"0").ToDouble(&mRestitution);
 
-    if (node->GetAttribute(L"type", L"0") == "static")
+    if (node->GetAttribute(L"type", L"dynamic") == "static")
     {
         mStatic = 1;
     }

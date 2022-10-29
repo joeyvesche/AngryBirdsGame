@@ -25,6 +25,32 @@ void Poly::XmlLoad(wxXmlNode *node)
         mVertices.push_back(mVertex);
     }
 
+    double density, friction, restitution;
+    std::wstring type;
+
+    node->GetAttribute("density", "1").ToDouble(&density);
+    node->GetAttribute("friction", "0.5").ToDouble(&friction);
+    node->GetAttribute("restitution", "0.5").ToDouble(&restitution);
+    type = node->GetAttribute("type", "dynamic");
+
+    b2PolygonShape poly;
+    poly.Set(mVertices.data(), mVertices.size());
+
+    // Create the body definition
+    b2BodyDef bodyDefinition;
+    bodyDefinition.position = b2Vec2(GetX(), GetY());
+    bodyDefinition.angle = GetAngle();
+    bodyDefinition.type = type == L"static" ? b2_staticBody : b2_dynamicBody;
+
+    mBody = GetLevel()->GetPhysics()->GetWorld()->CreateBody(&bodyDefinition);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &poly;
+    fixtureDef.density = density;
+    fixtureDef.friction = friction;
+    fixtureDef.restitution = restitution;
+
+    mBody->CreateFixture(&fixtureDef);
 }
 
 void Poly::Accept(ItemVisitor* visitor)
@@ -40,8 +66,8 @@ void Poly::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
    graphics->PushState();
 
-   auto position = b2Vec2(GetX(), GetY());
-   auto angle= Consts::DtoR * GetAngle();
+   auto position = mBody->GetPosition();
+   auto angle= mBody->GetAngle();
 
     // Find the minimum and maximum x/y values
     b2Vec2 minimums = mVertices[0];
