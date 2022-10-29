@@ -39,7 +39,6 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     b2Body* body = mBody;
     auto position = body->GetPosition();
     auto angle = body->GetAngle();
-    angle *= Consts::DtoR;
 
     auto wid = mRadius * Consts::MtoCM * 2;
     auto x = position.x * Consts::MtoCM;
@@ -48,8 +47,6 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PushState();
     graphics->Translate(x, y);
     graphics->Rotate(angle);
-
-
 
     graphics->Scale(1, -1);
     graphics->DrawBitmap(*GetBitmap(),

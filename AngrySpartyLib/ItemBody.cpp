@@ -103,13 +103,22 @@ void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
     ///Foe object
     if (key == 2)
     {
-        // Create the shape
-        b2CircleShape circle;
+        // Create the vertices for the octagon
+        std::vector<b2Vec2> vertices;
+        double angle = 0; // the rotation from the horizontal axis in degrees
 
-        circle.m_radius = (float)mRadius;
+        for (int i = 0; i < 8; ++i, angle += 360.0 / 8)
+        {
+            double angleRad = angle * Consts::DtoR;
+            vertices.push_back(mRadius * b2Vec2(std::cos(angleRad), std::sin(angleRad)));
+        }
 
-        body->CreateFixture(&circle, 1.0f);
+        // assign the vertices to a polygon shape
+        b2PolygonShape octagon;
+        octagon.Set(vertices.data(), vertices.size());
 
+        // assign this shape to the body
+        body->CreateFixture(&octagon, 1.0f);
         mBody = body;
     }
 }
