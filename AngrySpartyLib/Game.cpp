@@ -89,14 +89,6 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
             350, 900);
     graphics->PopState();
     */
-    if(mDebug) {
-        DebugDraw debugDraw(graphics);
-        debugDraw.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
-        mLevel->GetPhysics()->GetWorld()->SetDebugDraw(&debugDraw);
-        mLevel->GetPhysics()->GetWorld()->DebugDraw();
-    }
-
-
 
     //
     // From here we are dealing with centimeter pixels
@@ -105,6 +97,13 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     // INSERT YOUR DRAWING CODE HERE
 
     mLevel->OnDraw(graphics);
+
+    if(mDebug) {
+        DebugDraw debugDraw(graphics);
+        debugDraw.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+        mLevel->GetPhysics()->GetWorld()->SetDebugDraw(&debugDraw);
+        mLevel->GetPhysics()->GetWorld()->DebugDraw();
+    }
 
     mScore.OnDraw(graphics, GetWidth(), GetHeight());
 
