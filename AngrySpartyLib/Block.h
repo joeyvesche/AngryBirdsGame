@@ -27,6 +27,10 @@ private:
 
     int mRepeatX = 1; /// Amount of times to repeat block
 
+    double mFriction = 0.0; /// Friction for the block
+
+    double mRestitution = 0.0; /// Restitution for the block
+
 
 public:
     /// Default constructor (disabled)
@@ -46,6 +50,9 @@ public:
     b2Vec2 GetPosition() {return mBody->GetPosition();}
 
     b2Vec2 GetSize() {return mSize;};
+
+    void SetFricRest(double friction, double restitution);
+
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 

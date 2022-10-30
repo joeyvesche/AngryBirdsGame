@@ -11,8 +11,6 @@
 ItemBody::ItemBody(Block *block, wxXmlNode *node)
 {
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
-    node->GetAttribute(L"friction", L"0").ToDouble(&mFriction);
-    node->GetAttribute(L"restitution", L"0").ToDouble(&mRestitution);
 
     if (node->GetAttribute(L"type", L"dynamic") == "static")
     {
@@ -122,7 +120,7 @@ void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
  * Create physics body for Block
  * @param physics
  */
-void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
+void ItemBody::CreateBlock(std::shared_ptr<Physics> physics, double friction, double restitution)
 {
     b2Body* body = CreateBody(physics);
     // Create the box
@@ -133,12 +131,11 @@ void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
         body->CreateFixture(&box, 0.0f);
     }
     else {
-        mFriction = 1.0;
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &box;
         fixtureDef.density = (float) mDensity;
-        fixtureDef.friction = (float) mFriction;
-        fixtureDef.restitution = (float) mRestitution;
+        fixtureDef.friction = (float) friction;
+        fixtureDef.restitution = (float) restitution;
 
         body->CreateFixture(&fixtureDef);
 

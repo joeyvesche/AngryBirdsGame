@@ -58,7 +58,7 @@ public:
 
     void CreateSparty(std::shared_ptr<Physics> physics, int key);
 
-    void CreateBlock(std::shared_ptr<Physics> physics);
+    void CreateBlock(std::shared_ptr<Physics> physics, double friction, double restitution);
 };
 
 #endif //PROJECT1_ITEMBODY_H

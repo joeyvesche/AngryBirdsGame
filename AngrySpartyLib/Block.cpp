@@ -25,7 +25,7 @@ void Block::XmlLoad(wxXmlNode* node)
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this, node);
     Level *level = Item::GetLevel();
     std::shared_ptr<Physics> physics = level->GetPhysics();
-    body->CreateBlock(physics);
+    body->CreateBlock(physics, mFriction, mRestitution);
     mBody = body->GetBody();
 }
 
@@ -70,4 +70,10 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     }
 
     graphics->PopState();
+}
+
+void Block::SetFricRest(double friction, double restitution)
+{
+    mFriction = friction;
+    mRestitution = restitution;
 }

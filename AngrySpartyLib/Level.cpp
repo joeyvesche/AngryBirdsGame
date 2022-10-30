@@ -27,6 +27,9 @@
  */
 void Level::LoadItemsXml(wxXmlNode * items)
 {
+    bool blockSet = false; ///set to true when friction and restitution are loaded in
+    double friction = 0;
+    double restitution = 0;
     for (auto child = items->GetChildren(); child != nullptr; child = child->GetNext())
     {
         std::shared_ptr<Item> item;
@@ -42,6 +45,18 @@ void Level::LoadItemsXml(wxXmlNode * items)
         } else if (name == L"block")
         {
             auto block = std::make_shared<Block>(this, child->GetAttribute(L"image").ToStdWstring());
+            if (blockSet == false)
+            {
+                child->GetAttribute(L"friction", L"0").ToDouble(&friction);
+                child->GetAttribute(L"restitution", L"0").ToDouble(&restitution);
+                if (friction != 0)
+                {
+                    blockSet = true;
+                }
+
+            }
+
+            block->SetFricRest(friction, restitution);
             block->XmlLoad(child);
             item = block;
 
