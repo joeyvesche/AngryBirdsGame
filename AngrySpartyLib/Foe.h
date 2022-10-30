@@ -25,6 +25,9 @@ private:
     ///Body of the AngrySparty object
     b2Body* mBody;
 
+    double mLastX = 0;
+    double mLastY = 0;
+    bool mMoving = false;
 public:
     /// Default constructor (disabled)
     Foe() = delete;
@@ -44,6 +47,9 @@ public:
      * @param dc Device context to draw on
      */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
+    bool IsDead();
+    void Detach();
 };
 
 #include "ItemBody.h"

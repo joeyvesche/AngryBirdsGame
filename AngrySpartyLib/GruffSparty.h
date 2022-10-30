@@ -30,7 +30,6 @@ public:
 
     GruffSparty(Level *level);
 
-    void Accept(ItemVisitor * visitor) override {};
 
     std::pair<double,float> GetConstants() override;
 

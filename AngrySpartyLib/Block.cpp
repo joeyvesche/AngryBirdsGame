@@ -1,6 +1,6 @@
 /**
  * @file Block.cpp
- * @author Joseph Pauls, Will Morant
+ * @author Joseph Pauls, Will Morant, Yuqi Pan
  */
 
 #include "pch.h"

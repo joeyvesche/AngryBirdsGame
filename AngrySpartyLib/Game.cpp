@@ -11,7 +11,7 @@
 #include <vector>
 #include "DebugDraw.h"
 #include "Level.h"
-
+#include "LevelFinishChecker.h"
 // The directory that contains all level xml files
 std::wstring const LevelDirectory = L"levels/";
 
@@ -96,20 +96,33 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     //
     // INSERT YOUR DRAWING CODE HERE
 
-    mLevel->OnDraw(graphics);
+    int score = mLevel->OnDraw(graphics);
 
-    if(mDebug) {
+    if(mDebug)
+    {
         DebugDraw debugDraw(graphics);
         debugDraw.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
         mLevel->GetPhysics()->GetWorld()->SetDebugDraw(&debugDraw);
         mLevel->GetPhysics()->GetWorld()->DebugDraw();
     }
-
+    mScore.AddLevelScore(score);
     mScore.OnDraw(graphics, GetWidth(), GetHeight());
 
     graphics->PopState();
 
-
+    LevelFinishChecker visitor;
+    mLevel->Accept(&visitor);
+    auto stat = visitor.LevelStat();
+    if(stat == LevelFinishChecker::Stat::ReTry)
+    {
+        mScore.ClearLevelScore();
+        mLevel->Reset();
+    }
+    else if(stat == LevelFinishChecker::Stat::NextLevel)
+    {
+        mScore.UpdateGameScore();
+        SetLevel((mLevelNo + 1)% mLevels.size());
+    }
 
 }
 
@@ -175,6 +188,7 @@ void Game::Accept(ItemVisitor* visitor)
 
 void Game::SetLevel(int index)
 {
+    mLevelNo = index;
     mLevel = mLevels[index];
     mLevel->Reset();
 }

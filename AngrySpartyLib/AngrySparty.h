@@ -43,6 +43,7 @@ public:
      void SetBody(Level *level);
 
      virtual std::pair<double,float> GetConstants() = 0;
+     void Accept(ItemVisitor * visitor) override;
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H

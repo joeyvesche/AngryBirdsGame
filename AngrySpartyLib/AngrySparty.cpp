@@ -7,7 +7,7 @@
 #include "AngrySparty.h"
 #include "Game.h"
 #include "Consts.h"
-
+#include "ItemVisitor.h"
 /**
  * Constructs the angry sparty object
  * @param level
@@ -53,5 +53,10 @@ void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     graphics->PopState();
     graphics->PopState();
+}
+
+void AngrySparty::Accept(ItemVisitor* visitor)
+{
+    visitor->VisitSparty(this);
 }
 

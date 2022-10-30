@@ -33,7 +33,6 @@ public:
 
     std::pair<double,float> GetConstants() override;
 
-    void Accept(ItemVisitor * visitor) override {};
 
 };
 

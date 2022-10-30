@@ -15,7 +15,7 @@
 #include <memory>
 #include "AngrySparty.h"
 #include "Physics.h"
-
+class ItemVisitor;
 class Item;
 /**
  * This class loads and stores the contents of a
@@ -35,14 +35,13 @@ private:
 
     std::shared_ptr<Physics> mPhysics; ///The physics system for this level
 
-
 public:
     /// Default constructor (disabled)
     Level() = delete;
 
     Level(std::wstring const & filepath);
 
-    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
+    int OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
 
     void Reset();
 
@@ -81,6 +80,8 @@ public:
     void Add(std::shared_ptr<Item> item) { mItems.push_back(item); }
 
     void UpdateL(double elapsed);
+    void Accept(ItemVisitor* visitor);
+
 };
 
 

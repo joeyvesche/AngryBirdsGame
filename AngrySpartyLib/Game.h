@@ -29,6 +29,8 @@ private:
     /// Y offset
     double mYOffset = 1;
 
+    int mLevelNo = 1;
+
     std::vector<std::shared_ptr<Level>> mLevels; ///< A list of all levels
     std::shared_ptr<Level> mLevel; ///< The currently loaded level
 

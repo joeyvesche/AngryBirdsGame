@@ -15,6 +15,7 @@
 #include "GruffSparty.h"
 #include "HelmetSparty.h"
 #include "Physics.h"
+#include "DeadFoeCollector.h"
 
 /**
  * Parse the xml node that contains all items
@@ -157,14 +158,34 @@ void Level::Reset()
  * Draw the items
  *
  * @param graphics the graphics context to draw on
+ * @return Score of this draw
  */
-void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
+int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     for (auto & item : mItems)
     {
         item->Draw(graphics);
-
     }
+    int score = 0;
+    DeadFoeCollector visitor;
+    Accept(&visitor);
+    auto deathList = visitor.DeathList();
+    score = deathList.size();
+    for(auto item: deathList)
+    {
+        auto target = mItems.begin();
+        for(; target != mItems.end(); target++)
+        {
+            if((*target).get() == item)
+                break;
+        }
+        if(target!=mItems.end())
+        {
+            item->Detach();
+            mItems.erase(target);
+        }
+    }
+    return score;
 }
 
 /**
@@ -174,4 +195,12 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 void Level::UpdateL(double elapsed)
 {
     mPhysics->UpdateP(elapsed);
+}
+
+void Level::Accept(ItemVisitor* visitor)
+{
+    for(auto item : mItems)
+    {
+        item->Accept(visitor);
+    }
 }

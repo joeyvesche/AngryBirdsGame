@@ -1,7 +1,6 @@
 /**
  * @file Scoreboard.h
- * @authors joeyv, Joseph Pauls
- *
+ * @authors joeyv, Joseph Pauls, Yuqi Pan
  *
  */
 
@@ -27,14 +26,21 @@ public:
     /// Assignment operator
     void operator=(const Scoreboard &) = delete;
 
-    static void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, double height);
+    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double width, double height);
 
     /// Update the game score by adding current level's score
     void UpdateGameScore(){
         mGameScore += mLevelScore;
         mLevelScore = 0; //Prep Level Score by resetting it to 0 for the next level
     };
-
+    void AddLevelScore(int score)
+    {
+        mLevelScore += score;
+    }
+    void ClearLevelScore()
+    {
+        mLevelScore = 0;
+    }
 
 };
 

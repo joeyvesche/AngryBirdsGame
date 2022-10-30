@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "Consts.h"
 
+const double StopMovingFactor = 0.0000005;
 Foe::Foe(Level *level, const std::wstring &filename) : Item(level, filename)
 {
 
@@ -26,6 +27,8 @@ void Foe::XmlLoad(wxXmlNode* node)
     body->MakeBody(physics, 2);
     mBody = body->GetBody();
 
+    mLastX = GetX();
+    mLastY = GetY();
 }
 
 void Foe::Accept(ItemVisitor* visitor)
@@ -44,6 +47,17 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     auto x = position.x * Consts::MtoCM;
     auto y = position.y * Consts::MtoCM;
 
+    if(abs((mLastX - x)) > StopMovingFactor || abs((mLastY - y)) > StopMovingFactor)
+    {
+        mMoving = true;
+        mLastX = x;
+        mLastY = y;
+    }
+    else
+    {
+        mMoving = false;
+    }
+
     graphics->PushState();
     graphics->Translate(x, y);
     graphics->Rotate(angle);
@@ -56,4 +70,16 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     graphics->PopState();
     graphics->PopState();
+}
+
+bool Foe::IsDead()
+{
+    if(mMoving)
+        return false;
+    return (GetY() - (mLastY / Consts::MtoCM)) >= mDown;
+}
+
+void Foe::Detach()
+{
+    mBody->GetWorld()->DestroyBody(mBody);
 }

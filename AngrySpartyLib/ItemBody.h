@@ -48,7 +48,6 @@ public:
     ItemBody(Block* block, wxXmlNode* node);
     ItemBody(AngrySparty * angry);
     ItemBody(Foe *foe, wxXmlNode* node);
-
     void MakeBody(std::shared_ptr<Physics> physics, int key);
 
     b2Body* GetBody() {return mBody;}
