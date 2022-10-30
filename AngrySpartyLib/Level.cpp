@@ -14,8 +14,10 @@
 #include "Foe.h"
 #include "GruffSparty.h"
 #include "HelmetSparty.h"
+#include "LimpetSparty.h"
 #include "Physics.h"
 #include "DeadFoeCollector.h"
+
 
 /**
  * Parse the xml node that contains all items
@@ -69,7 +71,7 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if(item !=nullptr) {
             mItems.push_back(item);
-            item->XmlLoad(child);
+            ///item->XmlLoad(child);
         }
     }
 }
@@ -100,6 +102,10 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
         } else if (name == L"helmet-sparty")
         {
             sparty = std::make_shared<HelmetSparty>(this);
+        }
+        else if (name == L"limpet-sparty")
+        {
+            sparty = std::make_shared<LimpetSparty>(this);
         }
         mItems.push_back(sparty);
         mSpartys.push_back(sparty);

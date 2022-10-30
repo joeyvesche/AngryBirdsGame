@@ -39,7 +39,7 @@ void Poly::XmlLoad(wxXmlNode *node)
     // Create the body definition
     b2BodyDef bodyDefinition;
     bodyDefinition.position = b2Vec2(GetX(), GetY());
-    bodyDefinition.angle = GetAngle();
+    bodyDefinition.angle = GetAngle() * Consts::DtoR;
     bodyDefinition.type = type == L"static" ? b2_staticBody : b2_dynamicBody;
 
     mBody = GetLevel()->GetPhysics()->GetWorld()->CreateBody(&bodyDefinition);

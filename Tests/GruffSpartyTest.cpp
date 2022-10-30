@@ -14,3 +14,4 @@ TEST(GruffSpartyTest, Construct)
 {
     GruffSparty gruff(nullptr);
 }
+

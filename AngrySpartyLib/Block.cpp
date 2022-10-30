@@ -25,7 +25,7 @@ void Block::XmlLoad(wxXmlNode* node)
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this, node);
     Level *level = Item::GetLevel();
     std::shared_ptr<Physics> physics = level->GetPhysics();
-    body->MakeBody(physics, 0);
+    body->CreateBlock(physics);
     mBody = body->GetBody();
 }
 
@@ -41,9 +41,6 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     b2Body* body = mBody;
     auto position = body->GetPosition();
     auto angle = body->GetAngle();
-    //auto position = b2Vec2(GetX(), GetY());
-    //auto angle = GetAngle();
-    ///angle *= Consts::DtoR;
 
 
     graphics->Translate(position.x*Consts::MtoCM,

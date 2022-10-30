@@ -68,59 +68,33 @@ b2Body* ItemBody::CreateBody(std::shared_ptr<Physics> physics)
 }
 
 /**
- * Make the physics body for an object.
+ * Make the physics body for Foe
  * @param physics physics system for this level
  * @param key key that determines which item was passed to this function
  */
-void ItemBody::MakeBody(std::shared_ptr<Physics> physics, int key)
+void ItemBody::CreateFoe(std::shared_ptr<Physics> physics)
 {
 
-    /// Block
     b2Body* body = CreateBody(physics);
 
-    if (key == 0)
+
+    // Create the vertices for the octagon
+    std::vector<b2Vec2> vertices;
+    double angle = 360.0 / 16.0; // the rotation from the horizontal axis in degrees
+
+    for (int i = 0; i < 8; ++i, angle += 360.0 / 8)
     {
-        // Create the box
-        b2PolygonShape box;
-        box.SetAsBox(mSize.x/2, mSize.y/2);
-
-        if (mStatic == 1) {
-            body->CreateFixture(&box, 0.0f);
-        }
-        else {
-            b2FixtureDef fixtureDef;
-            fixtureDef.shape = &box;
-            fixtureDef.density = (float) mDensity;
-            fixtureDef.friction = (float) mFriction;
-            fixtureDef.restitution = (float) mRestitution;
-
-            body->CreateFixture(&fixtureDef);
-
-        }
-        mBody = body;
+        double angleRad = angle * Consts::DtoR;
+        vertices.push_back(mRadius * b2Vec2(std::cos(angleRad), std::sin(angleRad)));
     }
 
-    ///Foe object
-    if (key == 2)
-    {
-        // Create the vertices for the octagon
-        std::vector<b2Vec2> vertices;
-        double angle = 0; // the rotation from the horizontal axis in degrees
+    // assign the vertices to a polygon shape
+    b2PolygonShape octagon;
+    octagon.Set(vertices.data(), vertices.size());
 
-        for (int i = 0; i < 8; ++i, angle += 360.0 / 8)
-        {
-            double angleRad = angle * Consts::DtoR;
-            vertices.push_back(mRadius * b2Vec2(std::cos(angleRad), std::sin(angleRad)));
-        }
-
-        // assign the vertices to a polygon shape
-        b2PolygonShape octagon;
-        octagon.Set(vertices.data(), vertices.size());
-
-        // assign this shape to the body
-        body->CreateFixture(&octagon, 1.0f);
-        mBody = body;
-    }
+    // assign this shape to the body
+    body->CreateFixture(&octagon, 1.0f);
+    mBody = body;
 }
 
 /**
@@ -141,6 +115,36 @@ void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
     body->CreateFixture(&circle, 0.0f);
 
     mBody = body;
+
+}
+
+/**
+ * Create physics body for Block
+ * @param physics
+ */
+void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
+{
+    b2Body* body = CreateBody(physics);
+    // Create the box
+    b2PolygonShape box;
+    box.SetAsBox(mSize.x/2, mSize.y/2);
+
+    if (mStatic == 1) {
+        body->CreateFixture(&box, 0.0f);
+    }
+    else {
+        mFriction = 1.0;
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &box;
+        fixtureDef.density = (float) mDensity;
+        fixtureDef.friction = (float) mFriction;
+        fixtureDef.restitution = (float) mRestitution;
+
+        body->CreateFixture(&fixtureDef);
+
+    }
+    mBody = body;
+
 
 }
 

@@ -13,5 +13,6 @@
     <angry x="-6.5" y="0.3" spacing="0.6">
         <gruff-sparty/>
         <helmet-sparty/>
+        <limpet-sparty/>
     </angry>
 </level>
