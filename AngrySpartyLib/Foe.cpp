@@ -1,6 +1,6 @@
 /**
  * @file Foe.cpp
- * @author Will Morant
+ * @author Will Morant, Joey Vesche
  */
 
 #include "pch.h"

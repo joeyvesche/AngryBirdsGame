@@ -1,6 +1,6 @@
 /**
  * @file level.cpp
- * @authors Will Skaggs, Joseph Pauls
+ * @authors Will Skaggs, Joseph Pauls, Joey Vesche
 */
 
 #include "pch.h"

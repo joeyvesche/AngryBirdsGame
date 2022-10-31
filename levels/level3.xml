@@ -1,30 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<level width="14.22" height="8">
+<level width="20" height="8">
     <items>
-        <background width="14.22" height="8" image="background1.png"/>
-        <slingshot x="-5.5" y="0.25"/>
-        <block x="0" y="0.125" width="14.22" height="0.25" repeat-x="35" type="static" image="sand.png"/>
-        <block x="4.5197" y="0.36511" angle="-180.006" width="2" height="0.2" image="elementWood015.png"/>
-        <block x="2.5197" y="0.36511" angle="-180.006" width="2" height="0.2" image="elementWood015.png"/>
-        <block x="0.5" y="1.98" angle="-203" width="1.5" height="0.1" image="elementWood015.png"/>
-        <block x="0.3" y="1.75" angle="-270.015" width="0.3" height="0.3" image="debrisStone_1.png"/>
+        <background width="20" height="8" image="background1.png"/>
+        <goalposts x="-5.5" y="0.25"/>
+        <block x="0" y="0.125" width="20" height="0.25" repeat-x="45" type="static" image="sand.png"/>
+        <block x="7.5197" y="0.36511" angle="-180.006" friction="0.3" restitution="0.8" width="2" height="0.2" image="elementWood015.png"/>
+        <block x="5.5197" y="0.36511" angle="-180.006" width="2" height="0.2" image="elementWood015.png"/>
+        <block x="3.05" y="1.98" angle="-203" width="1.6" height="0.1" image="elementWood015.png"/>
+        <block x="3.3" y="1.75" angle="-270.015" width="0.3" height="0.3" image="debrisStone_1.png"/>
+        <block x="3.6" y="2.1" angle="-270.015" width="0.3" height="0.3" image="debrisStone_1.png"/>
+        <block x="3.65" y="2.1" angle="-270.015" width="0.3" height="0.3" image="debrisStone_1.png"/>
+        <block x="3.625" y="2.3" angle="-270.015" width="0.3" height="0.3" image="debrisStone_1.png"/>
+        <block x="9.15" y="1.8" angle="-180" width="0.7" height="0.4" image="elementWood015.png"/>
+        <block x="8.2" y="1" angle="-180" width="0.15" height="0.7" image="elementWood015.png"/>
+        <block x="7.2" y="1" angle="-180" width="0.15" height="0.7" image="elementWood015.png"/>
+        <block x="5.7" y="1" angle="-180" width="0.15" height="0.7" image="elementWood015.png"/>
+        <block x="4.7" y="1" angle="-180" width="0.15" height="0.7" image="elementWood015.png"/>
+        <block x="7.7" y="1.45" angle="-180" width="1.3" height="0.15" image="elementWood015.png"/>
+        <block x="5.2" y="1.45" angle="-180" width="1.3" height="0.15" image="elementWood015.png"/>
+        <block x="5.2" y="2.5" angle="-180" width="0.15" height="2" image="elementWood015.png"/>
+        <block x="7.7" y="2.5" angle="-180" width="0.15" height="2" image="elementWood015.png"/>
+        <block x="5.025" y="1.6" angle="-180" width="0.3" height="0.45" image="elementMetal013.png"/>
+        <block x="5.25" y="1.6" angle="-180" width="0.3" height="0.45" image="elementMetal013.png"/>
+        <block x="8.02" y="1.6" angle="-180" width="0.3" height="0.35" image="elementMetal013.png"/>
+        <block x="7.55" y="1.6" angle="-180" width="0.3" height="0.45" image="elementMetal013.png"/>
+        <block x="4.30" y="2" angle="-180" width="1.35" height="0.15" image="elementWood015.png"/>
+        <block x="6.5" y="2" angle="-180" width="2.25" height="0.15" image="elementWood015.png"/>
+        <block x="8.05" y="2" angle="-180" width="0.9" height="0.15" image="elementWood015.png"/>
+        <block x="5.2" y="3.5" angle="-180" width="2" height="0.15" image="elementWood015.png"/>
+        <block x="7.7" y="3.5" angle="-180" width="2" height="0.15" image="elementWood015.png"/>
+        <block x="7.7" y="3.9" angle="-180" width="0.15" height="1" image="elementWood015.png"/>
+        <block x="5.2" y="3.9" angle="-180" width="0.15" height="1" image="elementWood015.png"/>
 
-        <poly x="0.5" y="1.3" angle="-180" image="elementMetal002.png">
+
+        <poly x="3.5" y="1.3" angle="-180" image="elementMetal002.png">
             <v x="-0.325" y="-0.325"/>
             <v x="0.325" y="-0.325"/>
             <v x="-0.325" y="0.325"/>
         </poly>
-        <block x="5.9" y="1.26511" angle="358.586" width="0.7" height="0.7" image="elementExplosive039.png"/>
-        <block x="5.9" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
-        <block x="1.2" y="1.26511" angle="358.586" width="0.7" height="0.7" image="elementExplosive039.png"/>
-        <block x="1.2" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
-        <block x="0.48" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
-        <block x="0.3" y="1.09" angle="359.828" width="0.35" height="0.35" image="elementExplosive039.png"/>
 
-        <foe x="2.99279" y="1.55826" angle="-337.974" radius="0.3" down="1" image="foeM.png"/>
+        <poly x="9.5" y="1.3" angle="-90" image="elementMetal002.png">
+            <v x="-0.325" y="-0.325"/>
+            <v x="0.325" y="-0.325"/>
+            <v x="-0.325" y="0.325"/>
+        </poly>
+        <block x="8.9" y="1.26511" angle="358.586" width="0.7" height="0.7" image="elementExplosive039.png"/>
+        <block x="8.9" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
+        <block x="4.2" y="1.26511" angle="358.586" width="0.7" height="0.7" image="elementExplosive039.png"/>
+        <block x="4.2" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
+        <block x="3.48" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
+        <block x="3.3" y="1.09" angle="359.828" width="0.35" height="0.35" image="elementExplosive039.png"/>
+        <block x="9.6" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
+        <block x="9.8" y="1.09" angle="359.828" width="0.35" height="0.35" image="elementExplosive039.png"/>
+
+        <foe x="6.5" y="0.8" angle="-337.974" radius="0.3" down="1" image="foeM.png"/>
+        <foe x="6.5" y="2.4" angle="-337.974" radius="0.3" down="1" image="foeM2.png"/>
+        <foe x="8.3" y="2.4" angle="-337.974" radius="0.3" down="1" image="foeN.png"/>
+        <foe x="4.5" y="2.4" angle="-337.974" radius="0.3" down="1" image="foeO.png"/>
+        <foe x="5.1" y="0.8" angle="-337.974" radius="0.2" down="1" image="foeN.png"/>
+        <foe x="7.7" y="0.8" angle="-337.974" radius="0.2" down="1" image="foeM2.png"/>
     </items>
     <angry x="-6.5" y="0.3" spacing="0.6">
+        <helmet-sparty/>
+        <helmet-sparty/>
         <gruff-sparty/>
+        <helmet-sparty/>
         <gruff-sparty/>
     </angry>
 </level>

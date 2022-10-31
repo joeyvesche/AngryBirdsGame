@@ -70,32 +70,10 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 
     graphics->Translate(mXOffset, mYOffset);
 
-    /**auto wid = mWidth*Consts::MtoCM;
-    auto hit = mHeight*Consts::MtoCM;
-
-    graphics->PushState();
-    graphics->Scale(1, -1);
-    graphics->DrawBitmap(*mBackground,
-            -wid/2,
-            -hit,
-            wid, hit);
-    graphics->PopState();
-
-    graphics->PushState();
-    graphics->Scale(0.17, -0.17);
-    graphics->DrawBitmap(*mSlingshot,
-            -3500,
-            -920,
-            350, 900);
-    graphics->PopState();
-    */
-
     //
     // From here we are dealing with centimeter pixels
     // and Y up being increase values
     //
-    // INSERT YOUR DRAWING CODE HERE
-
     int score = mLevel->OnDraw(graphics);
 
     if(mDebug)

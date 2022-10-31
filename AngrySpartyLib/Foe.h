@@ -1,6 +1,6 @@
 /**
  * @file Foe.h
- * @author Will Morant
+ * @author Will Morant, Joey Vesche
  *
  * Foe class
  */
