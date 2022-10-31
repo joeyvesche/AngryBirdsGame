@@ -25,6 +25,14 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
     node->GetAttribute(L"height", "0").ToDouble(&mHeight);
     mSize.Set(float(mWidth), float(mHeight));
 
+    auto friction = node->GetAttribute(L"friction", L"NA");
+    if (friction != L"NA") friction.ToDouble(&mFriction);
+
+    auto restitution = node->GetAttribute(L"restitution", L"NA");
+    if (restitution != L"NA") restitution.ToDouble(&mRestitution);
+
+    auto density = node->GetAttribute(L"density", L"NA");
+    if (density != L"NA") density.ToDouble(&mDensity);
 }
 
 ItemBody::ItemBody(AngrySparty *angry)
@@ -120,29 +128,22 @@ void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
  * Create physics body for Block
  * @param physics
  */
-void ItemBody::CreateBlock(std::shared_ptr<Physics> physics, double friction, double restitution)
+void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
 {
     b2Body* body = CreateBody(physics);
     // Create the box
     b2PolygonShape box;
     box.SetAsBox(mSize.x/2, mSize.y/2);
 
-    if (mStatic == 1) {
-        body->CreateFixture(&box, 0.0f);
-    }
-    else {
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape = &box;
-        fixtureDef.density = (float) mDensity;
-        fixtureDef.friction = (float) friction;
-        fixtureDef.restitution = (float) restitution;
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &box;
+    fixtureDef.density = (float) mDensity;
+    fixtureDef.friction = (float) mFriction;
+    fixtureDef.restitution = (float) mRestitution;
 
-        body->CreateFixture(&fixtureDef);
+    body->CreateFixture(&fixtureDef);
 
-    }
     mBody = body;
-
-
 }
 
 
