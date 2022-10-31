@@ -23,11 +23,11 @@ private:
 
     b2Vec2 mSize; ///Size of the item
 
-    double mFriction = 0; ///Friction of item
+    double mFriction = 0.5; ///Friction of item
 
     double mDensity = 1; /// Density of item
 
-    double mRestitution = 0; /// Restitution of item
+    double mRestitution = 0.5; /// Restitution of item
 
     bool mStatic = 0; /// is this a static image?
 
@@ -58,7 +58,7 @@ public:
 
     void CreateSparty(std::shared_ptr<Physics> physics, int key);
 
-    void CreateBlock(std::shared_ptr<Physics> physics, double friction, double restitution);
+    void CreateBlock(std::shared_ptr<Physics> physics);
 };
 
 #endif //PROJECT1_ITEMBODY_H
