@@ -90,13 +90,37 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     LevelFinishChecker visitor;
     mLevel->Accept(&visitor);
     auto stat = visitor.LevelStat();
+
+    // Restart the level if it is failed
     if(stat == LevelFinishChecker::Stat::ReTry)
     {
+        // Draw the level failed text for a second
+        wxFont bigFont(wxSize(40, 70),
+                wxFONTFAMILY_SWISS,
+                wxFONTSTYLE_NORMAL,
+                wxFONTWEIGHT_BOLD);
+        graphics->PushState();
+        graphics->Scale(1, -1);
+        graphics->SetFont(bigFont, wxColour(0, 0, 255));
+        graphics->DrawText("Level Failed!", 0, 0);
+        graphics->PopState();
+
         mScore.ClearLevelScore();
         mLevel->Reset();
     }
+    // go to next level if level is won
     else if(stat == LevelFinishChecker::Stat::NextLevel)
     {
+        // Draw the level success text for a second
+        wxFont bigFont(wxSize(40, 70),
+                wxFONTFAMILY_SWISS,
+                wxFONTSTYLE_NORMAL,
+                wxFONTWEIGHT_BOLD);
+        graphics->PushState();
+        graphics->Scale(1, -1);
+        graphics->SetFont(bigFont, wxColour(0, 0, 255));
+        graphics->DrawText("Level Complete!", 0, 0);
+        graphics->PopState();
         mScore.UpdateGameScore();
         SetLevel((mLevelNo + 1)% mLevels.size());
     }

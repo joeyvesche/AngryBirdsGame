@@ -189,7 +189,7 @@ int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
     DeadFoeCollector visitor;
     Accept(&visitor);
     auto deathList = visitor.DeathList();
-    score = deathList.size();
+    score = deathList.size() * 100; //< each foe is worth 100 points
     for(auto item: deathList)
     {
         auto target = mItems.begin();
