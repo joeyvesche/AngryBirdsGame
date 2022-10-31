@@ -5,7 +5,6 @@
 
 #include "pch.h"
 #include "HelmetSparty.h"
-#include "AngrySparty.h"
 #include <string>
 #include "Game.h"
 

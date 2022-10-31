@@ -1,5 +1,5 @@
 /**
- * @file level.cpp
+ * @file Level.cpp
  * @authors Will Skaggs, Joseph Pauls, Joey Vesche
 */
 
@@ -9,7 +9,6 @@
 #include "SlingShot.h"
 #include "Poly.h"
 #include "Background.h"
-#include "SlingShot.h"
 #include "Goalpost.h"
 #include "Foe.h"
 #include "GruffSparty.h"

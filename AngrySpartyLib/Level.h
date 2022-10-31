@@ -14,7 +14,6 @@
 #include <vector>
 #include <memory>
 #include "AngrySparty.h"
-#include "Physics.h"
 class ItemVisitor;
 class Item;
 /**

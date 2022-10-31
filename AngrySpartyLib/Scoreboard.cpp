@@ -8,7 +8,7 @@
 #include <wx/graphics.h>
 
 #include "Consts.h"
-#include "string"
+#include <string>
 Scoreboard::Scoreboard()
 {
     mLevelScore = 0;

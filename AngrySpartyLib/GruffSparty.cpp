@@ -7,7 +7,6 @@
 #include "GruffSparty.h"
 #include <string>
 #include "Game.h"
-#include "AngrySparty.h"
 
 ///Useful Constants
 /// The image to use for this sparty

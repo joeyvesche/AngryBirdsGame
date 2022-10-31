@@ -10,7 +10,6 @@
 #include "Block.h"
 #include <vector>
 #include "DebugDraw.h"
-#include "Level.h"
 #include "LevelFinishChecker.h"
 // The directory that contains all level xml files
 std::wstring const LevelDirectory = L"levels/";

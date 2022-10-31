@@ -1,5 +1,5 @@
 /**
- * @file Goalposts.cpp
+ * @file Goalpost.cpp
  * @author Joseph Pauls
  */
 
