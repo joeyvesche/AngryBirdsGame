@@ -20,6 +20,9 @@ private:
     /// The velocity factor for Limpet Sparty
     const float mLimpetSpartyVelocityFactor = 20.0;
 
+    ///Number of items destroyed
+    int mDestroyedItems = 0;
+
 public:
     /// Default constructor (disabled)
     LimpetSparty() = delete;

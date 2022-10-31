@@ -104,7 +104,7 @@ TEST(ItemTest, ImagesLoadOnlyOnce)
     std::transform(level0.begin(), level0.end(), std::inserter(uniqueBitmaps, uniqueBitmaps.begin()),
                    [](std::shared_ptr<Item> item) { return item->GetBitmap().get(); });
 
-    ASSERT_EQ(uniqueBitmaps.size(), 9);
+    ASSERT_EQ(uniqueBitmaps.size(), 10);
 
     // Check all items of a more advanced level
     Level level1(L"levels/level1.xml");

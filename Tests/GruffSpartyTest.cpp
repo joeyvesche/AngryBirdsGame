@@ -13,5 +13,13 @@
 TEST(GruffSpartyTest, Construct)
 {
     GruffSparty gruff(nullptr);
+
 }
 
+TEST(GruffSpartyTest, BasePosition)
+{
+    GruffSparty Gruff(nullptr);
+
+    ASSERT_EQ(0, Gruff.GetX());
+    ASSERT_EQ(0, Gruff.GetY());
+}

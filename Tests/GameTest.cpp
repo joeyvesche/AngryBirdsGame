@@ -29,7 +29,7 @@ public:
 };
 class CountVisitor: public ItemVisitor {
 public:
-    std::vector<Item*> mItems;
+    std::vector<std::shared_ptr<Item>> mItems;
     void VisitBlock(Block* block) override{ mItems.push_back(block);}
 };
 /*

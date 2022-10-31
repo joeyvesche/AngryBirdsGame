@@ -86,7 +86,6 @@ void Level::LoadItemsXml(wxXmlNode * items)
 
         if(item !=nullptr) {
             mItems.push_back(item);
-            ///item->XmlLoad(child);
         }
     }
 }
