@@ -39,6 +39,8 @@ private:
     bool mDebug = false;
 
     std::shared_ptr<Physics> mPhysics;
+
+    double levelTime;
 public:
     Game();
 

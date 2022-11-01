@@ -39,6 +39,7 @@ Game::Game()
  */
 void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
+
     wxBrush background(*wxBLACK);
     graphics->SetBrush(background);
     graphics->DrawRectangle(0, 0, width, height);
@@ -74,6 +75,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     // and Y up being increase values
     //
     int score = mLevel->OnDraw(graphics);
+    wxTimer start_text;
 
     if(mDebug)
     {
@@ -91,11 +93,25 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     mLevel->Accept(&visitor);
     auto stat = visitor.LevelStat();
 
+    if(levelTime <= 2)
+    {
+        // Draw the level failed text for a second
+        wxFont bigFont(wxSize(50, 80),
+                wxFONTFAMILY_SWISS,
+                wxFONTSTYLE_NORMAL,
+                wxFONTWEIGHT_BOLD);
+        graphics->PushState();
+        graphics->Scale(1, -1);
+        graphics->SetFont(bigFont, wxColour(0, 0, 255));
+        std::string levelStartText = "Level " + std::to_string(mLevelNo) + " Begin";
+        graphics->DrawText(levelStartText, -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
+        graphics->PopState();
+    }
     // Restart the level if it is failed
     if(stat == LevelFinishChecker::Stat::ReTry)
     {
         // Draw the level failed text for a second
-        wxFont bigFont(wxSize(40, 70),
+        wxFont bigFont(wxSize(80, 110),
                 wxFONTFAMILY_SWISS,
                 wxFONTSTYLE_NORMAL,
                 wxFONTWEIGHT_BOLD);
@@ -177,7 +193,8 @@ void Game::Clear()
  */
 void Game::Update(double elapsed)
 {
-    mLevel->UpdateL(elapsed);     /// Uncomment when we figure out why the blocks are exploding
+    mLevel->UpdateL(elapsed);
+    levelTime += elapsed;
 }
 
 void Game::Accept(ItemVisitor* visitor)
@@ -192,4 +209,5 @@ void Game::SetLevel(int index)
     mLevelNo = index;
     mLevel = mLevels[index];
     mLevel->Reset();
+    levelTime = 0;
 }
