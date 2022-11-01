@@ -159,6 +159,7 @@ void Level::Reset()
     b2Vec2 size;
     size.Set(mWidth, mHeight);
     mPhysics = std::make_shared<Physics>(size);
+    SetContactListener();
 
     // process everything else
     for (auto child = root->GetChildren(); child != nullptr; child = child->GetNext())
@@ -214,6 +215,11 @@ int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 void Level::UpdateL(double elapsed)
 {
     mPhysics->UpdateP(elapsed);
+    for (auto element: mSpartys) {
+        bool flip = element->Obliterate(mObliterateBody);
+        if (flip == true)
+            break;
+    }
 }
 
 void Level::Accept(ItemVisitor* visitor)
@@ -222,4 +228,32 @@ void Level::Accept(ItemVisitor* visitor)
     {
         item->Accept(visitor);
     }
+}
+
+/**
+ * Contact Listener for box2D, allows custom functions on contact between objects.
+ * @param contact
+ */
+
+void Level::AngryContactListener::BeginContact(b2Contact *contact)
+{
+    b2Body *firstBody = contact->GetFixtureA()->GetBody();
+    b2Body *secondBody = contact->GetFixtureB()->GetBody();
+
+    for (auto i = mParent->SpartyBegin(); i != mParent->SpartyEnd(); i++)
+    {
+        if ((*i)->GetBody() == firstBody) /// If the item is the first body in contact
+        {
+            mParent->SetObliterateBody(secondBody);
+        }
+        else if ((*i)->GetBody() == secondBody)
+        {
+            mParent->SetObliterateBody(firstBody);
+        }
+    }
+}
+
+void Level::SetObliterateBody(b2Body* body)
+{
+    mObliterateBody = body;
 }

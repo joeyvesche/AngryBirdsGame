@@ -48,6 +48,8 @@ public:
      */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
+    b2Body* GetBody() override {return mBody;}
+
     bool IsDead();
     void Detach();
 };

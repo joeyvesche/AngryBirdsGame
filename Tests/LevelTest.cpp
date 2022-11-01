@@ -48,7 +48,13 @@ TEST(LevelTest, Load)
                 {-5.3, 0.3},
             };
 
-    ASSERT_EQ(xyPairs, expected) << "Test all items are positioned correctly";
+    ///ASSERT_EQ(xyPairs, expected) << "Test all items are positioned correctly";
+
+    for(int i = 0; i < expected.size(); i++)
+    {
+        ASSERT_NEAR(xyPairs[i].first, expected[i].first, 0.000001);
+        ASSERT_NEAR(xyPairs[i].second, expected[i].second, 0.000001);
+    }
 }
 
 TEST(LevelTest, Load2)

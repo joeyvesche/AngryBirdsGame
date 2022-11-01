@@ -34,7 +34,12 @@ private:
 
     std::shared_ptr<Physics> mPhysics; ///The physics system for this level
 
+    ///The b2Body to be obliterated, for the LimpetSparty
+    b2Body* mObliterateBody = nullptr;
+
+
 public:
+
     /// Default constructor (disabled)
     Level() = delete;
 
@@ -59,17 +64,30 @@ public:
     auto begin() { return mItems.begin(); }
 
     /**
+     * Iterator to beginning of Spartys
+     * @return
+     */
+    auto SpartyBegin() {return mSpartys.begin();}
+
+    /**
      * get an iterator to one past the end of the items
      *
      * @return iterator to one past the end
      */
     auto end() { return mItems.end(); }
 
+    /**
+     * Iterator to end of Spartys
+     * @return
+     */
+    auto SpartyEnd() {return mSpartys.end();}
+
     std::shared_ptr<Physics> GetPhysics() {return mPhysics;}
-    void SetPhysics(std::shared_ptr<Physics> physics) {mPhysics = physics;}
 
     double GetWidth() const {return mWidth;}
     double GetHeight() const {return mHeight;}
+
+    void SetObliterateBody(b2Body *body);
 
     /**
      * Add an item to this level
@@ -77,9 +95,27 @@ public:
      * @param item the item to add to this level
      */
     void Add(std::shared_ptr<Item> item) { mItems.push_back(item); }
-
+    void remove(std::vector<std::shared_ptr<Item>>::iterator it) {mItems.erase(it);}
     void UpdateL(double elapsed);
     void Accept(ItemVisitor* visitor);
+
+    class AngryContactListener : public b2ContactListener {
+    private:
+        Level *mParent = nullptr;
+    public:
+        AngryContactListener(Level* level) {mParent = level;}
+        void BeginContact(b2Contact *contact) override;
+
+
+    };
+
+    /**
+     * Sets contact listener for physics world
+     */
+    void SetContactListener()
+    {
+        mPhysics->GetWorld()->SetContactListener(new AngryContactListener(this));
+    }
 
 };
 

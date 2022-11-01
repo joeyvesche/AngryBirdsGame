@@ -45,7 +45,7 @@ public:
     void Accept(ItemVisitor * visitor) override;
 
     ///getter for box2D Body object
-    b2Body *GetBody() {return mBody;}
+    b2Body *GetBody() override {return mBody;}
 
     b2Vec2 GetPosition() {return mBody->GetPosition();}
 

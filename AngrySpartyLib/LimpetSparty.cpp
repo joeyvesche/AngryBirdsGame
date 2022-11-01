@@ -26,3 +26,22 @@ std::pair<double,float> LimpetSparty::GetConstants()
 {
     return std::pair<double,float>(mLimpetSpartyRadius, mLimpetSpartyVelocityFactor);
 }
+
+bool LimpetSparty::Obliterate(b2Body *body)
+{
+    if (mDestroyedItems < 3)
+    {
+        for (auto  i = GetLevel()->begin(); i != GetLevel()->end(); i++)
+        {
+            if (body == (*i)->GetBody() && body->GetType() == b2BodyType::b2_dynamicBody)
+            {
+                body->GetWorld()->DestroyBody(body);
+                GetLevel()->remove(i);
+                mDestroyedItems++;
+                break;
+            }
+        }
+        return true;
+    }
+    return false;
+}

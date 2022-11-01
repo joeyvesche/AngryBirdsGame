@@ -36,6 +36,8 @@ public:
     LimpetSparty(Level *level);
 
     std::pair<double,float> GetConstants() override;
+
+    bool Obliterate(b2Body *body) override;
 };
 
 #endif //PROJECT1_LIMPETSPARTY_H

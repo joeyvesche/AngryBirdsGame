@@ -15,6 +15,8 @@
 #include <b2_fixture.h>
 #include <b2_collision.h>
 #include <b2_circle_shape.h>
+#include <b2_world_callbacks.h>
+#include <b2_contact.h>
 
 /**
  * Physics system for a level.
@@ -27,14 +29,16 @@ private:
     /// A ground reference object
     b2Body* mGround;
 
+
 public:
     Physics(const b2Vec2& size);
 
     b2World *GetWorld() {return &mWorld;}
 
-    b2Body* CreateBody(b2BodyDef definition);
 
     void UpdateP(double elapsed);
+
+
 };
 
 #endif //PROJECT1_PHYSICS_H

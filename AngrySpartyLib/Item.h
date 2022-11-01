@@ -140,6 +140,10 @@ public:
 
     double GetAngle(){ return mAngle; }
 
+    virtual bool Obliterate(b2Body *body) {return false;}
+
+    virtual b2Body* GetBody() {return nullptr;}
+
 };
 
 #endif //PROJECT1_ITEM_H

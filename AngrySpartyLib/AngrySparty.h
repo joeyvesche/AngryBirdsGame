@@ -41,6 +41,7 @@ public:
      */
      void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
      void SetBody(Level *level);
+     b2Body* GetBody() override {return mBody;}
 
      virtual std::pair<double,float> GetConstants() = 0;
      void Accept(ItemVisitor * visitor) override;

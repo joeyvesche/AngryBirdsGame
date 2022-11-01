@@ -40,6 +40,7 @@ ItemBody::ItemBody(AngrySparty *angry)
     mPosition.Set(float(angry->GetX()), float(angry->GetY()));
     std::pair<double, float> constants = angry->GetConstants();
     mRadius = constants.first;
+    mAngle = angry->GetAngle();
 }
 
 ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
@@ -110,15 +111,38 @@ void ItemBody::CreateFoe(std::shared_ptr<Physics> physics)
 
 void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
 {
-    mStatic = key;
+    mStatic = 0;
     b2Body* body = CreateBody(physics);
 
-    // Create the shape
-    b2CircleShape circle;
+    if (mStatic == 1)
+    {
+        // Create the shape
+        b2CircleShape circle;
 
-    circle.m_radius = (float)mRadius;
+        circle.m_radius = (float) mRadius;
 
-    body->CreateFixture(&circle, 0.0f);
+        body->CreateFixture(&circle, 0.0f);
+    }
+    else
+    {
+        body->SetAngularDamping(0.9);
+        body->SetLinearDamping(0.1);
+
+        // Create the shape
+        b2CircleShape circle;
+        circle.m_radius = (float)mRadius;
+
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &circle;
+        fixtureDef.density = (float)5;
+        fixtureDef.friction = 1;
+        fixtureDef.restitution = 0.3;
+
+        body->CreateFixture(&fixtureDef);
+
+        ///direction *= velocityFactor
+        ///body->SetLinearVelocity(direction);
+    }
 
     mBody = body;
 
