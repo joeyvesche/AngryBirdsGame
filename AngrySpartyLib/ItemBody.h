@@ -14,6 +14,7 @@
 class Block;
 class AngrySparty;
 class Foe;
+class Poly;
 class ItemBody {
 private:
 
@@ -48,6 +49,7 @@ public:
     ItemBody(Block* block, wxXmlNode* node);
     ItemBody(AngrySparty * angry);
     ItemBody(Foe *foe, wxXmlNode* node);
+    ItemBody(Poly *poly, wxXmlNode* node);
     void CreateFoe(std::shared_ptr<Physics> physics);
 
     b2Body* GetBody() {return mBody;}
@@ -59,6 +61,7 @@ public:
     void CreateSparty(std::shared_ptr<Physics> physics, int key);
 
     void CreateBlock(std::shared_ptr<Physics> physics);
+    void CreatePoly(std::shared_ptr<Physics> physics, const std::vector<b2Vec2>& vertices);
 };
 
 #endif //PROJECT1_ITEMBODY_H

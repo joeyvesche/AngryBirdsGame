@@ -170,5 +170,48 @@ void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
     mBody = body;
 }
 
+void ItemBody::CreatePoly(std::shared_ptr<Physics> physics, const std::vector<b2Vec2>& vertices)
+{
+    b2PolygonShape poly;
+    poly.Set(vertices.data(), vertices.size());
+
+    mBody = CreateBody(physics);
+
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &poly;
+    fixtureDef.density = mDensity;
+    fixtureDef.friction = mFriction;
+    fixtureDef.restitution = mRestitution;
+
+    mBody->CreateFixture(&fixtureDef);
+}
+
+ItemBody::ItemBody(Poly* poly, wxXmlNode* node)
+{
+    node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
+
+    if (node->GetAttribute(L"type", L"dynamic") == "static")
+    {
+        mStatic = 1;
+    }
+
+    node->GetAttribute(L"x", "0").ToDouble(&mX);
+    node->GetAttribute(L"y", "0").ToDouble(&mY);
+    mPosition.Set(float(mX), float(mY));
+
+    node->GetAttribute(L"width", "0").ToDouble(&mWidth);
+    node->GetAttribute(L"height", "0").ToDouble(&mHeight);
+    mSize.Set(float(mWidth), float(mHeight));
+
+    auto friction = node->GetAttribute(L"friction", L"NA");
+    if (friction != L"NA") friction.ToDouble(&mFriction);
+
+    auto restitution = node->GetAttribute(L"restitution", L"NA");
+    if (restitution != L"NA") restitution.ToDouble(&mRestitution);
+
+    auto density = node->GetAttribute(L"density", L"NA");
+    if (density != L"NA") density.ToDouble(&mDensity);
+}
+
 
 
