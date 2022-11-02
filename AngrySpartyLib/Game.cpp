@@ -89,13 +89,11 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 
     graphics->PopState();
 
-    LevelFinishChecker visitor;
-    mLevel->Accept(&visitor);
-    auto stat = visitor.LevelStat();
 
-    if(levelTime <= 2)
+    // Draw the level start text for two seconds
+    if(mLevelTime <= 2)
     {
-        // Draw the level failed text for a second
+
         wxFont bigFont(wxSize(50, 80),
                 wxFONTFAMILY_SWISS,
                 wxFONTSTYLE_NORMAL,
@@ -107,38 +105,52 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
         graphics->DrawText(levelStartText, -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
         graphics->PopState();
     }
-    // Restart the level if it is failed
-    if(stat == LevelFinishChecker::Stat::ReTry)
+    // Draw the Level Failed Text for two seconds
+    if(0 < mTwoSecondsRetry && mTwoSecondsRetry < 2)
     {
-        // Draw the level failed text for a second
-        wxFont bigFont(wxSize(80, 110),
+        // Draw the level failed text for two seconds
+        wxFont bigFont(wxSize(50, 80),
                 wxFONTFAMILY_SWISS,
                 wxFONTSTYLE_NORMAL,
                 wxFONTWEIGHT_BOLD);
         graphics->PushState();
         graphics->Scale(1, -1);
         graphics->SetFont(bigFont, wxColour(0, 0, 255));
-        graphics->DrawText("Level Failed!", 0, 0);
+        graphics->DrawText("Level Failed!", -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
         graphics->PopState();
 
+    }
+
+    //Restart the Level
+    if(mTwoSecondsRetry <= 0)
+    {
         mScore.ClearLevelScore();
         mLevel->Reset();
+        mTwoSecondsRetry = 2;
     }
     // go to next level if level is won
-    else if(stat == LevelFinishChecker::Stat::NextLevel)
+    else if(0 < mTwoSecondsNextLevel && mTwoSecondsNextLevel < 2)
     {
-        // Draw the level success text for a second
-        wxFont bigFont(wxSize(40, 70),
+        // Draw the level success text for two seconds
+        wxFont bigFont(wxSize(50, 80),
                 wxFONTFAMILY_SWISS,
                 wxFONTSTYLE_NORMAL,
                 wxFONTWEIGHT_BOLD);
         graphics->PushState();
         graphics->Scale(1, -1);
         graphics->SetFont(bigFont, wxColour(0, 0, 255));
-        graphics->DrawText("Level Complete!", 0, 0);
+        graphics->DrawText("Level Complete!", -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
         graphics->PopState();
+
+    }
+
+    // Go to the next level after two seconds
+    else if(mTwoSecondsNextLevel <= 0)
+    {
         mScore.UpdateGameScore();
+        mTwoSecondsNextLevel = 2;
         SetLevel((mLevelNo + 1)% mLevels.size());
+
     }
 
 }
@@ -194,7 +206,21 @@ void Game::Clear()
 void Game::Update(double elapsed)
 {
     mLevel->UpdateL(elapsed);
-    levelTime += elapsed;
+    mLevelTime += elapsed;
+
+    // If the level is over, count two seconds before restarting or moving on
+    LevelFinishChecker visitor;
+    mLevel->Accept(&visitor);
+    auto stat = visitor.LevelStat();
+    if(stat == LevelFinishChecker::Stat::ReTry)
+    {
+        mTwoSecondsRetry -= elapsed;
+    }
+
+    if(stat == LevelFinishChecker::Stat::NextLevel)
+    {
+        mTwoSecondsNextLevel -= elapsed;
+    }
 }
 
 void Game::Accept(ItemVisitor* visitor)
@@ -209,5 +235,5 @@ void Game::SetLevel(int index)
     mLevelNo = index;
     mLevel = mLevels[index];
     mLevel->Reset();
-    levelTime = 0;
+    mLevelTime = 0;
 }

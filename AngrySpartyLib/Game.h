@@ -31,6 +31,12 @@ private:
 
     int mLevelNo = 1;
 
+    double mLevelTime;
+
+    double mTwoSecondsRetry = 2 ;
+
+    double mTwoSecondsNextLevel = 2;
+
     std::vector<std::shared_ptr<Level>> mLevels; ///< A list of all levels
     std::shared_ptr<Level> mLevel; ///< The currently loaded level
 
@@ -40,7 +46,7 @@ private:
 
     std::shared_ptr<Physics> mPhysics;
 
-    double levelTime;
+
 public:
     Game();
 
