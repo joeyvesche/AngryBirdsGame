@@ -43,13 +43,13 @@ void Scoreboard::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double widt
         // aligns the zero to the right properly when the level score is only 1 digit long
         if (mLevelScore == 0)
         {
-            graphics->DrawText(std::to_wstring(mGameScore), 6.5*Consts::MtoCM, -8*Consts::MtoCM);
+            graphics->DrawText(std::to_wstring(mLevelScore), 6.5*Consts::MtoCM, -8*Consts::MtoCM);
         }
         else
         {
-            graphics->DrawText(std::to_wstring(mGameScore), 5.5*Consts::MtoCM, -8*Consts::MtoCM);
+            graphics->DrawText(std::to_wstring(mLevelScore), 5.5*Consts::MtoCM, -8*Consts::MtoCM);
         }
-        graphics->DrawText(std::to_wstring(mLevelScore), -6.75*Consts::MtoCM, -8*Consts::MtoCM);
+        graphics->DrawText(std::to_wstring(mGameScore), -6.75*Consts::MtoCM, -8*Consts::MtoCM);
     }
 
     // account for level 2 being wider than the others
@@ -57,13 +57,13 @@ void Scoreboard::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, double widt
     {
         if (mLevelScore == 0)
         {
-            graphics->DrawText(std::to_wstring(mGameScore), 9.5*Consts::MtoCM, -8*Consts::MtoCM);
+            graphics->DrawText(std::to_wstring(mLevelScore), 9.5*Consts::MtoCM, -8*Consts::MtoCM);
         }
         else
         {
-            graphics->DrawText(std::to_wstring(mGameScore), 8.5*Consts::MtoCM, -8*Consts::MtoCM);
+            graphics->DrawText(std::to_wstring(mLevelScore), 8.5*Consts::MtoCM, -8*Consts::MtoCM);
         }
-        graphics->DrawText(std::to_wstring(mLevelScore), -9.75*Consts::MtoCM, -8*Consts::MtoCM);
+        graphics->DrawText(std::to_wstring(mGameScore), -9.75*Consts::MtoCM, -8*Consts::MtoCM);
     }
     graphics->PopState();
 }
