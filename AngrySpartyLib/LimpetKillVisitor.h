@@ -2,15 +2,13 @@
  * @file LimpetKillVisitor.h
  * @author Will
  *
- *
+ * Limpet Visitor to different objects
  */
 
 #ifndef PROJECT1_LIMPETKILLVISITOR_H
 #define PROJECT1_LIMPETKILLVISITOR_H
 
-
 #include "ItemVisitor.h"
-
 
 class LimpetKillVisitor : public ItemVisitor {
 private:

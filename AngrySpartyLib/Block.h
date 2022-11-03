@@ -2,7 +2,7 @@
  * @file Block.h
  * @author Joseph Pauls, Will Morant
  *
- *Base Class for block items. inherited from Item
+ * Base Class for block items. inherited from Item
  */
 
 #ifndef PROJECT1_BLOCK_H
@@ -21,7 +21,6 @@ class Block : public Item {
 private:
 
     b2Body* mBody; /// Box2d Body for block
-
 
     b2Vec2 mSize; /// size vector of block
 
@@ -53,10 +52,7 @@ public:
 
     void SetFricRest(double friction, double restitution);
 
-
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-
-
 };
 
 #endif //PROJECT1_BLOCK_H

@@ -2,7 +2,7 @@
  * @file Shooter.h
  * @author Will Skaggs
  *
- *
+ * Implementing the slingshot firing
  */
 
 #ifndef PROJECT1_SHOOTER_H

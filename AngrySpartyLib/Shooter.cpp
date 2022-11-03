@@ -142,6 +142,10 @@ bool Shooter::Shoot()
     return true;
 }
 
+/**
+ * Get the midpoint of the arm
+ * @return vector of the points
+ */
 b2Vec2 Shooter::GetArmMidpoint()
 {
     auto pointBack = mBandAttachBack + b2Vec2(GetX(), GetY());

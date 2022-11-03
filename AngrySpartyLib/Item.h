@@ -92,17 +92,7 @@ public:
      */
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
-    /**
-    *
-    * @param item
-    * @return distance between two items
-    */
-    double DistanceTo(std::shared_ptr<Item> item);
-
-
     virtual void XmlLoad(wxXmlNode* node);
-
-
 
     /**
     * Handle updates for animation

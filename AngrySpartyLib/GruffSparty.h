@@ -2,7 +2,7 @@
  * @file GruffSparty.h
  * @author Will Morant
  *
- * Gruff Sparty class
+ * Base Class for Gruff Sparty
  */
 
 #ifndef PROJECT1_GRUFFSPARTY_H
@@ -29,7 +29,6 @@ public:
     void operator=(const GruffSparty &) = delete;
 
     GruffSparty(Level *level);
-
 
     std::pair<double,float> GetConstants() override;
 

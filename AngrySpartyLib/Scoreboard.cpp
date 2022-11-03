@@ -1,6 +1,6 @@
 /**
  * @file Scoreboard.cpp
- * @authors joeyv, Joseph Pauls
+ * @authors Joey Vesche, Joseph Pauls
  */
 
 #include "pch.h"
@@ -9,6 +9,10 @@
 
 #include "Consts.h"
 #include <string>
+
+/**
+ * Scorebaord Constructor
+ */
 Scoreboard::Scoreboard()
 {
     mLevelScore = 0;

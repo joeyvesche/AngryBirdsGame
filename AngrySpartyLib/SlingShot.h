@@ -2,7 +2,7 @@
  * @file SlingShot.h
  * @authors joeyv, Joseph Pauls
  *
- *
+ * Implementing the slingshot
  */
 
 #ifndef PROJECT1_SLINGSHOT_H

@@ -1,6 +1,6 @@
 /**
  * @file Item.cpp
- * @author Joseph Pauls
+ * @author Joseph Pauls, Joey Vesche
  */
 
 #include "pch.h"
@@ -11,8 +11,10 @@
 using namespace std;
 const std::wstring ResDir = L"./images/";
 /**
-*  Constructor
-*/
+ * Constructor
+ * @param level Level
+ * @param filename File name
+ */
 Item::Item(Level* level, const wstring& filename) : mLevel(level)
 {
     auto [img, bitmap] = LoadImage(filename);
@@ -48,18 +50,6 @@ std::pair<std::shared_ptr<wxImage>, std::shared_ptr<wxBitmap>> Item::LoadImage(s
     return {mImagePack[filename], mBitmapPack[filename]};
 }
 
-
-/**
- * Compute the distance from this item to another item
- * @return Distance in pixels
- */
-double Item::DistanceTo(std::shared_ptr<Item> item)
-{
-    auto dx = item->GetX() - GetX();
-    auto dy = item->GetY() - GetY();
-    return sqrt(dx * dx + dy * dy);
-}
-
 /**
  * Test to see if we hit this object with a mouse.
  * @param x X position to test
@@ -91,7 +81,8 @@ bool Item::HitTest(int x, int y)
 }
 
 /**
- * Draw this item
+ * Draw this Item
+ * @param graphics Context to draw on
  */
 void Item::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {

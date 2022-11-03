@@ -9,6 +9,7 @@
 #define PROJECT1_MAINFRAME_H
 
 class GameView;
+
 /**
  * The main (top-level) frame of the application
  */

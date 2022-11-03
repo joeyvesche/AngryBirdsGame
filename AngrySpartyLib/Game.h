@@ -2,7 +2,7 @@
  * @file Game.h
  * @authors Yuqi Pan, Joey Vesche, Joseph Pauls
  *
- *
+ * Base class for the game
  */
 
 #ifndef PROJECT1_GAME_H
@@ -76,13 +76,7 @@ public:
 
     void Load(const wxString& filename);
 
-    void Clear();
-
     void Update(double elapsed);
-
-    void Add(std::shared_ptr<Item> item);
-
-    std::shared_ptr<Item> HitTest(int x, int y);
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
 
@@ -100,9 +94,6 @@ public:
     /// Get the currently loaded level
     std::shared_ptr<Level> GetLevel() { return mLevel; }
 
-
-
-    bool isDebug() {return mDebug; }
     void Debug(bool debug) { mDebug = debug; }
 
     void Shoot();

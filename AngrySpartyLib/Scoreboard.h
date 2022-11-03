@@ -2,6 +2,7 @@
  * @file Scoreboard.h
  * @authors joeyv, Joseph Pauls, Yuqi Pan
  *
+ * Implementing the Scoreboard
  */
 
 #ifndef PROJECT1_SCOREBOARD_H
@@ -12,10 +13,8 @@
 class Scoreboard{
 
 private:
-
     int mLevelScore = 0;
     int mGameScore = 0;
-
 
 public:
     Scoreboard();
@@ -33,10 +32,18 @@ public:
         mGameScore += mLevelScore;
         mLevelScore = 0; //Prep Level Score by resetting it to 0 for the next level
     };
+    /**
+     * Adding to the scoreboard
+     * @param score Score
+     */
     void AddLevelScore(int score)
     {
         mLevelScore += score;
     }
+
+    /**
+     * Clearing the Scoreboard
+     */
     void ClearLevelScore()
     {
         mLevelScore = 0;

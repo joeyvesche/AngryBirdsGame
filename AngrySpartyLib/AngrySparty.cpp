@@ -10,14 +10,19 @@
 #include "ItemVisitor.h"
 /**
  * Constructs the angry sparty object
- * @param level
- * @param filename
+ * @param level Level
+ * @param filename File name
  */
 AngrySparty::AngrySparty(Level *level, const std::wstring &filename) :Item(level, filename)
 {
 
 }
 
+/**
+ * Sets the body of the Sparty
+ * @param level Which level to set
+ * @param key static(1) or dynamic(0)
+ */
 void AngrySparty::SetBody(Level *level, int key)
 {
     std::shared_ptr<Physics> physics = level->GetPhysics();
@@ -55,6 +60,10 @@ void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PopState();
 }
 
+/**
+ * Accepts a visitor
+ * @param visitor Visitor
+ */
 void AngrySparty::Accept(ItemVisitor* visitor)
 {
     visitor->VisitSparty(this);

@@ -2,7 +2,7 @@
  * @file Foe.h
  * @author Will Morant, Joey Vesche
  *
- * Foe class
+ * Base class for Foe
  */
 
 #ifndef PROJECT1_FOE_H
@@ -21,7 +21,6 @@ class Foe : public Item {
 private:
     double mRadius = 0;
     double mDown = 0;
-    ///File Name. Set when loading in the foe from an XML file
 
     ///Body of the AngrySparty object
     b2Body* mBody;
@@ -44,6 +43,7 @@ public:
     void Accept(ItemVisitor * visitor) override;
     void Accept(LimpetKillVisitor * visitor) override;
     Foe(Level *level, const std::wstring &filename);
+
     /**
      * Draw this item
      * @param dc Device context to draw on
@@ -55,7 +55,4 @@ public:
     bool IsDead();
     void Detach();
 };
-
-#include "ItemBody.h"
-
 #endif //PROJECT1_FOE_H

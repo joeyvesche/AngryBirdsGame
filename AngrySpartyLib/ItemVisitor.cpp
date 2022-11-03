@@ -1,6 +1,6 @@
 /**
  * @file ItemVisitor.cpp
- * @author joeyv
+ * @author Joey Vesche
  */
 
 #include "pch.h"

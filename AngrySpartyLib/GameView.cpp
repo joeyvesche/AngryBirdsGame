@@ -9,6 +9,7 @@
 #include "GameView.h"
 #include <wx/dcbuffer.h>
 #include <wx/graphics.h>
+#include <iostream>
 #include "ids.h"
 #include "Block.h"
 #include "SlingShot.h"
@@ -69,18 +70,6 @@ void GameView::Initialize(wxFrame* parent)
     mTimer.SetOwner(this);
     mTimer.Start(FrameDuration);
     mStopWatch.Start();
-
-    /// Load all of the levels when the game is launched and store them for later use.
-
-    /**
-     * Might need these later for moving objects
-     * --
-    Bind(wxEVT_TIMER, &GameView::OnTimer, this);
-    mTimer.SetOwner(this);
-    mTimer.Start(FrameDuration);
-    mStopWatch.Start();
-     * --
-     */
 
 }
 
@@ -144,11 +133,9 @@ b2Vec2 GameView::ToVirtual(int x, int y)
     return scale * (clickPx - originPx);
 }
 
-#include <iostream>
-
 /**
  * Handle the left mouse button down event
- * @param event
+ * @param event Mouse event
  */
 void GameView::OnLeftDown(wxMouseEvent &event)
 {
@@ -180,7 +167,7 @@ void GameView::OnLeftDown(wxMouseEvent &event)
 
 /**
  * Handle the left mouse button up event
- * @param event
+ * @param event Mouse event
  */
 void GameView::OnLeftUp(wxMouseEvent &event)
 {
@@ -193,7 +180,7 @@ void GameView::OnLeftUp(wxMouseEvent &event)
 
 /**
  * Handle the mouse move event
- * @param event
+ * @param event Mouse event
  */
 void GameView::OnMouseMove(wxMouseEvent &event)
 {
@@ -238,7 +225,7 @@ void GameView::OnMouseMove(wxMouseEvent &event)
 
 /**
  * Function to set/unset debug view
- * @param event  command event
+ * @param event Mouse event
  */
 void GameView::OnDebugView(wxCommandEvent& event)
 {
@@ -296,6 +283,10 @@ void GameView::OnLoadLevelThree(wxCommandEvent& event)
     Refresh();
 }
 
+/**
+ *  Load the Items
+ * @param event Mouse event
+ */
 void GameView::LoadItems(wxCommandEvent& event)
 {
     wxFileDialog loadFileDialog(this, _("Load Game file"), "", "",
@@ -311,6 +302,10 @@ void GameView::LoadItems(wxCommandEvent& event)
     Refresh();
 }
 
+/**
+ * Refresh on Time
+ * @param event Mouse event
+ */
 void GameView::OnTimeGo(wxTimerEvent& event)
 {
     Refresh();

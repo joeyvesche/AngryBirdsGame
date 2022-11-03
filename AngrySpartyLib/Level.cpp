@@ -212,6 +212,10 @@ void Level::UpdateL(double elapsed)
     }
 }
 
+/**
+ * Accepts an Item Visitor
+ * @param visitor Visitor
+ */
 void Level::Accept(ItemVisitor* visitor)
 {
     for(auto item : mItems)
@@ -223,7 +227,7 @@ void Level::Accept(ItemVisitor* visitor)
 
 /**
  * Contact Listener for box2D, allows custom functions on contact between objects.
- * @param contact
+ * @param contact Contact listener
  */
 
 void Level::AngryContactListener::BeginContact(b2Contact *contact)
@@ -246,6 +250,10 @@ void Level::AngryContactListener::BeginContact(b2Contact *contact)
     }
 }
 
+/**
+ * Obliterates the body
+ * @param body Body
+ */
 void Level::SetObliterateBody(b2Body* body)
 {
     mObliterateBody = body;

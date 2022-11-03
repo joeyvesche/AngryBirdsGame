@@ -153,27 +153,6 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
 }
 
 /**
- * Add an item to the Game
- * @param item New item to add
- */
-void Game::Add(std::shared_ptr<Item> item)
-{
-    //mItems.push_back(item);
-}
-
-/**
- * Test an x,y click location to see if it clicked
- * on some item in the Game.
- * @param x X location in pixels
- * @param y Y location in pixels
- * @returns Pointer to item we clicked on or nullptr if none.
-*/
-std::shared_ptr<Item> Game::HitTest(int x, int y)
-{
-    return nullptr;
-}
-
-/**
  * Shoot the current loaded sparty
  */
 void Game::Shoot()
@@ -200,15 +179,6 @@ void Game::Shoot()
 void Game::Load(const wxString& filename)
 {
 
-}
-
-/**
- * Clear the Game data.
- *
- * Deletes all known items in the Game.
- */
-void Game::Clear()
-{
 }
 
 
@@ -340,7 +310,10 @@ void Game::Update(double elapsed)
 
     }
 }
-
+/**
+ * Accepts an Item Visitor
+ * @param visitor Visitor
+ */
 void Game::Accept(ItemVisitor* visitor)
 {
     for (auto item: *mLevel) {
@@ -348,6 +321,10 @@ void Game::Accept(ItemVisitor* visitor)
     }
 }
 
+/**
+ * Sets the Level
+ * @param index Level to set
+ */
 void Game::SetLevel(int index)
 {
     mLevelNo = index;

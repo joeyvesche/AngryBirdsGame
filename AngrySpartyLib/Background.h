@@ -2,7 +2,7 @@
  * @file Background.h
  * @author Will Morant
  *
- *
+ * Background Base class
  */
 
 #ifndef PROJECT1_BACKGROUND_H

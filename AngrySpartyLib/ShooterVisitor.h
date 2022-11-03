@@ -2,7 +2,7 @@
  * @file ShooterVisitor.h
  * @author Will Skaggs
  *
- *
+ * Slingshot shooter Visitor
  */
 
 #ifndef PROJECT1_SHOOTERVISITOR_H

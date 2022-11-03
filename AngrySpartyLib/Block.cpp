@@ -7,10 +7,19 @@
 #include "Block.h"
 #include "ItemVisitor.h"
 
+/**
+ * Block Constructor
+ * @param level Level
+ * @param filename File name
+ */
 Block::Block(Level* level, const std::wstring& filename) : Item(level, filename)
 {
 }
 
+/**
+ * Loads in the block
+ * @param node Node block
+ */
 void Block::XmlLoad(wxXmlNode* node)
 {
     Item::XmlLoad(node);
@@ -29,11 +38,19 @@ void Block::XmlLoad(wxXmlNode* node)
     mBody = body->GetBody();
 }
 
+/**
+ * Accepts a vistior
+ * @param visitor Visitor
+ */
 void Block::Accept(ItemVisitor* visitor)
 {
     visitor->VisitBlock(this);
 }
 
+/**
+ * Draws the blocks
+ * @param graphics The device context to draw on
+ */
 void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
@@ -72,6 +89,11 @@ void Block::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PopState();
 }
 
+/**
+ * Sets the Friction Resistance
+ * @param friction Friction
+ * @param restitution Restitution
+ */
 void Block::SetFricRest(double friction, double restitution)
 {
     mFriction = friction;

@@ -1,6 +1,6 @@
 /**
  * @file Poly.cpp
- * @author joeyv
+ * @author Joey Vesche
  */
 
 #include "pch.h"
@@ -8,10 +8,19 @@
 #include "Game.h"
 #include "Consts.h"
 
+/**
+ * Poly Constructor
+ * @param level Level
+ * @param filename File name
+ */
 Poly::Poly(Level *level, const std::wstring &filename) : Item(level, filename)
 {
 }
 
+/**
+ * Loads Poly in from XML
+ * @param node Poly node
+ */
 void Poly::XmlLoad(wxXmlNode *node)
 {
     Item::XmlLoad(node);
@@ -32,17 +41,21 @@ void Poly::XmlLoad(wxXmlNode *node)
     mBody = body->GetBody();
 }
 
+/**
+ * Accepts an Item Visitor
+ * @param visitor Visitor
+ */
 void Poly::Accept(ItemVisitor* visitor)
 {
     visitor->VisitPoly(this);
 }
 
+/**
+ * Draws a poly objects
+ * @param graphics Context to draw on
+ */
 void Poly::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    //auto body = GetBody();
-   // auto position = body->GetPosition();
-   // auto angle = body->GetAngle();
-
    graphics->PushState();
 
    auto position = mBody->GetPosition();

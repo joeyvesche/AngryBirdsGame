@@ -9,20 +9,27 @@
 
 /**
  * Background Constructor, Sets image
- * @param level
- * @param filename
+ * @param level Level
+ * @param filename File name
  */
 Background::Background(Level *level, const std::wstring &filename) : Item(level, filename)
 {
 }
 
+/**
+ * Loads in the background
+ * @param node Node background
+ */
 void Background::XmlLoad(wxXmlNode *node)
 {
     node->GetAttribute(L"width", L"0").ToDouble(&mWidth);
     node->GetAttribute(L"height", L"0").ToDouble(&mHeight);
 }
 
-
+/**
+ * Draws in the background
+ * @param graphics The device context to draw on
+ */
 void Background::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     auto wid = mWidth * Consts::MtoCM;

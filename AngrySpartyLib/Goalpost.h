@@ -1,6 +1,8 @@
 /**
  * @file Goalpost.h
  * @author Joseph Pauls
+ *
+ * Base class for the Goal Posts
  */
 
 #ifndef PROJECT1_GOALPOSTS_H

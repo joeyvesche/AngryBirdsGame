@@ -2,7 +2,7 @@
  * @file LimpetSparty.h
  * @author Will Morant
  *
- *
+ * Class that Initializes the Limpet Sparty
  */
 
 #ifndef PROJECT1_LIMPETSPARTY_H

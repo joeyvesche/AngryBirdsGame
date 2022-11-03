@@ -1,6 +1,6 @@
 /**
  * @file HelmetSparty.cpp
- * @author Will
+ * @author Will Morant
  */
 
 #include "pch.h"
@@ -15,7 +15,7 @@ const std::wstring HelmetSpartyImage = L"helmet-sparty.png";
 
 /**
  * Helmet Sparty initializer
- * @param level
+ * @param level Level
  */
 
 HelmetSparty::HelmetSparty(Level *level) : AngrySparty(level, HelmetSpartyImage)
@@ -23,7 +23,10 @@ HelmetSparty::HelmetSparty(Level *level) : AngrySparty(level, HelmetSpartyImage)
 
 }
 
-
+/**
+ * Get the Radius and Velocity factor
+ * @return Pair of the constants
+ */
 std::pair<double,float> HelmetSparty::GetConstants()
 {
     return std::pair<double,float>(mHelmetSpartyRadius, mHelmetSpartyVelocityFactor);

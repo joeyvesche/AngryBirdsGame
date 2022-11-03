@@ -51,7 +51,7 @@ public:
       *
       * @param x
       * @param y
-      * @return
+      * @return True if hit
       */
      bool HitTest(int x, int y) override
      {

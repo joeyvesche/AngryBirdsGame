@@ -70,13 +70,6 @@ public:
     }
 
     /**
-     * Get the size of the level in meters
-     *
-     * @return the {width, height} of this level in meters
-     */
-    //std::pair<double, double> Size() const { return mSize; }
-
-    /**
      * get an iterator to the beginning of the items
      *
      * @return iterator to the beginning
@@ -115,6 +108,7 @@ public:
      * @param item the item to add to this level
      */
     void Add(std::shared_ptr<Item> item) { mItems.push_back(item); }
+
     void remove(std::vector<std::shared_ptr<Item>>::iterator it) {mItems.erase(it);}
     void UpdateL(double elapsed);
     void Accept(ItemVisitor* visitor);
@@ -122,7 +116,6 @@ public:
     /**
      * Contact Listener class for the physics world
      */
-
     class AngryContactListener : public b2ContactListener {
     private:
         Level *mParent = nullptr;

@@ -8,6 +8,9 @@
 #include "ids.h"
 #include "GameView.h"
 
+/**
+ * MainFrame Initializer
+ */
 void MainFrame::Initialize()
 {
 
@@ -72,7 +75,7 @@ void MainFrame::Initialize()
 
 /**
  * Exit menu option handlers
- * @param event
+ * @param event Exit event
  */
 void MainFrame::OnExit(wxCommandEvent& event)
 {
@@ -81,7 +84,7 @@ void MainFrame::OnExit(wxCommandEvent& event)
 
 /**
  * about menu handler
- * @param event
+ * @param event About Event
  */
 void MainFrame::OnAbout(wxCommandEvent& event)
 {

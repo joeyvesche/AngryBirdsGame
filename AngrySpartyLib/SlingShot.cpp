@@ -1,6 +1,6 @@
 /**
  * @file SlingShot.cpp
- * @authors Joseph Pauls, joeyv
+ * @authors Joseph Pauls, Joey Vesche
  */
 
 #include "pch.h"
@@ -38,6 +38,10 @@ const int SlingshotBandWidth = 15;
 /// The slingshot band colour
 const wxColour SlingshotBandColor = wxColour(55, 18, 1);
 
+/**
+ * Slingshot Constructor
+ * @param level Level
+ */
 SlingShot::SlingShot(Level* level) : Shooter(level, WoodSlingshotBaseName, WoodSlingshotArmFilename)
 {
    mSize = WoodSlingshotSize;

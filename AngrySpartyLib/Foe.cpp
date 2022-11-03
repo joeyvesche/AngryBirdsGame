@@ -8,12 +8,21 @@
 #include "Game.h"
 #include "Consts.h"
 
-const double StopMovingFactor = 0.0000005;
+const double StopMovingFactor = 0.0000005; ///< The stop Moving factor
+
+/**
+ * Constructor
+ * @param level Level
+ * @param filename File name
+ */
 Foe::Foe(Level *level, const std::wstring &filename) : Item(level, filename)
 {
-
 }
 
+/**
+ * Loads in Foe
+ * @param node Node foe
+ */
 void Foe::XmlLoad(wxXmlNode* node)
 {
     Item::XmlLoad(node);
@@ -31,16 +40,28 @@ void Foe::XmlLoad(wxXmlNode* node)
     mLastY = GetY();
 }
 
+/**
+ * Accepts an Item Visitor
+ * @param visitor Visitor
+ */
 void Foe::Accept(ItemVisitor* visitor)
 {
     visitor->VisitFoe(this);
 }
 
+/**
+ * Accepts a Limpet Visitor
+ * @param visitor Visitor
+ */
 void Foe::Accept(LimpetKillVisitor* visitor)
 {
     visitor->VisitFoe(this);
 }
 
+/**
+ * Draws the Foe
+ * @param graphics The context to draw on
+ */
 void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
@@ -77,6 +98,10 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PopState();
 }
 
+/**
+ * Checks to see if Foe is dead
+ * @return True if dead
+ */
 bool Foe::IsDead()
 {
     if(mMoving)
@@ -84,6 +109,9 @@ bool Foe::IsDead()
     return (GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM);
 }
 
+/**
+ * Destorys the body
+ */
 void Foe::Detach()
 {
     mBody->GetWorld()->DestroyBody(mBody);

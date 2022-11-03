@@ -2,7 +2,7 @@
  * @file ItemBody.h
  * @author Will Morant
  *
- *
+ * Underlying Body class for all the Objects
  */
 
 #ifndef PROJECT1_ITEMBODY_H
@@ -15,6 +15,7 @@ class Block;
 class AngrySparty;
 class Foe;
 class Poly;
+
 class ItemBody {
 private:
 
@@ -40,9 +41,6 @@ private:
     double mHeight = 0; /// Height for size
     double mRadius = 0; ///Radius for the object
     double mDown = 0;  /// Down for foe
-
-
-
 
 public:
 

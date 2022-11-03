@@ -2,7 +2,7 @@
  * @file HelmetSparty.h
  * @author Will Morant
  *
- *
+ * Base class for the Helmet Sparty
  */
 
 #ifndef PROJECT1_HELMETSPARTY_H
@@ -32,8 +32,6 @@ public:
     HelmetSparty(Level *level);
 
     std::pair<double,float> GetConstants() override;
-
-
 };
 
 #endif //PROJECT1_HELMETSPARTY_H

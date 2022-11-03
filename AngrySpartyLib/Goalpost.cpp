@@ -1,6 +1,6 @@
 /**
  * @file Goalpost.cpp
- * @author Joseph Pauls
+ * @author Joseph Pauls, Joey Vesche
  */
 
 #include "pch.h"
@@ -36,7 +36,7 @@ const int GoalpostBandWidth = 15;
 
 /**
  * Goalpost constructor
- * @param level
+ * @param level Level
  */
 Goalposts::Goalposts(Level* level) : Shooter(level, GoalpostsBaseName, GoalPostsArmImageFilename)
 {

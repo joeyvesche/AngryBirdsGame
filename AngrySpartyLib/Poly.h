@@ -2,7 +2,7 @@
  * @file Poly.h
  * @author joeyv
  *
- *
+ * Initialing for the Poly Object
  */
 #include "Item.h"
 #include <string>

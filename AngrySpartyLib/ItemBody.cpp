@@ -8,6 +8,11 @@
 #include "AngrySparty.h"
 #include "Consts.h"
 
+/**
+ * Constructor
+ * @param block Block
+ * @param node Node
+ */
 ItemBody::ItemBody(Block *block, wxXmlNode *node)
 {
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);
@@ -35,6 +40,10 @@ ItemBody::ItemBody(Block *block, wxXmlNode *node)
     if (density != L"NA") density.ToDouble(&mDensity);
 }
 
+/**
+ * Setting the body for Angry Sparty
+ * @param angry Angry Sparts
+ */
 ItemBody::ItemBody(AngrySparty *angry)
 {
     mPosition.Set(float(angry->GetX()), float(angry->GetY()));
@@ -44,6 +53,11 @@ ItemBody::ItemBody(AngrySparty *angry)
     mStatic = true;
 }
 
+/**
+ * Getting/Setting the body for Foe
+ * @param foe Foe Object
+ * @param node For Node
+ */
 ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
 {
     node->GetAttribute(L"radius", L"0").ToDouble(&mRadius);
@@ -56,12 +70,11 @@ ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
 /**
  * Creates a new b2Body in the world
  * @param physics physics system in this world
- * @return
+ * @return b2Body
  */
 b2Body* ItemBody::CreateBody(std::shared_ptr<Physics> physics)
 {
     b2World* world = physics->GetWorld(); ///Get world from physics
-
 
     // Create the body definition
     b2BodyDef bodyDefinition;
@@ -72,7 +85,6 @@ b2Body* ItemBody::CreateBody(std::shared_ptr<Physics> physics)
     auto body = world->CreateBody(&bodyDefinition);
 
     return body;
-
 }
 
 /**
@@ -149,7 +161,7 @@ void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
 
 /**
  * Create physics body for Block
- * @param physics
+ * @param physics Physics
  */
 void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
 {
@@ -169,6 +181,11 @@ void ItemBody::CreateBlock(std::shared_ptr<Physics> physics)
     mBody = body;
 }
 
+/**
+ * Create physics body for Poly
+ * @param physics Physics
+ * @param vertices Points on the Poly
+ */
 void ItemBody::CreatePoly(std::shared_ptr<Physics> physics, const std::vector<b2Vec2>& vertices)
 {
     b2PolygonShape poly;
@@ -185,6 +202,11 @@ void ItemBody::CreatePoly(std::shared_ptr<Physics> physics, const std::vector<b2
     mBody->CreateFixture(&fixtureDef);
 }
 
+/**
+ * Getting/Setting the body for Poly
+ * @param poly Poly Object
+ * @param node Poly Node
+ */
 ItemBody::ItemBody(Poly* poly, wxXmlNode* node)
 {
     node->GetAttribute(L"angle", L"0").ToDouble(&mAngle);

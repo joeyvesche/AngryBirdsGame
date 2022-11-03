@@ -1,6 +1,7 @@
 /**
  * @file GameView.h
  * @author Will Morant, Joey Vesche
+ *
  * GameView class
  */
 
@@ -15,8 +16,8 @@
 class GameView: public wxWindow {
 private:
     void OnPaint(wxPaintEvent& event);
-    /// Game class object
 
+    /// Game class object
     Game mGame;
 
     bool mOutlines = false;
@@ -34,10 +35,6 @@ private:
     void OnLeftDown(wxMouseEvent &event);
     void OnLeftUp(wxMouseEvent &event);
     void OnMouseMove(wxMouseEvent &event);
-    /**
-     * Might need this later for object movement
-    void OnTimer(wxTimerEvent& event);
-     */
 
     //
     // Level loading functions
