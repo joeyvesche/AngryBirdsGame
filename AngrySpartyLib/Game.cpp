@@ -256,7 +256,15 @@ void Game::Update(double elapsed)
             {
                 mScore.UpdateGameScore();
                 mTimer = 0;
-                SetLevel((mLevelNo + 1) % mLevels.size());
+
+                // if we're on the last level, stay on that level. Otherwise, move forward
+                if (mLevelNo + 1 == mLevels.size())
+                {
+                    SetLevel(mLevelNo);
+                } else
+                {
+                    SetLevel((mLevelNo + 1) % mLevels.size());
+                }
             }
 
             break;
