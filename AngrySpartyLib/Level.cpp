@@ -10,7 +10,6 @@
 #include "Poly.h"
 #include "Background.h"
 #include "Goalpost.h"
-#include "Foe.h"
 #include "GruffSparty.h"
 #include "HelmetSparty.h"
 #include "LimpetSparty.h"
@@ -181,7 +180,7 @@ void Level::Reset()
  * @param graphics the graphics context to draw on
  * @return Score of this draw
  */
-int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
+void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     ShooterVisitor shooterVisitor;
     Accept(&shooterVisitor);
@@ -195,26 +194,6 @@ int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
         }
     }
 
-    mScore = 0;
-    DeadFoeCollector visitor;
-    Accept(&visitor);
-    auto deathList = visitor.DeathList();
-    mScore += deathList.size() * 100; //< each foe is worth 100 points
-    for(auto item: deathList)
-    {
-        auto target = mItems.begin();
-        for(; target != mItems.end(); target++)
-        {
-            if((*target).get() == item)
-                break;
-        }
-        if(target!=mItems.end())
-        {
-            item->Detach();
-            mItems.erase(target);
-        }
-    }
-    return mScore;
 }
 
 /**
@@ -277,3 +256,20 @@ void Level::SetObliterateBody(b2Body* body)
     mObliterateBody = body;
 }
 
+void Level::KillFoe(std::vector<Foe*> deathList)
+{
+    for(auto item: deathList)
+    {
+        auto target = mItems.begin();
+        for(; target != mItems.end(); target++)
+        {
+            if((*target).get() == item)
+                break;
+        }
+        if(target!=mItems.end())
+        {
+            item->Detach();
+            mItems.erase(target);
+        }
+    }
+}

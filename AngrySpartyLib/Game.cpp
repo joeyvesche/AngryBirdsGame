@@ -13,6 +13,7 @@
 #include "LevelFinishChecker.h"
 #include "ShooterVisitor.h"
 #include "Shooter.h"
+#include "DeadFoeCollector.h"
 
 /// The directory that contains all level xml files
 std::wstring const LevelDirectory = L"levels/";
@@ -86,7 +87,7 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     // From here we are dealing with centimeter pixels
     // and Y up being increase values
     //
-    int score = mLevel->OnDraw(graphics);
+    mLevel->OnDraw(graphics);
     wxTimer start_text;
 
     if(mDebug)
@@ -96,7 +97,6 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
         mLevel->GetPhysics()->GetWorld()->SetDebugDraw(&debugDraw);
         mLevel->GetPhysics()->GetWorld()->DebugDraw();
     }
-    mScore.AddLevelScore(score);
     mScore.OnDraw(graphics, GetWidth(), GetHeight());
 
     graphics->PopState();
@@ -280,6 +280,12 @@ void Game::Update(double elapsed)
                 shooter->Release();
                 mLevel->PopSparty();
                 mLevel->GetPhysics()->GetWorld()->DestroyBody(sparty->GetBody());
+
+                DeadFoeCollector deathVisitor;
+                Accept(&deathVisitor);
+                auto deathList = deathVisitor.DeathList();
+                mScore.AddLevelScore(deathList.size() * 100) ; //< each foe is worth 100 points
+                mLevel->KillFoe(deathList);
 
                 // If the level is over, count two seconds before restarting or moving on
                 LevelFinishChecker visitor;

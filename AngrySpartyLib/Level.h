@@ -14,6 +14,7 @@
 #include <vector>
 #include <memory>
 #include "AngrySparty.h"
+#include "Foe.h"
 class ItemVisitor;
 class Item;
 class AngrySparty;
@@ -48,7 +49,7 @@ public:
 
     Level(std::wstring const & filepath);
 
-    int OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
+    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
 
     void Reset();
 
@@ -137,6 +138,7 @@ public:
         mPhysics->GetWorld()->SetContactListener(new AngryContactListener(this));
     }
 
+    void KillFoe(std::vector<Foe*> deathlist);
 };
 
 
