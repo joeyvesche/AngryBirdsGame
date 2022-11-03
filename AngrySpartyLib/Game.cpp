@@ -254,9 +254,11 @@ void Game::Update(double elapsed)
 
             if (mTimer >= TransitionDelayAll)
             {
+                mScore.UpdateGameScore();
                 mTimer = 0;
                 SetLevel((mLevelNo + 1) % mLevels.size());
             }
+
             break;
         }
 
@@ -339,4 +341,5 @@ void Game::SetLevel(int index)
     mState = State::Loading;
     mLevelTime = 0;
     mTimer = 0;
+    mScore.ClearLevelScore();
 }
