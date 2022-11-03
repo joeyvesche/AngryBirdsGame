@@ -122,7 +122,7 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
         mItems.push_back(sparty);
         mSpartys.push_back(sparty);
         sparty->SetLocation(x, y);
-        sparty->SetBody(this);
+        sparty->SetBody(this, 0);
         x += spacing;
     }
 }
@@ -218,13 +218,6 @@ void Level::Accept(ItemVisitor* visitor)
     }
 }
 
-void Level::Accept(LimpetKillVisitor* visitor)
-{
-    for (auto item : mItems)
-    {
-        item->Accept(visitor);
-    }
-}
 
 /**
  * Contact Listener for box2D, allows custom functions on contact between objects.
@@ -244,7 +237,7 @@ void Level::AngryContactListener::BeginContact(b2Contact *contact)
         {
             mParent->SetObliterateBody(secondBody);
         }
-        else if ((*i)->GetBody() == secondBody)
+        else if ((*i)->GetBody() == secondBody) /// If the item is the second body in contact
         {
             mParent->SetObliterateBody(firstBody);
         }

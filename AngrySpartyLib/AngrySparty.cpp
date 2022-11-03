@@ -18,11 +18,11 @@ AngrySparty::AngrySparty(Level *level, const std::wstring &filename) :Item(level
 
 }
 
-void AngrySparty::SetBody(Level *level)
+void AngrySparty::SetBody(Level *level, int key)
 {
     std::shared_ptr<Physics> physics = level->GetPhysics();
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this);
-    body->CreateSparty(physics, 1); /// key = 1 for static body
+    body->CreateSparty(physics, key); /// key = 1 for static body
     mBody = body->GetBody();
 }
 
@@ -58,5 +58,15 @@ void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 void AngrySparty::Accept(ItemVisitor* visitor)
 {
     visitor->VisitSparty(this);
+}
+
+/**
+ * Set sparty to dynamic for shooting from slingshot
+ */
+void AngrySparty::SetDynamic()
+{
+    GetLevel()->GetPhysics()->GetWorld()->DestroyBody(mBody);
+    SetBody(GetLevel(), 0);
+
 }
 

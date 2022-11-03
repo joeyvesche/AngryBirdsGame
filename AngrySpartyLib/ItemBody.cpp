@@ -41,6 +41,7 @@ ItemBody::ItemBody(AngrySparty *angry)
     std::pair<double, float> constants = angry->GetConstants();
     mRadius = constants.first;
     mAngle = angry->GetAngle();
+    mStatic = 1;
 }
 
 ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
@@ -111,7 +112,7 @@ void ItemBody::CreateFoe(std::shared_ptr<Physics> physics)
 
 void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
 {
-    mStatic = 0;
+    mStatic = key;
     b2Body* body = CreateBody(physics);
 
     if (mStatic == 1)

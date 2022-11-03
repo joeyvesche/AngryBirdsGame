@@ -134,6 +134,7 @@ bool Shooter::Shoot()
     }
 
     // the angry sparty will travel in the opposite direction
+    mSparty->SetDynamic();
     auto direction = -pullVec;
     direction *= mSparty->GetConstants().second;
     mSparty->GetBody()->SetLinearVelocity(direction);

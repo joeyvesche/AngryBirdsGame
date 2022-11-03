@@ -118,7 +118,10 @@ public:
     void remove(std::vector<std::shared_ptr<Item>>::iterator it) {mItems.erase(it);}
     void UpdateL(double elapsed);
     void Accept(ItemVisitor* visitor);
-    void Accept(LimpetKillVisitor* visitor);
+
+    /**
+     * Contact Listener class for the physics world
+     */
 
     class AngryContactListener : public b2ContactListener {
     private:

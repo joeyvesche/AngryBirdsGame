@@ -41,7 +41,7 @@ public:
      * @param dc Device context to draw on
      */
      void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-     void SetBody(Level *level);
+     void SetBody(Level *level, int key);
      b2Body* GetBody() override {return mBody;}
 
      virtual std::pair<double,float> GetConstants() = 0;
@@ -61,6 +61,7 @@ public:
          auto radius = Consts::MtoCM * GetConstants().first;
          return length < radius;
      }
+     void SetDynamic();
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H

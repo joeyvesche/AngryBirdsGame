@@ -11,8 +11,8 @@
 
 #include "ItemVisitor.h"
 
-class Foe;
-class LimpetKillVisitor {
+
+class LimpetKillVisitor : public ItemVisitor {
 private:
     bool mKey = false;
 
