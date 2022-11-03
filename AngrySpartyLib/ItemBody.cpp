@@ -41,7 +41,7 @@ ItemBody::ItemBody(AngrySparty *angry)
     std::pair<double, float> constants = angry->GetConstants();
     mRadius = constants.first;
     mAngle = angry->GetAngle();
-    mStatic = 1;
+    mStatic = true;
 }
 
 ItemBody::ItemBody(Foe *foe, wxXmlNode* node)
@@ -141,8 +141,6 @@ void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
 
         body->CreateFixture(&fixtureDef);
 
-        ///direction *= velocityFactor
-        ///body->SetLinearVelocity(direction);
     }
 
     mBody = body;

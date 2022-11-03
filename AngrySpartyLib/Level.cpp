@@ -122,7 +122,7 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
         mItems.push_back(sparty);
         mSpartys.push_back(sparty);
         sparty->SetLocation(x, y);
-        sparty->SetBody(this, 0);
+        sparty->SetBody(this, 1);
         x += spacing;
     }
     std::reverse(mSpartys.begin(), mSpartys.end());  //<Reverse list to pull spartys properly
@@ -173,6 +173,7 @@ void Level::Reset()
             LoadSpartysXml(child);
         }
     }
+
 }
 
 /**

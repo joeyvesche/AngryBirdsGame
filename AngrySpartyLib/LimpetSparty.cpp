@@ -30,24 +30,23 @@ std::pair<double,float> LimpetSparty::GetConstants()
 
 bool LimpetSparty::Obliterate(b2Body *body)
 {
-    if (mDestroyedItems < 15)
+    if (body != nullptr)
     {
-        LimpetKillVisitor visitor;
-        for (auto  i = GetLevel()->begin(); i != GetLevel()->end(); i++)
-        {
-            if (body == (*i)->GetBody() && body->GetType() == b2BodyType::b2_dynamicBody)
-            {
-                (*i)->Accept(&visitor);
-                if (visitor.GetKey() == false)
-                {
-                    body->GetWorld()->DestroyBody(body);
-                    GetLevel()->remove(i);
-                    mDestroyedItems++;
-                    break;
+        if (mDestroyedItems < 50) {
+            LimpetKillVisitor visitor;
+            for (auto i = GetLevel()->begin(); i!=GetLevel()->end(); i++) {
+                if (body==(*i)->GetBody() && body->GetType()==b2BodyType::b2_dynamicBody) {
+                    (*i)->Accept(&visitor);
+                    if (visitor.GetKey()==false) {
+                        body->GetWorld()->DestroyBody(body);
+                        GetLevel()->remove(i);
+                        mDestroyedItems++;
+                        break;
+                    }
                 }
             }
+            return true;
         }
-        return true;
     }
     return false;
 }
