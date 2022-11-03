@@ -81,7 +81,7 @@ bool Foe::IsDead()
 {
     if(mMoving)
         return false;
-    return (GetY() - (mLastY / Consts::MtoCM)) >= mDown;
+    return (GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM);
 }
 
 void Foe::Detach()

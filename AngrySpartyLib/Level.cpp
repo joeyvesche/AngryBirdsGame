@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "Level.h"
 #include "Block.h"
+#include "Game.h"
 #include "SlingShot.h"
 #include "Poly.h"
 #include "Background.h"
@@ -86,6 +87,8 @@ void Level::LoadItemsXml(wxXmlNode * items)
             mItems.push_back(item);
         }
     }
+
+
 }
 
 /**
@@ -104,19 +107,16 @@ void Level::LoadSpartysXml(wxXmlNode * angry)
     angry->GetAttribute("spacing").ToDouble(&spacing);
 
     // parse and store angry spartys
-    for (auto child = angry->GetChildren(); child != nullptr; child = child->GetNext())
-    {
+    for (auto child = angry->GetChildren(); child!=nullptr; child = child->GetNext()) {
         std::wstring name = child->GetName().ToStdWstring();
         std::shared_ptr<AngrySparty> sparty;
-        if (name == L"gruff-sparty")
-        {
+        if (name==L"gruff-sparty") {
             sparty = std::make_shared<GruffSparty>(this);
-        } else if (name == L"helmet-sparty")
-        {
+        }
+        else if (name==L"helmet-sparty") {
             sparty = std::make_shared<HelmetSparty>(this);
         }
-        else if (name == L"limpet-sparty")
-        {
+        else if (name==L"limpet-sparty") {
             sparty = std::make_shared<LimpetSparty>(this);
         }
         mItems.push_back(sparty);
@@ -173,6 +173,7 @@ void Level::Reset()
             LoadSpartysXml(child);
         }
     }
+
 }
 
 /**
