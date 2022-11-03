@@ -22,7 +22,7 @@ void AngrySparty::SetBody(Level *level, int key)
 {
     std::shared_ptr<Physics> physics = level->GetPhysics();
     std::shared_ptr<ItemBody> body = std::make_shared<ItemBody>(this);
-    body->CreateSparty(physics, key); /// key = 1 for static body
+    body->CreateSparty(physics, key);
     mBody = body->GetBody();
 }
 

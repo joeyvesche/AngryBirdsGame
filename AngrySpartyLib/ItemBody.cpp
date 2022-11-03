@@ -141,8 +141,6 @@ void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)
 
         body->CreateFixture(&fixtureDef);
 
-        ///direction *= velocityFactor
-        ///body->SetLinearVelocity(direction);
     }
 
     mBody = body;
