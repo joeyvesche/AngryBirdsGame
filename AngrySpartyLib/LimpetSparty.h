@@ -18,7 +18,7 @@ private:
     const double mLimpetSpartyRadius = 0.25;
 
     /// The velocity factor for Limpet Sparty
-    const float mLimpetSpartyVelocityFactor = 20.0;
+    const float mLimpetSpartyVelocityFactor = 10.0;
 
     ///Number of items destroyed
     int mDestroyedItems = 0;

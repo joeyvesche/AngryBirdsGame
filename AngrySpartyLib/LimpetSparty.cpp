@@ -1,10 +1,11 @@
 /**
  * @file LimpetSparty.cpp
- * @author Will
+ * @author Will Morant
  */
 
 #include "pch.h"
 #include "LimpetSparty.h"
+#include "LimpetKillVisitor.h"
 
 /// Useful Constants
 /// The image to use for this sparty
@@ -29,16 +30,21 @@ std::pair<double,float> LimpetSparty::GetConstants()
 
 bool LimpetSparty::Obliterate(b2Body *body)
 {
-    if (mDestroyedItems < 3)
+    if (mDestroyedItems < 15)
     {
+        LimpetKillVisitor visitor;
         for (auto  i = GetLevel()->begin(); i != GetLevel()->end(); i++)
         {
             if (body == (*i)->GetBody() && body->GetType() == b2BodyType::b2_dynamicBody)
             {
-                body->GetWorld()->DestroyBody(body);
-                GetLevel()->remove(i);
-                mDestroyedItems++;
-                break;
+                (*i)->Accept(&visitor);
+                if (visitor.GetKey() == false)
+                {
+                    body->GetWorld()->DestroyBody(body);
+                    GetLevel()->remove(i);
+                    mDestroyedItems++;
+                    break;
+                }
             }
         }
         return true;

@@ -16,6 +16,7 @@
 #include "Physics.h"
 #include <unordered_map>
 
+class LimpetKillVisitor;
 class ItemVisitor;
 class Level;
 
@@ -137,6 +138,7 @@ public:
     std::shared_ptr<wxBitmap> GetBitmap() const { return mItemBitmap; }
 
     virtual void Accept(ItemVisitor * visitor) = 0;
+    virtual void Accept(LimpetKillVisitor *visitor) {};
 
     double GetAngle(){ return mAngle; }
 

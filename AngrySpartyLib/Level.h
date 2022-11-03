@@ -36,6 +36,8 @@ private:
 
     std::shared_ptr<Physics> mPhysics; ///The physics system for this level
 
+    int mScore = 0; /// A score tracker for this level
+
     ///The b2Body to be obliterated, for the LimpetSparty
     b2Body* mObliterateBody = nullptr;
 
@@ -115,6 +117,7 @@ public:
     void remove(std::vector<std::shared_ptr<Item>>::iterator it) {mItems.erase(it);}
     void UpdateL(double elapsed);
     void Accept(ItemVisitor* visitor);
+    void Accept(LimpetKillVisitor* visitor);
 
     class AngryContactListener : public b2ContactListener {
     private:

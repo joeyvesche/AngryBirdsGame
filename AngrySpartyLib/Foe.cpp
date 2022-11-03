@@ -36,6 +36,11 @@ void Foe::Accept(ItemVisitor* visitor)
     visitor->VisitFoe(this);
 }
 
+void Foe::Accept(LimpetKillVisitor* visitor)
+{
+    visitor->VisitFoe(this);
+}
+
 void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();

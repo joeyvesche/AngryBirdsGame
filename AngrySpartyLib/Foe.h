@@ -10,6 +10,7 @@
 
 #include "Item.h"
 #include "Level.h"
+#include "LimpetKillVisitor.h"
 
 class ItemBody;
 
@@ -41,6 +42,7 @@ public:
     void XmlLoad(wxXmlNode* node) override;
 
     void Accept(ItemVisitor * visitor) override;
+    void Accept(LimpetKillVisitor * visitor) override;
     Foe(Level *level, const std::wstring &filename);
     /**
      * Draw this item

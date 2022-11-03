@@ -195,11 +195,11 @@ int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
         }
     }
 
-    int score = 0;
+    mScore = 0;
     DeadFoeCollector visitor;
     Accept(&visitor);
     auto deathList = visitor.DeathList();
-    score = deathList.size() * 100; //< each foe is worth 100 points
+    mScore += deathList.size() * 100; //< each foe is worth 100 points
     for(auto item: deathList)
     {
         auto target = mItems.begin();
@@ -214,7 +214,7 @@ int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
             mItems.erase(target);
         }
     }
-    return score;
+    return mScore;
 }
 
 /**
@@ -239,6 +239,14 @@ void Level::Accept(ItemVisitor* visitor)
     }
 }
 
+void Level::Accept(LimpetKillVisitor* visitor)
+{
+    for (auto item : mItems)
+    {
+        item->Accept(visitor);
+    }
+}
+
 /**
  * Contact Listener for box2D, allows custom functions on contact between objects.
  * @param contact
@@ -248,6 +256,8 @@ void Level::AngryContactListener::BeginContact(b2Contact *contact)
 {
     b2Body *firstBody = contact->GetFixtureA()->GetBody();
     b2Body *secondBody = contact->GetFixtureB()->GetBody();
+
+
 
     for (auto i = mParent->SpartyBegin(); i != mParent->SpartyEnd(); i++)
     {
@@ -266,3 +276,4 @@ void Level::SetObliterateBody(b2Body* body)
 {
     mObliterateBody = body;
 }
+
