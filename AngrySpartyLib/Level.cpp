@@ -256,6 +256,10 @@ void Level::SetObliterateBody(b2Body* body)
     mObliterateBody = body;
 }
 
+/**
+ * Remove foes from the deathList from the items list.
+ * @param deathList a list of foes that have been determined to be dead
+ */
 void Level::KillFoe(std::vector<Foe*> deathList)
 {
     for(auto item: deathList)

@@ -281,6 +281,7 @@ void Game::Update(double elapsed)
                 mLevel->PopSparty();
                 mLevel->GetPhysics()->GetWorld()->DestroyBody(sparty->GetBody());
 
+                // Check if foes are dead at the end of the turn and remove dead foes from the items list.
                 DeadFoeCollector deathVisitor;
                 Accept(&deathVisitor);
                 auto deathList = deathVisitor.DeathList();
