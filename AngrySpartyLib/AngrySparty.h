@@ -11,6 +11,8 @@
 #include "Item.h"
 #include "Level.h"
 #include "ItemBody.h"
+#include <b2_body.h>
+#include "Consts.h"
 
 
 /**
@@ -20,7 +22,6 @@ class AngrySparty: public Item {
 private:
         ///Body of the AngrySparty object
         b2Body* mBody;
-
 
 public:
 
@@ -45,6 +46,21 @@ public:
 
      virtual std::pair<double,float> GetConstants() = 0;
      void Accept(ItemVisitor * visitor) override;
+
+     /**
+      *
+      * @param x
+      * @param y
+      * @return
+      */
+     bool HitTest(int x, int y) override
+     {
+         b2Vec2 click(x, y);
+         b2Vec2 posCM = Consts::MtoCM * mBody->GetPosition();
+         auto length = (click - posCM).Length();
+         auto radius = Consts::MtoCM * GetConstants().first;
+         return length < radius;
+     }
 };
 
 #endif //PROJECT1_ANGRYSPARTY_H

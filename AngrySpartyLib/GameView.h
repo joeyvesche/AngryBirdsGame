@@ -22,6 +22,9 @@ private:
     bool mOutlines = false;
     double mTime = 0;
 
+    /// The Angry Sparty we are currently shooting
+    std::shared_ptr<AngrySparty> mShooting;
+
     /// The timer that allows for animation
     wxTimer mTimer;
 
@@ -58,6 +61,8 @@ private:
     void TestAdd();
 
     void OnTimeGo(wxTimerEvent& event);
+
+    b2Vec2 ToVirtual(int x, int y);
 
 public:
     void Initialize(wxFrame* parent);

@@ -16,6 +16,8 @@
 #include "AngrySparty.h"
 class ItemVisitor;
 class Item;
+class AngrySparty;
+
 /**
  * This class loads and stores the contents of a
  * level XML file
@@ -27,7 +29,7 @@ private:
     double mWidth = 0.0;
     double mHeight = 0.0;
     std::vector<std::shared_ptr<Item>> mItems; ///< All items in this level
-    std::vector<std::shared_ptr<Item>> mSpartys; ///< All Spartys in this level
+    std::vector<std::shared_ptr<AngrySparty>> mSpartys; ///< All Spartys in this level
 
     void LoadItemsXml(wxXmlNode * items);
     void LoadSpartysXml(wxXmlNode * angry);
@@ -36,7 +38,6 @@ private:
 
     ///The b2Body to be obliterated, for the LimpetSparty
     b2Body* mObliterateBody = nullptr;
-
 
 public:
 
@@ -48,6 +49,22 @@ public:
     int OnDraw(std::shared_ptr<wxGraphicsContext> graphics);
 
     void Reset();
+
+    /**
+     * Return the next sparty in line for the slingshot.
+     *
+     * @return shared_ptr to an AngrySparty
+     */
+    std::shared_ptr<AngrySparty> GetNextSparty() { return mSpartys.empty() ? nullptr : mSpartys.back(); }
+
+    /**
+     * Remove the most recently used sparty from the level
+     */
+    void PopSparty()
+    {
+        mItems.erase(std::find(mItems.begin(), mItems.end(), mSpartys.back()));
+        mSpartys.pop_back();
+    }
 
     /**
      * Get the size of the level in meters

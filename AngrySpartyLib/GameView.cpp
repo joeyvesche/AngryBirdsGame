@@ -14,9 +14,17 @@
 #include "SlingShot.h"
 #include "Consts.h"
 #include <memory>
+#include "ShooterVisitor.h"
+#include <algorithm>
 
 /// Frame duration in seconds
 const double FrameDuration = 1.0/60.0;
+
+const double ShooterMaximumNegativePullAngle = -1.7;
+
+/// Pull angles from +pi to this value are allowed
+const double ShooterMinimumPositivePullAngle = 2.42;
+
 
 /**
  * Add menus specific to the view
@@ -110,6 +118,33 @@ void GameView::OnPaint(wxPaintEvent& event)
 
 }
 
+/**
+ * Convert wxWidgets coordinates to our virtual coordinate system
+ *
+ * @param x x position in wxWidgets coordinates in pixels
+ * @param y y position in wxWidgets coordinates in pixels
+ * @return position in the virtual coordinate system
+ */
+b2Vec2 GameView::ToVirtual(int x, int y)
+{
+    auto clientSize = GetClientSize();
+    double width = clientSize.x, height = clientSize.y;
+
+    b2Vec2 playingAreaSize = b2Vec2(mGame.GetWidth(), mGame.GetHeight());
+    playingAreaSize *= Consts::MtoCM;
+
+    auto scaleX = playingAreaSize.y / height;
+    auto scaleY = playingAreaSize.x / width;
+    auto scale = std::max(scaleX, scaleY);
+
+    auto playingAreaPx = (1 / scale) * playingAreaSize;
+
+    b2Vec2 originPx(width / 2, -(height + playingAreaPx.y) / 2);
+    b2Vec2 clickPx(x, -y);
+    return scale * (clickPx - originPx);
+}
+
+#include <iostream>
 
 /**
  * Handle the left mouse button down event
@@ -117,11 +152,30 @@ void GameView::OnPaint(wxPaintEvent& event)
  */
 void GameView::OnLeftDown(wxMouseEvent &event)
 {
-    // DEBUG: each click moves the slingshot slightly to the right
-    // This is done for testing reloading of levels
-    //std::shared_ptr<Item> hit = mGame.GetLevel()->begin()[1];
-    //hit->SetLocation(hit->GetX() + 0.25, hit->GetY());
-    //Refresh();
+    // do nothing if we're not ready to pull back
+    if (!mGame.Ready()) return;
+
+    // check if game is ready and item clicked on was the sparty on the shooter
+    ShooterVisitor shooterVisitor;
+    mGame.GetLevel()->Accept(&shooterVisitor);
+    auto shooter = shooterVisitor.Get();
+
+    auto virtualCoords = ToVirtual(event.GetX(), event.GetY());
+
+    std::shared_ptr<AngrySparty> hit = nullptr;
+
+    for (auto itr = mGame.GetLevel()->SpartyBegin(); itr != mGame.GetLevel()->SpartyEnd(); ++itr)
+    {
+        if ((*itr)->HitTest(virtualCoords.x, virtualCoords.y))
+        {
+            hit = *itr;
+        }
+    }
+
+    if (hit != nullptr && hit == shooter->GetLoadedSparty())
+    {
+        mShooting = hit;
+    }
 }
 
 /**
@@ -130,7 +184,11 @@ void GameView::OnLeftDown(wxMouseEvent &event)
  */
 void GameView::OnLeftUp(wxMouseEvent &event)
 {
-
+    if (mShooting != nullptr)
+    {
+        mGame.Shoot();
+        mShooting = nullptr;
+    }
 }
 
 /**
@@ -139,7 +197,43 @@ void GameView::OnLeftUp(wxMouseEvent &event)
  */
 void GameView::OnMouseMove(wxMouseEvent &event)
 {
+    if (mShooting != nullptr)
+    {
+        // grab where the current loaded sparty and mouse position
+        ShooterVisitor shooterVisitor;
+        mGame.GetLevel()->Accept(&shooterVisitor);
+        Shooter * shooter = shooterVisitor.Get();
 
+        std::shared_ptr<AngrySparty> sparty = shooter->GetLoadedSparty();
+        auto newLoc = (1 / Consts::MtoCM) * ToVirtual(event.GetX(), event.GetY());
+
+        // clamp the rotation and length of the pull
+        auto midpoint = shooter->GetArmMidpoint();
+        auto pullVec = newLoc - midpoint;
+
+        if (pullVec.Length() > shooter->GetMaxPull())
+        {
+            pullVec.Normalize();
+            pullVec *= shooter->GetMaxPull();
+        }
+
+        auto rotationRad = std::atan2(pullVec.y, pullVec.x);
+
+        if (rotationRad < 0 && rotationRad > ShooterMaximumNegativePullAngle)
+        {
+            pullVec = pullVec.Length() * b2Vec2(std::cos(ShooterMaximumNegativePullAngle),
+                                                std::sin(ShooterMaximumNegativePullAngle));
+        } else if (rotationRad > 0 && rotationRad < ShooterMinimumPositivePullAngle)
+        {
+            pullVec = pullVec.Length() * b2Vec2(std::cos(ShooterMinimumPositivePullAngle),
+                                                std::sin(ShooterMinimumPositivePullAngle));
+        }
+
+        // set the sparty to the next location
+        newLoc = midpoint + pullVec;
+        sparty->SetLocation(newLoc.x, newLoc.y);
+        sparty->GetBody()->SetTransform(newLoc, sparty->GetAngle());
+    }
 }
 
 /**

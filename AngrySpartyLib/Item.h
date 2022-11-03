@@ -55,7 +55,7 @@ public:
     virtual ~Item();
 
     /// Test if the item is hit by the mouse
-    bool HitTest(int x, int y);
+    virtual bool HitTest(int x, int y);
 
     /// Default constructor (disabled)
     Item() = delete;

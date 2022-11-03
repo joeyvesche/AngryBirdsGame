@@ -38,46 +38,14 @@ const int SlingshotBandWidth = 15;
 /// The slingshot band colour
 const wxColour SlingshotBandColor = wxColour(55, 18, 1);
 
-SlingShot::SlingShot(Level* level) : Item(level, WoodSlingshotBaseName)
+SlingShot::SlingShot(Level* level) : Shooter(level, WoodSlingshotBaseName, WoodSlingshotArmFilename)
 {
-    auto [img, bitmap] = LoadImage(WoodSlingshotArmFilename);
-    mArmImage = img;
-    mArmBitmap = bitmap;
-}
-
-void SlingShot::Draw(std::shared_ptr<wxGraphicsContext> graphics)
-{
-    graphics->PushState();
-
-    // Get the center x and y position of this item
-    auto posX = GetX() * Consts::MtoCM, posY= GetY() * Consts::MtoCM;
-
-    // Calculate the width and height of the item in centimeters
-    double width = WoodSlingshotSize.x * Consts::MtoCM;
-    double height = WoodSlingshotSize.y * Consts::MtoCM;
-
-    // translate to the correct location to draw the image
-    graphics->Translate(posX, posY);
-
-    // draw the actual slingshot
-    graphics->Scale(1, -1);
-    graphics->DrawBitmap(*GetBitmap(),
-            -width / 2,
-            -height,
-            width, height);
-    graphics->Scale(1, -1);
-
-    // draw the band on the slingshot
-    wxPen pen(SlingshotBandColor, SlingshotBandWidth);
-    graphics->SetPen(pen);
-
-    graphics->StrokeLine(WoodSlingshotBandAttachBack.x * Consts::MtoCM,
-            WoodSlingshotBandAttachBack.y * Consts::MtoCM,
-            WoodSlingshotBandAttachFront.x * Consts::MtoCM,
-            WoodSlingshotBandAttachFront.y * Consts::MtoCM);
-
-    graphics->PopState();
-
+   mSize = WoodSlingshotSize;
+   mBandAttachBack = WoodSlingshotBandAttachBack;
+   mBandAttachFront = WoodSlingshotBandAttachFront;
+   mMaxPull = WoodSlingshotMaximumPull;
+   mBandColor = SlingshotBandColor;
+   mBandWidth = SlingshotBandWidth;
 }
 
 

@@ -12,12 +12,10 @@
 #include "AngrySparty.h"
 #include <string>
 #include <memory>
+#include "Shooter.h"
 
-class SlingShot : public Item{
+class SlingShot : public Shooter {
 private:
-    std::shared_ptr<wxImage> mArmImage; ///< Image of the slingshot arm
-    std::shared_ptr<wxBitmap> mArmBitmap; ///< Bitmap of the slingshot arm
-    std::shared_ptr<AngrySparty> mSparty; ///< A pointer to the sparty currently in the slingshot
 
 public:
     /// Default constructor (disabled)
@@ -28,9 +26,6 @@ public:
 
     SlingShot(Level* level);
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-
-    void Accept(ItemVisitor * visitor) override {}
 };
 
 #endif //PROJECT1_SLINGSHOT_H

@@ -11,12 +11,24 @@
 #include <vector>
 #include "DebugDraw.h"
 #include "LevelFinishChecker.h"
-// The directory that contains all level xml files
+#include "ShooterVisitor.h"
+#include "Shooter.h"
+
+/// The directory that contains all level xml files
 std::wstring const LevelDirectory = L"levels/";
 
-// an ordered list of level xml file names
+/// an ordered list of level xml file names
 std::vector<std::wstring> const LevelFiles =
         {L"level0.xml", L"level1.xml", L"level2.xml", L"level3.xml"};
+
+/// the delay of loading a level in seconds
+double const TransitionDelayAll = 2;
+
+/// the minimum pull length of the shooter in meters
+const double ShooterMinimumPullLength = 0.25;
+
+/// The minimum velocity of a sparty in meters / second
+const double MinimumSpartyVelocity = 0.1;
 
 /**
  * Game Constructor
@@ -90,69 +102,54 @@ void Game::OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int he
     graphics->PopState();
 
 
-    // Draw the level start text for two seconds
-    if(mLevelTime <= 2)
-    {
+    // Draw a prompt to the center of the screen if needed
+    wxFont bigFont(wxSize(50, 80),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
 
-        wxFont bigFont(wxSize(50, 80),
+    std::wstring message;
+
+    switch (mState)
+    {
+        case State::Loading:
+        {
+            message = L"Level " + std::to_wstring(mLevelNo)+ L" Begin";
+            break;
+        }
+        case State::Failure:
+        {
+            message = L"Level Failed!";
+            break;
+        }
+        case State::Success:
+        {
+            message = L"Level Complete!";
+            break;
+        }
+    }
+
+    if (!message.empty())
+    {
+        wxSize bigSize(GetWidth() * Consts::MtoCM / 10, GetHeight() * Consts::MtoCM / 10);
+
+        wxFont bigFont(bigSize,
                 wxFONTFAMILY_SWISS,
                 wxFONTSTYLE_NORMAL,
                 wxFONTWEIGHT_BOLD);
+
         graphics->PushState();
+
+        double msgWidth, msgHeight; // width and height of the text (in cm thanks to scaling)
+        graphics->GetTextExtent(message, &msgWidth, &msgHeight);
+
+        graphics->Translate(-msgWidth / 2, (GetHeight() * Consts::MtoCM + msgHeight) / 2);
         graphics->Scale(1, -1);
         graphics->SetFont(bigFont, wxColour(0, 0, 255));
-        std::string levelStartText = "Level " + std::to_string(mLevelNo) + " Begin";
-        graphics->DrawText(levelStartText, -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
+        graphics->DrawText(message, 0, 0);
+
         graphics->PopState();
     }
-    // Draw the Level Failed Text for two seconds
-    if(0 < mTwoSecondsRetry && mTwoSecondsRetry < 2)
-    {
-        // Draw the level failed text for two seconds
-        wxFont bigFont(wxSize(50, 80),
-                wxFONTFAMILY_SWISS,
-                wxFONTSTYLE_NORMAL,
-                wxFONTWEIGHT_BOLD);
-        graphics->PushState();
-        graphics->Scale(1, -1);
-        graphics->SetFont(bigFont, wxColour(0, 0, 255));
-        graphics->DrawText("Level Failed!", -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
-        graphics->PopState();
-
-    }
-
-    //Restart the Level
-    if(mTwoSecondsRetry <= 0)
-    {
-        mScore.ClearLevelScore();
-        mLevel->Reset();
-        mTwoSecondsRetry = 2;
-    }
-    // go to next level if level is won
-    else if(0 < mTwoSecondsNextLevel && mTwoSecondsNextLevel < 2)
-    {
-        // Draw the level success text for two seconds
-        wxFont bigFont(wxSize(50, 80),
-                wxFONTFAMILY_SWISS,
-                wxFONTSTYLE_NORMAL,
-                wxFONTWEIGHT_BOLD);
-        graphics->PushState();
-        graphics->Scale(1, -1);
-        graphics->SetFont(bigFont, wxColour(0, 0, 255));
-        graphics->DrawText("Level Complete!", -2.5*Consts::MtoCM, -4.5*Consts::MtoCM);
-        graphics->PopState();
-
-    }
-
-    // Go to the next level after two seconds
-    else if(mTwoSecondsNextLevel <= 0)
-    {
-        mScore.UpdateGameScore();
-        mTwoSecondsNextLevel = 2;
-        SetLevel((mLevelNo + 1)% mLevels.size());
-
-    }
-
 }
 
 /**
@@ -174,6 +171,22 @@ void Game::Add(std::shared_ptr<Item> item)
 std::shared_ptr<Item> Game::HitTest(int x, int y)
 {
     return nullptr;
+}
+
+/**
+ * Shoot the current loaded sparty
+ */
+void Game::Shoot()
+{
+    ShooterVisitor shooterVisitor;
+    mLevel->Accept(&shooterVisitor);
+    Shooter * shooter = shooterVisitor.Get();
+    bool success = shooter->Shoot();
+
+    if (success)
+    {
+        mState = State::Wait;
+    }
 }
 
 
@@ -208,18 +221,106 @@ void Game::Update(double elapsed)
     mLevel->UpdateL(elapsed);
     mLevelTime += elapsed;
 
-    // If the level is over, count two seconds before restarting or moving on
-    LevelFinishChecker visitor;
-    mLevel->Accept(&visitor);
-    auto stat = visitor.LevelStat();
-    if(stat == LevelFinishChecker::Stat::ReTry)
+    switch (mState)
     {
-        mTwoSecondsRetry -= elapsed;
-    }
+        case State::Loading:
+        {
+            mTimer += elapsed;
 
-    if(stat == LevelFinishChecker::Stat::NextLevel)
-    {
-        mTwoSecondsNextLevel -= elapsed;
+            if (mTimer >= TransitionDelayAll)
+            {
+                mTimer = 0;
+                mState = State::Ready;
+            }
+            break;
+        }
+
+        case State::Failure:
+        {
+            mTimer += elapsed;
+
+            if (mTimer >= TransitionDelayAll)
+            {
+                mTimer = 0;
+                mScore.ClearLevelScore();
+                SetLevel(mLevelNo);
+            }
+            break;
+        }
+
+        case State::Success:
+        {
+            mTimer += elapsed;
+
+            if (mTimer >= TransitionDelayAll)
+            {
+                mTimer = 0;
+                SetLevel((mLevelNo + 1) % mLevels.size());
+            }
+            break;
+        }
+
+        case State::Wait:
+        {
+            // make sure angry sparty is done before moving on
+            ShooterVisitor shooterVisitor;
+            mLevel->Accept(&shooterVisitor);
+            auto shooter = shooterVisitor.Get();
+            auto sparty = shooter->GetLoadedSparty();
+
+            if (sparty->GetBody()->GetLinearVelocity().Length() < MinimumSpartyVelocity)
+            {
+                mTimer += elapsed;
+
+                if (mTimer < TransitionDelayAll) break;
+
+                mTimer = 0;
+                shooter->Release();
+                mLevel->PopSparty();
+                mLevel->GetPhysics()->GetWorld()->DestroyBody(sparty->GetBody());
+
+                // If the level is over, count two seconds before restarting or moving on
+                LevelFinishChecker visitor;
+                mLevel->Accept(&visitor);
+                auto stat = visitor.LevelStat();
+
+                if(stat == LevelFinishChecker::Stat::ReTry)
+                {
+                    mState = State::Failure;
+                }
+                else if(stat == LevelFinishChecker::Stat::NextLevel)
+                {
+                    mState = State::Success;
+                }
+                else
+                {
+                    mState = State::Ready;
+                }
+            }
+
+            break;
+        }
+
+        case State::Ready:
+        {
+            // Search for the shooter in the level
+            ShooterVisitor shooterVisitor;
+            mLevel->Accept(&shooterVisitor);
+            auto shooter = shooterVisitor.Get();
+
+            // if the shooter DNE, there's nothing more to do
+            if (shooter == nullptr) break;
+
+            // load a sparty if needed
+            if (shooter->GetLoadedSparty() == nullptr)
+            {
+                shooter->LoadSparty(mLevel->GetNextSparty());
+            }
+
+            break;
+        }
+
+
     }
 }
 
@@ -235,5 +336,7 @@ void Game::SetLevel(int index)
     mLevelNo = index;
     mLevel = mLevels[index];
     mLevel->Reset();
+    mState = State::Loading;
     mLevelTime = 0;
+    mTimer = 0;
 }

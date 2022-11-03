@@ -38,57 +38,12 @@ const int GoalpostBandWidth = 15;
  * Goalpost constructor
  * @param level
  */
-Goalposts::Goalposts(Level* level) :Item(level, GoalpostsBaseName)
+Goalposts::Goalposts(Level* level) : Shooter(level, GoalpostsBaseName, GoalPostsArmImageFilename)
 {
-    auto [img, bitmap] = LoadImage(GoalPostsArmImageFilename);
-    mArmImage = img;
-    mArmBitmap = bitmap;
-}
-
-/**
- * Load variables from XML
- * @param node
- */
-void Goalposts::XmlLoad(wxXmlNode *node)
-{
-    Item::XmlLoad(node);
-}
-
-/**
- * Draw the goalpost
- * @param graphics graphics context for the game
- */
-void Goalposts::Draw(std::shared_ptr<wxGraphicsContext> graphics)
-{
-    graphics->PushState();
-
-    // Get the center x and y position of this item
-    auto posX = GetX() * Consts::MtoCM, posY= GetY() * Consts::MtoCM;
-
-    // Calculate the width and height of the item in centimeters
-    double width = GoalpostsSize.x * Consts::MtoCM;
-    double height = GoalpostsSize.y * Consts::MtoCM;
-
-    // translate to the correct location to draw the image
-    graphics->Translate(posX, posY);
-
-    // draw the actual Goalpost
-    graphics->Scale(1, -1);
-    graphics->DrawBitmap(*GetBitmap(),
-            -width / 2,
-            -height,
-            width, height);
-    graphics->Scale(1, -1);
-
-    // draw the band on the Goalpost
-    wxPen pen(GoalpostBandColor, GoalpostBandWidth);
-    graphics->SetPen(pen);
-
-    graphics->StrokeLine(GoalpostsBandAttachBack.x * Consts::MtoCM,
-            GoalpostsBandAttachBack.y * Consts::MtoCM,
-            GoalpostsBandAttachFront.x * Consts::MtoCM,
-            GoalpostsBandAttachFront.y * Consts::MtoCM);
-
-    graphics->PopState();
-
+    mSize = GoalpostsSize;
+    mBandAttachBack = GoalpostsBandAttachBack;
+    mBandAttachFront = GoalpostsBandAttachFront;
+    mMaxPull = GoalpostsMaximumPull;
+    mBandColor = GoalpostBandColor;
+    mBandWidth = GoalpostBandWidth;
 }

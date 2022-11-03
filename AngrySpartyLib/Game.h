@@ -33,9 +33,8 @@ private:
 
     double mLevelTime;
 
-    double mTwoSecondsRetry = 2 ;
-
-    double mTwoSecondsNextLevel = 2;
+    /// Timer used for delays between states and levels
+    double mTimer = 0;
 
     std::vector<std::shared_ptr<Level>> mLevels; ///< A list of all levels
     std::shared_ptr<Level> mLevel; ///< The currently loaded level
@@ -46,6 +45,19 @@ private:
 
     std::shared_ptr<Physics> mPhysics;
 
+    /**
+     * The states of the game
+     *
+     * Loading: the 2 second delay at the start of every level
+     * Ready: An angry sparty is ready to be shot
+     * Wait: the state between shooting an angry sparty and the next turn
+     * Success: All foes of a level have been defeated
+     * Failure: No angry spartys left, foes still alive
+     */
+    enum class State {Loading, Ready, Wait, Success, Failure};
+
+    /// the current state of our game
+    State mState = State::Loading;
 
 public:
     Game();
@@ -74,6 +86,13 @@ public:
 
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
 
+    /**
+     * Determine if the user is able to pull back on the slingshot
+     *
+     * @return true if the level is ready, false otherwise
+     */
+    bool Ready() const { return mState == State::Ready; }
+
     void Accept(ItemVisitor * visitor);
 
     void SetLevel(int index);
@@ -81,8 +100,12 @@ public:
     /// Get the currently loaded level
     std::shared_ptr<Level> GetLevel() { return mLevel; }
 
+
+
     bool isDebug() {return mDebug; }
     void Debug(bool debug) { mDebug = debug; }
+
+    void Shoot();
 };
 
 #endif //PROJECT1_GAME_H

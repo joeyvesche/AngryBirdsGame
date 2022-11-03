@@ -16,7 +16,7 @@
 #include "LimpetSparty.h"
 #include "Physics.h"
 #include "DeadFoeCollector.h"
-
+#include "ShooterVisitor.h"
 
 /**
  * Parse the xml node that contains all items
@@ -148,6 +148,7 @@ void Level::Reset()
 {
     // clear any previously stored items
     mItems.clear();
+    mSpartys.clear();
 
     // process root tag attributes
     auto root = mDoc.GetRoot();
@@ -182,10 +183,18 @@ void Level::Reset()
  */
 int Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    ShooterVisitor shooterVisitor;
+    Accept(&shooterVisitor);
+    auto shooter = shooterVisitor.Get();
+
     for (auto & item : mItems)
     {
-        item->Draw(graphics);
+        if (shooter == nullptr || shooter->GetLoadedSparty() != item || !shooter->IsLoaded())
+        {
+            item->Draw(graphics);
+        }
     }
+
     int score = 0;
     DeadFoeCollector visitor;
     Accept(&visitor);
