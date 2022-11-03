@@ -13,7 +13,7 @@ find_package(wxWidgets COMPONENTS core base xrc html xml REQUIRED)
 include(${wxWidgets_USE_FILE})
 
 # Add source files to this library
-add_library(${PROJECT_NAME} ${SOURCE_FILES} ShooterVisitor.cpp ShooterVisitor.h)
+add_library(${PROJECT_NAME} ${SOURCE_FILES})
 
 # Add Box2D to the project
 include(FetchContent)

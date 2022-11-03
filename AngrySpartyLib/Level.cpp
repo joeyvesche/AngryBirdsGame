@@ -173,6 +173,7 @@ void Level::Reset()
             LoadSpartysXml(child);
         }
     }
+
 }
 
 /**
