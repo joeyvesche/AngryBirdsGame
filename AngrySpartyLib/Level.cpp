@@ -249,18 +249,6 @@ void Level::AngryContactListener::BeginContact(b2Contact *contact)
             mParent->SetObliterateBody(firstBody);
         }
     }
-
-    /**for (auto i = mParent->begin(); i != mParent->end(); i++)
-    {
-        if ((*i)->GetBody() == firstBody) /// If the item is the first body in contact
-        {
-            mParent->SetObliterateBody(secondBody);
-        }
-        else if ((*i)->GetBody() == secondBody) /// If the item is the second body in contact
-        {
-            mParent->SetObliterateBody(firstBody);
-        }
-    }*/
 }
 
 /**
