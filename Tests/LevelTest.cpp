@@ -45,7 +45,6 @@ TEST(LevelTest, Load)
                 {3.09669, 1.8305},
                 {-6.5, 0.3},
                 {-5.9, 0.3},
-                {-5.3, 0.3},
             };
 
     ///ASSERT_EQ(xyPairs, expected) << "Test all items are positioned correctly";
