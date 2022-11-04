@@ -41,7 +41,7 @@ Game::Game()
         mLevels.push_back(std::make_shared<Level>(LevelDirectory + filename));
     }
 
-    SetLevel(3);
+    SetLevel(1);
 }
 
 /**

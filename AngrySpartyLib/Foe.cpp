@@ -65,7 +65,9 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     auto x = position.x * Consts::MtoCM;
     auto y = position.y * Consts::MtoCM;
 
-    if(abs((mLastX - x)) > StopMovingFactor || abs((mLastY - y)) > StopMovingFactor)
+    auto xCopy = mLastX;
+    auto yCopy = mLastY;
+    if(abs((xCopy - x)) > StopMovingFactor || abs((yCopy - y)) > StopMovingFactor)
     {
         mMoving = true;
         mLastX = x;
@@ -96,7 +98,7 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 bool Foe::IsDead()
 {
-    return (GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM);
+    return (GetBody()->GetPosition().y) <= mDown;
 }
 
 /**
