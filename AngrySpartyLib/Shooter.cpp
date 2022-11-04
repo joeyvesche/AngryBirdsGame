@@ -119,6 +119,7 @@ void Shooter::LoadSparty(std::shared_ptr<AngrySparty> sparty)
 
 /**
  * Shoot the current loaded sparty
+ * @return false if the pull length is too low
  */
 bool Shooter::Shoot()
 {

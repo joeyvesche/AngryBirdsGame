@@ -16,31 +16,48 @@ class AngrySparty;
 class Foe;
 class Poly;
 
+/**
+ * Class that describes the physics body for an item
+ */
 class ItemBody {
 private:
 
-    b2Body* mBody; /// Box2d Body for Item
+    /// Box2d Body for Item
+    b2Body* mBody;
 
-    b2Vec2 mPosition; /// Position vector for Item
+    /// Position vector for Item
+    b2Vec2 mPosition;
 
-    b2Vec2 mSize; ///Size of the item
+    ///Size of the item
+    b2Vec2 mSize;
 
-    double mFriction = 0.5; ///Friction of item
+    ///Friction of item
+    double mFriction = 0.5;
 
-    double mDensity = 1; /// Density of item
+    /// Density of item
+    double mDensity = 1;
 
-    double mRestitution = 0.5; /// Restitution of item
+    /// Restitution of item
+    double mRestitution = 0.5;
 
-    bool mStatic = 0; /// is this a static image?
+    /// is this a static image?
+    bool mStatic = 0;
 
-    double mAngle = 0; /// Angle for the body
+    /// Angle for the body
+    double mAngle = 0;
 
-    double mX = 0;  /// X value for position
-    double mY = 0;  /// Y value for position
-    double mWidth = 0;  /// Width for size
-    double mHeight = 0; /// Height for size
-    double mRadius = 0; ///Radius for the object
-    double mDown = 0;  /// Down for foe
+    /// X value for position
+    double mX = 0;
+    /// Y value for position
+    double mY = 0;
+    /// Width for size
+    double mWidth = 0;
+    /// Height for size
+    double mHeight = 0;
+    ///Radius for the object
+    double mRadius = 0;
+    /// Down for foe
+    double mDown = 0;
 
 public:
 
@@ -50,8 +67,16 @@ public:
     ItemBody(Poly *poly, wxXmlNode* node);
     void CreateFoe(std::shared_ptr<Physics> physics);
 
+    /**
+     * Get the b2Body created by this object
+     * @return
+     */
     b2Body* GetBody() {return mBody;}
 
+    /**
+     * Get the position of this b2Body
+     * @return
+     */
     b2Vec2 GetPosition() {return mPosition;}
 
     b2Body* CreateBody(std::shared_ptr<Physics> physics);

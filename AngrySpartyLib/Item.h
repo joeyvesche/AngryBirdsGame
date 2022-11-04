@@ -34,9 +34,11 @@ private:
     /// shared collection of bitmaps used for items
     inline static std::unordered_map<std::wstring, const std::shared_ptr<wxBitmap>> mBitmapPack;
 
-    /// Item location in the level
+    /// Item X location in the level
     double mX = 0;
+    /// Item Y location in the level
     double mY = 0;
+    /// Item angle in the level
     double mAngle = 0;
     /// The underlying Item image
     std::shared_ptr<wxImage> mItemImage;
@@ -45,9 +47,7 @@ private:
     std::shared_ptr<wxBitmap> mItemBitmap;
 
 protected:
-    /// level constructor
-    /// \param level
-    /// \param filename
+
     Item(Level *level, const std::wstring &filename);
 
 public:
@@ -86,10 +86,7 @@ public:
     */
     void SetLocation(double x, double y) { mX = x; mY = y; }
 
-    /**
-     * Draw this item
-     * @param dc Device context to draw on
-     */
+
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
     virtual void XmlLoad(wxXmlNode* node);
@@ -127,13 +124,29 @@ public:
      */
     std::shared_ptr<wxBitmap> GetBitmap() const { return mItemBitmap; }
 
+    /**
+     * Accept an item visitor
+     * @param visitor
+     */
     virtual void Accept(ItemVisitor * visitor) = 0;
-    virtual void Accept(LimpetKillVisitor *visitor) {};
 
+    /**
+     * Gets the angle of the item
+     * @return
+     */
     double GetAngle(){ return mAngle; }
 
+    /**
+     * virtual Obliterate function for LimpetSparty
+     * @param body
+     * @return
+     */
     virtual bool Obliterate(b2Body *body) {return false;}
 
+    /**
+     * virtual GetBody function for all items
+     * @return
+     */
     virtual b2Body* GetBody() {return nullptr;}
 
 };

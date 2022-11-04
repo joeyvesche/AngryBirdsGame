@@ -27,17 +27,21 @@ class Level {
 private:
     wxXmlDocument mDoc; ///< the xml document that represents this level
 
+    /// Width of the level
     double mWidth = 0.0;
+    /// Height of the level
     double mHeight = 0.0;
-    std::vector<std::shared_ptr<Item>> mItems; ///< All items in this level
-    std::vector<std::shared_ptr<AngrySparty>> mSpartys; ///< All Spartys in this level
+    /// All items in this level
+    std::vector<std::shared_ptr<Item>> mItems;
+    /// All Spartys in this level
+    std::vector<std::shared_ptr<AngrySparty>> mSpartys;
 
     void LoadItemsXml(wxXmlNode * items);
     void LoadSpartysXml(wxXmlNode * angry);
 
-    std::shared_ptr<Physics> mPhysics; ///The physics system for this level
+    ///The physics system for this level
+    std::shared_ptr<Physics> mPhysics;
 
-    int mScore = 0; /// A score tracker for this level
 
     ///The b2Body to be obliterated, for the LimpetSparty
     b2Body* mObliterateBody = nullptr;
@@ -95,9 +99,21 @@ public:
      */
     auto SpartyEnd() {return mSpartys.end();}
 
+    /**
+     * Get the physics object for this level
+     * @return
+     */
     std::shared_ptr<Physics> GetPhysics() {return mPhysics;}
 
+    /**
+     * Get the physics of the level
+     * @return
+     */
     double GetWidth() const {return mWidth;}
+    /**
+     * Get the height of this level
+     * @return
+     */
     double GetHeight() const {return mHeight;}
 
     void SetObliterateBody(b2Body *body);
@@ -109,6 +125,10 @@ public:
      */
     void Add(std::shared_ptr<Item> item) { mItems.push_back(item); }
 
+    /**
+     * Remove an item from mItems
+     * @param it iterator position for the list
+     */
     void remove(std::vector<std::shared_ptr<Item>>::iterator it) {mItems.erase(it);}
     void UpdateL(double elapsed);
     void Accept(ItemVisitor* visitor);
@@ -118,8 +138,13 @@ public:
      */
     class AngryContactListener : public b2ContactListener {
     private:
+        /// Parent class of this class
         Level *mParent = nullptr;
     public:
+        /**
+         * Sets mParent to the level.
+         * @param level
+         */
         AngryContactListener(Level* level) {mParent = level;}
         void BeginContact(b2Contact *contact) override;
 

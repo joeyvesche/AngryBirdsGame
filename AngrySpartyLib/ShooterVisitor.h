@@ -21,6 +21,7 @@ class Shooter;
  */
 class ShooterVisitor : public ItemVisitor {
 private:
+    /// Shooter object for this visitor
     Shooter * mShooter = nullptr;
 
 public:

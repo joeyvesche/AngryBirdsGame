@@ -29,20 +29,26 @@ private:
     /// Y offset
     double mYOffset = 1;
 
+    /// Which level is this?
     int mLevelNo = 1;
-
+    /// Time of the level
     double mLevelTime;
 
     /// Timer used for delays between states and levels
     double mTimer = 0;
 
-    std::vector<std::shared_ptr<Level>> mLevels; ///< A list of all levels
-    std::shared_ptr<Level> mLevel; ///< The currently loaded level
+    /// A list of all levels
+    std::vector<std::shared_ptr<Level>> mLevels;
+    /// The currently loaded level
+    std::shared_ptr<Level> mLevel;
 
-    Scoreboard mScore; ///< The scoreboard for the game
+    /// The scoreboard for the game
+    Scoreboard mScore;
 
+    ///Is debugView on?
     bool mDebug = false;
 
+    ///Physics object for the level
     std::shared_ptr<Physics> mPhysics;
 
     /**
@@ -91,9 +97,16 @@ public:
 
     void SetLevel(int index);
 
-    /// Get the currently loaded level
+    /**
+     * Get the currently loaded level
+     * @return the currently loaded level
+     */
     std::shared_ptr<Level> GetLevel() { return mLevel; }
 
+    /**
+     * Sets mDebug based on parameter
+     * @param debug
+     */
     void Debug(bool debug) { mDebug = debug; }
 
     void Shoot();

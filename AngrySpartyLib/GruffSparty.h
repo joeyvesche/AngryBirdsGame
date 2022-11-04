@@ -10,6 +10,9 @@
 
 #include "AngrySparty.h"
 
+/**
+ * Class that describes a gruff sparty object
+ */
 class GruffSparty: public AngrySparty {
 private:
     /// The radius in meters

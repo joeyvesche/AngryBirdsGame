@@ -49,14 +49,6 @@ void Foe::Accept(ItemVisitor* visitor)
     visitor->VisitFoe(this);
 }
 
-/**
- * Accepts a Limpet Visitor
- * @param visitor Visitor
- */
-void Foe::Accept(LimpetKillVisitor* visitor)
-{
-    visitor->VisitFoe(this);
-}
 
 /**
  * Draws the Foe

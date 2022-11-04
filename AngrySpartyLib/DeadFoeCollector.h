@@ -10,8 +10,12 @@
 
 #include "ItemVisitor.h"
 
+/**
+ * Class that describes a visitor to count the number of dead foes.
+ */
 class DeadFoeCollector : public ItemVisitor {
 private:
+    /// list of dead foes
     std::vector<Foe*> mDeath;
 public:
     /**

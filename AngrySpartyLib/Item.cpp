@@ -9,13 +9,14 @@
 #include <utility>
 
 using namespace std;
+/// Directory of the images used for the game
 const std::wstring ResDir = L"./images/";
 /**
  * Constructor
- * @param level Level
- * @param filename File name
+ * @param level level this item belongs to
+ * @param filename file for image
  */
-Item::Item(Level* level, const wstring& filename) : mLevel(level)
+Item::Item(Level* level, const std::wstring& filename) : mLevel(level)
 {
     auto [img, bitmap] = LoadImage(filename);
     mItemImage = img;

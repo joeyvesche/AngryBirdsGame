@@ -36,14 +36,19 @@ public:
     /// Assignment operator
     void operator=(const AngrySparty &) = delete;
 
-    /**
-     * Draw this item
-     * @param dc Device context to draw on
-     */
      void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
      void SetBody(Level *level, int key);
+
+     /**
+      * Gets the b2Body of the sparty object
+      * @return
+      */
      b2Body* GetBody() override {return mBody;}
 
+     /**
+      * Gets the Constants for an Angry Sparty
+      * @return pair<double,float> for constants
+      */
      virtual std::pair<double,float> GetConstants() = 0;
      void Accept(ItemVisitor * visitor) override;
 

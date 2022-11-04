@@ -10,6 +10,9 @@
 #ifndef PROJECT1_POLY_H
 #define PROJECT1_POLY_H
 
+/**
+ * Class that describes a polygon object
+ */
 class Poly : public Item {
 private:
     ///File Name. Set when loading in the foe from an XML file

@@ -90,7 +90,6 @@ b2Body* ItemBody::CreateBody(std::shared_ptr<Physics> physics)
 /**
  * Make the physics body for Foe
  * @param physics physics system for this level
- * @param key key that determines which item was passed to this function
  */
 void ItemBody::CreateFoe(std::shared_ptr<Physics> physics)
 {
@@ -120,6 +119,7 @@ void ItemBody::CreateFoe(std::shared_ptr<Physics> physics)
 /**
  * Creates the physics body for a sparty
  * @param key  static(1) or dynamic(0)
+ * @param physics physics object for this world
  */
 
 void ItemBody::CreateSparty(std::shared_ptr<Physics> physics, int key)

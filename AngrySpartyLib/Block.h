@@ -19,16 +19,20 @@
  */
 class Block : public Item {
 private:
+    /// Box2d Body for block
+    b2Body* mBody;
 
-    b2Body* mBody; /// Box2d Body for block
+    /// size vector of block
+    b2Vec2 mSize;
 
-    b2Vec2 mSize; /// size vector of block
+    /// Amount of times to repeat block
+    int mRepeatX = 1;
 
-    int mRepeatX = 1; /// Amount of times to repeat block
+    /// Friction for the block
+    double mFriction = 0.0;
 
-    double mFriction = 0.0; /// Friction for the block
-
-    double mRestitution = 0.0; /// Restitution for the block
+    /// Restitution for the block
+    double mRestitution = 0.0;
 
 
 public:
@@ -43,11 +47,22 @@ public:
     void XmlLoad(wxXmlNode* node) override;
     void Accept(ItemVisitor * visitor) override;
 
-    ///getter for box2D Body object
+    /**
+     * Getter for box2D body
+     * @return  b2Body of the object
+     */
     b2Body *GetBody() override {return mBody;}
 
+    /**
+     * Get the position of the object
+     * @return
+     */
     b2Vec2 GetPosition() {return mBody->GetPosition();}
 
+    /**
+     * Get the size of the object
+     * @return
+     */
     b2Vec2 GetSize() {return mSize;};
 
     void SetFricRest(double friction, double restitution);

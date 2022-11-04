@@ -15,6 +15,7 @@ class GameView;
  */
 class MainFrame : public wxFrame {
 private:
+    /// Game View for this frame
     GameView *mGameView;
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);

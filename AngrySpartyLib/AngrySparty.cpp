@@ -33,7 +33,7 @@ void AngrySparty::SetBody(Level *level, int key)
 
 /**
  *  Draws the Angry Spartys
- * @param graphics
+ *  @param graphics
  */
 void AngrySparty::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {

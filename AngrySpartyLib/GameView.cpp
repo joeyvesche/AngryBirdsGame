@@ -21,6 +21,7 @@
 /// Frame duration in seconds
 const double FrameDuration = 1.0/60.0;
 
+/// Maximum negative pull angle for slingshot
 const double ShooterMaximumNegativePullAngle = -1.7;
 
 /// Pull angles from +pi to this value are allowed

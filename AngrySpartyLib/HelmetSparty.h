@@ -10,6 +10,9 @@
 
 #include "AngrySparty.h"
 
+/**
+ * Class that describes a helmet sparty object
+ */
 class HelmetSparty: public AngrySparty {
 private:
 

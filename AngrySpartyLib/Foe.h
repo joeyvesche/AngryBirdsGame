@@ -19,14 +19,18 @@ class ItemBody;
  */
 class Foe : public Item {
 private:
+    /// Radius of the foe
     double mRadius = 0;
+    /// Y-value for a foe to be considered "dead"
     double mDown = 0;
 
     ///Body of the AngrySparty object
     b2Body* mBody;
-
+    ///Previous X position
     double mLastX = 0;
+    ///Previous Y position
     double mLastY = 0;
+    /// Is this foe moving?
     bool mMoving = false;
 public:
     /// Default constructor (disabled)
@@ -41,15 +45,13 @@ public:
     void XmlLoad(wxXmlNode* node) override;
 
     void Accept(ItemVisitor * visitor) override;
-    void Accept(LimpetKillVisitor * visitor) override;
     Foe(Level *level, const std::wstring &filename);
-
-    /**
-     * Draw this item
-     * @param dc Device context to draw on
-     */
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
+    /**
+     * Gets the physics body for a foe object
+     * @return
+     */
     b2Body* GetBody() override {return mBody;}
 
     bool IsDead();

@@ -14,6 +14,9 @@
 #include "AngrySparty.h"
 #include "ItemVisitor.h"
 
+/**
+ * Class that describes a sparty being shot
+ */
 class Shooter : public Item {
 private:
     std::shared_ptr<wxImage> mArmImage; ///< Image of the extra arm

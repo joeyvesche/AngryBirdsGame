@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "LimpetSparty.h"
 #include "LimpetKillVisitor.h"
+#include "ItemVisitor.h"
 
 /// Useful Constants
 /// The image to use for this sparty
@@ -55,4 +56,12 @@ bool LimpetSparty::Obliterate(b2Body *body)
         }
     }
     return false;
+}
+/**
+ * Accept an item visitor
+ * @param visitor
+ */
+void LimpetSparty::Accept(ItemVisitor* visitor)
+{
+    visitor->VisitLimpet(this);
 }

@@ -10,13 +10,20 @@
 
 #include "ItemVisitor.h"
 
-
+/**
+ * A class that describes a visitor that checks if a level is finished
+ */
 class LevelFinishChecker : public ItemVisitor {
 private:
+    /// Remaining sparty count
     int mSpartyCount = 0;
+    ///Remaining foe count
     int mFoeCount = 0;
 
 public:
+    /**
+     * The three states of a level finish
+     */
     enum class Stat{
         GoOn,
         ReTry,

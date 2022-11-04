@@ -180,7 +180,6 @@ void Level::Reset()
  * Draw the items
  *
  * @param graphics the graphics context to draw on
- * @return Score of this draw
  */
 void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 {
@@ -205,7 +204,7 @@ void Level::OnDraw(std::shared_ptr<wxGraphicsContext> graphics)
 void Level::UpdateL(double elapsed)
 {
     mPhysics->UpdateP(elapsed);
-    for (auto element: mSpartys) {
+    for (auto element: mItems) {
         bool flip = element->Obliterate(mObliterateBody);
         if (flip == true)
             break;
@@ -232,12 +231,26 @@ void Level::Accept(ItemVisitor* visitor)
 
 void Level::AngryContactListener::BeginContact(b2Contact *contact)
 {
-    b2Body *firstBody = contact->GetFixtureA()->GetBody();
-    b2Body *secondBody = contact->GetFixtureB()->GetBody();
+    b2Body* firstBody = contact->GetFixtureA()->GetBody();
+    b2Body* secondBody = contact->GetFixtureB()->GetBody();
 
+    LimpetKillVisitor visitor;
+    mParent->Accept(&visitor);
 
+    LimpetSparty* limpet = nullptr;
 
-    for (auto i = mParent->SpartyBegin(); i != mParent->SpartyEnd(); i++)
+    limpet = visitor.GetNextLimpet();
+    if (limpet!=nullptr)
+    {
+        if (limpet->GetBody()==firstBody) {
+            mParent->SetObliterateBody(secondBody);
+        }
+        else if (limpet->GetBody()==secondBody) {
+            mParent->SetObliterateBody(firstBody);
+        }
+    }
+
+    /**for (auto i = mParent->begin(); i != mParent->end(); i++)
     {
         if ((*i)->GetBody() == firstBody) /// If the item is the first body in contact
         {
@@ -247,7 +260,7 @@ void Level::AngryContactListener::BeginContact(b2Contact *contact)
         {
             mParent->SetObliterateBody(firstBody);
         }
-    }
+    }*/
 }
 
 /**

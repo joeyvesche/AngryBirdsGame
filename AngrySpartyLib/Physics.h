@@ -33,6 +33,10 @@ private:
 public:
     Physics(const b2Vec2& size);
 
+    /**
+     * Get the world of this physics object
+     * @return b2world for box2D
+     */
     b2World *GetWorld() {return &mWorld;}
 
 

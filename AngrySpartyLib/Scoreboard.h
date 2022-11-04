@@ -10,10 +10,15 @@
 #include "Item.h"
 #include "ItemVisitor.h"
 
+/**
+ * Class that describes the scoreboard
+ */
 class Scoreboard{
 
 private:
+    /// Score of the level
     int mLevelScore = 0;
+    ///Score of the game
     int mGameScore = 0;
 
 public:

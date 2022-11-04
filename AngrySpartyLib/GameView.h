@@ -20,7 +20,9 @@ private:
     /// Game class object
     Game mGame;
 
+    /// Are the outlines on?
     bool mOutlines = false;
+    /// Time of the game
     double mTime = 0;
 
     /// The Angry Sparty we are currently shooting
@@ -55,7 +57,7 @@ private:
     //
     void LoadItems(wxCommandEvent& event);
 
-    void TestAdd();
+
 
     void OnTimeGo(wxTimerEvent& event);
 

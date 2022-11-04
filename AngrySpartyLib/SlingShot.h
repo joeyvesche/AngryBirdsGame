@@ -14,6 +14,9 @@
 #include <memory>
 #include "Shooter.h"
 
+/**
+ * Class that describes the game's slingshot
+ */
 class SlingShot : public Shooter {
 private:
 
