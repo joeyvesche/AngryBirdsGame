@@ -1,13 +1,13 @@
 /**
  * @file Foe.cpp
- * @author Will Morant, Joey Vesche
+ * @author Will Morant, Joey Vesche, Yuqi Pan
  */
 
 #include "pch.h"
 #include "Foe.h"
 #include "Game.h"
 #include "Consts.h"
-
+const double FloorHeight = 0.25; ///< height of the floor
 const double StopMovingFactor = 0.0000005; ///< The stop Moving factor
 
 /**
@@ -96,7 +96,7 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 bool Foe::IsDead()
 {
-    return (GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM);
+    return ((GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM) || mLastY - mRadius <= FloorHeight);
 }
 
 /**
