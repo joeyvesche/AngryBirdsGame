@@ -25,7 +25,7 @@ TEST(LevelTest, Load)
     Level level(L"levels/level0.xml");
 
     // assert the correct number of items are loaded
-    ASSERT_EQ(std::distance(level.begin(), level.end()), 11) << "Check all objects loaded from xml";
+    ASSERT_EQ(std::distance(level.begin(), level.end()), 10) << "Check all objects loaded from xml";
 
     // assert all have the correct x, y coordinates
     std::vector<std::pair<double, double>> xyPairs;
