@@ -96,7 +96,7 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 bool Foe::IsDead()
 {
-    return ((GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM) || mLastY - mRadius <= FloorHeight);
+    return ((GetY() - (mLastY / Consts::MtoCM)) >= (mDown) || mLastY / Consts::MtoCM - mRadius <= FloorHeight);
 }
 
 /**
