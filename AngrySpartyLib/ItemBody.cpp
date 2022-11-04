@@ -96,7 +96,6 @@ void ItemBody::CreateFoe(std::shared_ptr<Physics> physics)
 
     b2Body* body = CreateBody(physics);
 
-
     // Create the vertices for the octagon
     std::vector<b2Vec2> vertices;
     double angle = 360.0 / 16.0; // the rotation from the horizontal axis in degrees
