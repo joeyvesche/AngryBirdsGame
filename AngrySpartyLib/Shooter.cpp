@@ -8,6 +8,9 @@
 #include "Consts.h"
 #include "ShooterVisitor.h"
 
+/// The maximum velocity an angry sparty can have
+const double ShooterMaxSpartyVelocity = 20;
+
 /**
  * Construct a new shooter
  * @param level the level this shooter belongs to
@@ -79,10 +82,6 @@ void Shooter::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
         graphics->PopState();
 
-        // draw line from back of sparty to right arm
-        graphics->StrokeLine(spartyLoc.x - spartyRadius, spartyLoc.y,
-                        attachFrontCM.x, attachFrontCM.y);
-
         // draw the extra arm
         graphics->PushState();
 
@@ -91,6 +90,10 @@ void Shooter::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         graphics->DrawBitmap(*mArmBitmap, -width / 2, -height, width, height);
 
         graphics->PopState();
+
+        // draw line from back of sparty to right arm
+        graphics->StrokeLine(spartyLoc.x - spartyRadius, spartyLoc.y,
+                        attachFrontCM.x, attachFrontCM.y);
 
     } else
     {
@@ -138,6 +141,13 @@ bool Shooter::Shoot()
     mSparty->SetDynamic();
     auto direction = -pullVec;
     direction *= mSparty->GetConstants().second;
+
+    if (direction.Length() > ShooterMaxSpartyVelocity)
+    {
+        direction.Normalize();
+        direction *= ShooterMaxSpartyVelocity;
+    }
+
     mSparty->GetBody()->SetLinearVelocity(direction);
     mState = State::Fired;
     return true;

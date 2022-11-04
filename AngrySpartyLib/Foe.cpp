@@ -70,8 +70,6 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if(abs((xCopy - x)) > StopMovingFactor || abs((yCopy - y)) > StopMovingFactor)
     {
         mMoving = true;
-        mLastX = x;
-        mLastY = y;
     }
     else
     {
@@ -98,7 +96,7 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 bool Foe::IsDead()
 {
-    return ((GetY() - (mLastY / Consts::MtoCM)) >= (mDown) || mLastY / Consts::MtoCM - mRadius <= FloorHeight);
+    return mBody->GetPosition().y <= mDown;
 }
 
 /**

@@ -26,10 +26,13 @@ private:
 
     ///Body of the AngrySparty object
     b2Body* mBody;
-    ///Previous X position
+
+    /// Previous x position
     double mLastX = 0;
+
     ///Previous Y position
     double mLastY = 0;
+
     /// Is this foe moving?
     bool mMoving = false;
 public:
