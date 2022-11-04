@@ -53,17 +53,17 @@
         <block x="9.6" y="0.56511" angle="359.828" width="0.7" height="0.7" image="elementExplosive039.png"/>
         <block x="9.8" y="1.09" angle="359.828" width="0.35" height="0.35" image="elementExplosive039.png"/>
 
-        <foe x="6.5" y="0.8" angle="-337.974" radius="0.3" down="0.7" image="foeM.png"/>
-        <foe x="6.5" y="2.4" angle="-337.974" radius="0.3" down="1" image="foeM2.png"/>
-        <foe x="8.3" y="2.4" angle="-337.974" radius="0.3" down="1" image="foeN.png"/>
-        <foe x="4.5" y="2.4" angle="-337.974" radius="0.3" down="1" image="foeO.png"/>
-        <foe x="5.1" y="0.8" angle="-337.974" radius="0.2" down="0.7" image="foeN.png"/>
-        <foe x="7.7" y="0.8" angle="-337.974" radius="0.2" down="0.7" image="foeM2.png"/>
+        <foe x="6.5" y="0.8" angle="-337.974" radius="0.3" down="0.6" image="foeM.png"/>
+        <foe x="6.5" y="2.4" angle="-337.974" radius="0.3" down="1.5" image="foeM2.png"/>
+        <foe x="8.3" y="2.4" angle="-337.974" radius="0.3" down="1.5" image="foeN.png"/>
+        <foe x="4.5" y="2.4" angle="-337.974" radius="0.3" down="1.5" image="foeO.png"/>
+        <foe x="5.1" y="0.8" angle="-337.974" radius="0.2" down="0.6" image="foeN.png"/>
+        <foe x="7.7" y="0.8" angle="-337.974" radius="0.2" down="0.6" image="foeM2.png"/>
     </items>
     <angry x="-6.5" y="0.3" spacing="0.6">
+        <limpet-sparty/>
         <helmet-sparty/>
         <helmet-sparty/>
         <gruff-sparty/>
-        <limpet-sparty/>
     </angry>
 </level>

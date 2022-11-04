@@ -104,8 +104,6 @@ void Foe::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 bool Foe::IsDead()
 {
-    if(mMoving)
-        return false;
     return (GetY() - (mLastY / Consts::MtoCM)) >= (mDown / Consts::MtoCM);
 }
 
