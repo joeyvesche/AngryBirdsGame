@@ -4,6 +4,7 @@
  */
 
 #include "pch.h"
+#include "Level.h"
 #include "LimpetSparty.h"
 #include "LimpetKillVisitor.h"
 #include "ItemVisitor.h"

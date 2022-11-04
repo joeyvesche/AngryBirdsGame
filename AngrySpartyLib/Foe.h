@@ -9,7 +9,6 @@
 #define PROJECT1_FOE_H
 
 #include "Item.h"
-#include "Level.h"
 #include "LimpetKillVisitor.h"
 
 class ItemBody;

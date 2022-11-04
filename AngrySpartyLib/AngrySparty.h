@@ -9,11 +9,11 @@
 #define PROJECT1_ANGRYSPARTY_H
 
 #include "Item.h"
-#include "Level.h"
 #include "ItemBody.h"
 #include <b2_body.h>
 #include "Consts.h"
 
+class Level;
 
 /**
  * Base class that describes any AngrySparty Object
